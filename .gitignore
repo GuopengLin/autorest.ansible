@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vscode/
+.vs/
+package-lock.json
+tmpoutput
+.history
+
+*.njsproj
+*.user
+*.orig
+
+*.DS_Store
+src/local.ts

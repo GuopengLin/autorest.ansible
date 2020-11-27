@@ -1,0 +1,88 @@
+Arguments: 
+  /usr/local/bin/node /tmp/yarn-cli.js --no-node-version-check --no-lockfile --json --registry https://registry.npmjs.org info @microsoft.azure/autorest.python@~3.0.56 versions
+
+PATH: 
+  /home/azureuser/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  12.18.3
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, scandir '/home/azureuser/.config/yarn/link'
+
+npm manifest: 
+  {
+    "name": "@autorest/ansible",
+    "version": "1.4.0",
+    "description": "Autorest Azure Ansible extension",
+    "main": "dist/index.js",
+    "engines": {
+      "node": ">=10.12.0"
+    },
+    "scripts": {
+      "start": "node dist/index.js",
+      "debug": "node --max_old_space_size=4096 --inspect-brk ./dist/index.js",
+      "eslint-fix": "eslint  . --fix --ext .ts",
+      "eslint": "eslint  . --ext .ts",
+      "build": "tsc -p .",
+      "start-testserver": "./node_modules/.bin/start-autorest-testserver",
+      "stop-testserver": "./node_modules/.bin/stop-autorest-testserver",
+      "watch": "tsc -p . --watch",
+      "prepare": "npm run build",
+      "test": "npm run build && mocha dist/test",
+      "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+      "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+      "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Azure/autorest.ansible.git"
+    },
+    "keywords": [
+      "autorest",
+      "extension"
+    ],
+    "author": "Microsoft Corporation",
+    "license": "MIT",
+    "devDependencies": {
+      "@types/chai": "^4.2.7",
+      "@types/mocha": "^5.2.5",
+      "@types/node": "10.17.0",
+      "chai": "^4.2.0",
+      "eslint": "~5.4.0",
+      "mocha": "^5.2.0",
+      "mocha-typescript": "^1.1.17",
+      "node-yaml": "^3.2.0",
+      "nyc": "^15.0.0",
+      "source-map-support": "^0.5.13",
+      "typescript": "^3.7.5"
+    },
+    "dependencies": {
+      "@autorest/core": "^3.0.6306",
+      "@azure-tools/async-io": "^3.0.209",
+      "@azure-tools/autorest-extension-base": "~3.1.235",
+      "@azure-tools/codegen": "^2.5.276",
+      "@azure-tools/codemodel": "4.13.325",
+      "@azure-tools/linq": "^3.1.232",
+      "autorest": "^3.0.6187",
+      "await-exec": "^0.1.2",
+      "dir-compare": "^2.2.0",
+      "js-yaml": "^3.13.1",
+      "node-yaml": "^3.2.0"
+    },
+    "files": [
+      "dist"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
