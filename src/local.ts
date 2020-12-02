@@ -34,7 +34,7 @@ export async function main() {
     const jsyaml = require('js-yaml');
     let model = jsyaml.safeLoad(input);
 
-    let codeModel = new AnsibleCodeModel(model, null, false, console.log);
+    let codeModel = new AnsibleCodeModel(model, "Galleries", false, console.log);
     let files = {};
     files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk);
     for (let f in files) {

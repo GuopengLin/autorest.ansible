@@ -1,0 +1,36 @@
+ - name: Create a Snapshot
+   azure_rm_snapshot:
+     resource_group_name: my_resource_group_name
+     snapshot_name: my_snapshot_name
+     incremental: true
+     disk_access_id: my_disk_access_id
+   
+
+ - name: get the Snapshot
+   azure_rm_snapshot_info:
+     resource_group_name: my_resource_group_name
+     snapshot_name: my_snapshot_name
+   
+
+ - name: Update the Snapshot (no change)
+   azure_rm_snapshot:
+     resource_group_name: my_resource_group_name
+     snapshot_name: my_snapshot_name
+     incremental: true
+     disk_access_id: my_disk_access_id
+   
+
+ - name: Update the Snapshot
+   azure_rm_snapshot:
+     resource_group_name: my_resource_group_name
+     snapshot_name: my_snapshot_name
+     incremental: true2
+     disk_access_id: my_disk_access_id22
+   
+
+ - name: Delete the Snapshot
+   azure_rm_snapshot:
+     resource_group_name: my_resource_group_name
+     snapshot_name: my_snapshot_name
+     state: absent
+   

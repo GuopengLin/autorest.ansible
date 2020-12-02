@@ -77,9 +77,20 @@ export function AppendModuleDocumentation(output: string[], module: Module, isIn
         doc['extends_documentation_fragment'].push('azure_tags');
     }
     doc['author'] = ['GuopengLin (@t-glin)'];
-    yaml.dump(doc).split('\n').forEach(element => {
-        output.push("    "+element);
-    });
+    let s = yaml.dump(doc).split("\n");
+    for (let i = 0; i < s.length;i++){
+        let j = 0;
+        let temp = "";
+        for (j = 0; j < s[i].length;j++){
+            if (s[i][j] != ' ')
+                break;
+            temp = temp + " ";
+        }
+        output.push(temp+s[i]);
+    }
+    // yaml.dump(doc).split("\n").forEach(element => {
+    //     output.push("    "+element);
+    // });
     output.push("'''");
     output.push("");
 }
@@ -145,9 +156,20 @@ export function AppendModuleReturnDoc(output: string[], module: Module, isInfoMo
 
     let doc: any = isInfoModule ? ModuleInfoReturnResponseFields(module) : ModuleReturnResponseFields(module);
 
-    yaml.dump(doc).split(/\r?\n/).forEach(element => {
-        output.push("    "+element);
-    });
+    let s = yaml.dump(doc).split(/\r?\n/);
+    for (let i = 0; i < s.length;i++){
+        let j = 0;
+        let temp = "";
+        for (j = 0; j < s[i].length;j++){
+            if (s[i][j] != ' ')
+                break;
+            temp = temp + " ";
+        }
+        output.push(temp+s[i]);
+    }
+    // yaml.dump(doc).split(/\r?\n/).forEach(element => {
+    //     output.push("    "+element);
+    // });
 
     output.push("'''");
 

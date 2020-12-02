@@ -1,0 +1,31 @@
+ - name: Create a ProximityPlacementGroup
+   azure_rm_proximityplacementgroup:
+     resource_group_name: my_resource_group_name
+     proximity_placement_group_name: my_proximity_placement_group_name
+   
+
+ - name: get the ProximityPlacementGroup
+   azure_rm_proximityplacementgroup_info:
+     resource_group_name: my_resource_group_name
+     proximity_placement_group_name: my_proximity_placement_group_name
+     include_colocation_status: my_include_colocation_status
+   
+
+ - name: Update the ProximityPlacementGroup (no change)
+   azure_rm_proximityplacementgroup:
+     resource_group_name: my_resource_group_name
+     proximity_placement_group_name: my_proximity_placement_group_name
+   
+
+ - name: Update the ProximityPlacementGroup
+   azure_rm_proximityplacementgroup:
+     resource_group_name: my_resource_group_name
+     proximity_placement_group_name: my_proximity_placement_group_name
+   
+
+ - name: Delete the ProximityPlacementGroup
+   azure_rm_proximityplacementgroup:
+     resource_group_name: my_resource_group_name
+     proximity_placement_group_name: my_proximity_placement_group_name
+     state: absent
+   

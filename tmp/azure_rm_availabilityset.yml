@@ -1,0 +1,30 @@
+ - name: Create a AvailabilitySet
+   azure_rm_availabilityset:
+     resource_group_name: my_resource_group_name
+     availability_set_name: my_availability_set_name
+   
+
+ - name: get the AvailabilitySet
+   azure_rm_availabilityset_info:
+     resource_group_name: my_resource_group_name
+     availability_set_name: my_availability_set_name
+   
+
+ - name: Update the AvailabilitySet (no change)
+   azure_rm_availabilityset:
+     resource_group_name: my_resource_group_name
+     availability_set_name: my_availability_set_name
+   
+
+ - name: Update the AvailabilitySet
+   azure_rm_availabilityset:
+     resource_group_name: my_resource_group_name
+     availability_set_name: my_availability_set_name
+   
+
+ - name: Delete the AvailabilitySet
+   azure_rm_availabilityset:
+     resource_group_name: my_resource_group_name
+     availability_set_name: my_availability_set_name
+     state: absent
+   

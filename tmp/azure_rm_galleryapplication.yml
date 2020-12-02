@@ -1,0 +1,47 @@
+ - name: Create a GalleryApplication
+   azure_rm_galleryapplication:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     description: my_description
+     eula: my_eula
+     privacy_statement_uri: my_privacy_statement_uri
+     release_note_uri: my_release_note_uri
+   
+
+ - name: get the GalleryApplication
+   azure_rm_galleryapplication_info:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+   
+
+ - name: Update the GalleryApplication (no change)
+   azure_rm_galleryapplication:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     description: my_description
+     eula: my_eula
+     privacy_statement_uri: my_privacy_statement_uri
+     release_note_uri: my_release_note_uri
+   
+
+ - name: Update the GalleryApplication
+   azure_rm_galleryapplication:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     description: my_description22
+     eula: my_eula22
+     privacy_statement_uri: my_privacy_statement_uri22
+     release_note_uri: my_release_note_uri22
+   
+
+ - name: Delete the GalleryApplication
+   azure_rm_galleryapplication:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     state: absent
+   

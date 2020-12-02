@@ -1,0 +1,5 @@
+ - name: get the VirtualMachineRunCommand
+   azure_rm_virtualmachineruncommand_info:
+     location: my_location
+     command_id: my_command_id
+   

@@ -1,0 +1,40 @@
+ - name: Create a GalleryApplicationVersion
+   azure_rm_galleryapplicationversion:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     gallery_application_version_name: my_gallery_application_version_name
+   
+
+ - name: get the GalleryApplicationVersion
+   azure_rm_galleryapplicationversion_info:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     gallery_application_version_name: my_gallery_application_version_name
+   
+
+ - name: Update the GalleryApplicationVersion (no change)
+   azure_rm_galleryapplicationversion:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     gallery_application_version_name: my_gallery_application_version_name
+   
+
+ - name: Update the GalleryApplicationVersion
+   azure_rm_galleryapplicationversion:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     gallery_application_version_name: my_gallery_application_version_name
+   
+
+ - name: Delete the GalleryApplicationVersion
+   azure_rm_galleryapplicationversion:
+     resource_group_name: my_resource_group_name
+     gallery_name: my_gallery_name
+     gallery_application_name: my_gallery_application_name
+     gallery_application_version_name: my_gallery_application_version_name
+     state: absent
+   

@@ -1,0 +1,30 @@
+ - name: Create a DiskEncryptionSet
+   azure_rm_diskencryptionset:
+     resource_group_name: my_resource_group_name
+     disk_encryption_set_name: my_disk_encryption_set_name
+   
+
+ - name: get the DiskEncryptionSet
+   azure_rm_diskencryptionset_info:
+     resource_group_name: my_resource_group_name
+     disk_encryption_set_name: my_disk_encryption_set_name
+   
+
+ - name: Update the DiskEncryptionSet (no change)
+   azure_rm_diskencryptionset:
+     resource_group_name: my_resource_group_name
+     disk_encryption_set_name: my_disk_encryption_set_name
+   
+
+ - name: Update the DiskEncryptionSet
+   azure_rm_diskencryptionset:
+     resource_group_name: my_resource_group_name
+     disk_encryption_set_name: my_disk_encryption_set_name
+   
+
+ - name: Delete the DiskEncryptionSet
+   azure_rm_diskencryptionset:
+     resource_group_name: my_resource_group_name
+     disk_encryption_set_name: my_disk_encryption_set_name
+     state: absent
+   

@@ -1,0 +1,31 @@
+ - name: Create a Image
+   azure_rm_image:
+     resource_group_name: my_resource_group_name
+     image_name: my_image_name
+   
+
+ - name: get the Image
+   azure_rm_image_info:
+     resource_group_name: my_resource_group_name
+     image_name: my_image_name
+     expand: my_expand
+   
+
+ - name: Update the Image (no change)
+   azure_rm_image:
+     resource_group_name: my_resource_group_name
+     image_name: my_image_name
+   
+
+ - name: Update the Image
+   azure_rm_image:
+     resource_group_name: my_resource_group_name
+     image_name: my_image_name
+   
+
+ - name: Delete the Image
+   azure_rm_image:
+     resource_group_name: my_resource_group_name
+     image_name: my_image_name
+     state: absent
+   

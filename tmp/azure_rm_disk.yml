@@ -1,0 +1,36 @@
+ - name: Create a Disk
+   azure_rm_disk:
+     resource_group_name: my_resource_group_name
+     disk_name: my_disk_name
+     disk_access_id: my_disk_access_id
+     tier: my_tier
+   
+
+ - name: get the Disk
+   azure_rm_disk_info:
+     resource_group_name: my_resource_group_name
+     disk_name: my_disk_name
+   
+
+ - name: Update the Disk (no change)
+   azure_rm_disk:
+     resource_group_name: my_resource_group_name
+     disk_name: my_disk_name
+     disk_access_id: my_disk_access_id
+     tier: my_tier
+   
+
+ - name: Update the Disk
+   azure_rm_disk:
+     resource_group_name: my_resource_group_name
+     disk_name: my_disk_name
+     disk_access_id: my_disk_access_id22
+     tier: my_tier22
+   
+
+ - name: Delete the Disk
+   azure_rm_disk:
+     resource_group_name: my_resource_group_name
+     disk_name: my_disk_name
+     state: absent
+   

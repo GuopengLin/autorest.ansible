@@ -1,0 +1,37 @@
+ - name: Create a VirtualMachine
+   azure_rm_virtualmachine:
+     resource_group_name: my_resource_group_name
+     vm_name: my_vm_name
+     license_type: my_license_type
+     extensions_time_budget: my_extensions_time_budget
+   
+
+ - name: get the VirtualMachine
+   azure_rm_virtualmachine_info:
+     resource_group_name: my_resource_group_name
+     vm_name: my_vm_name
+   
+
+ - name: Update the VirtualMachine (no change)
+   azure_rm_virtualmachine:
+     resource_group_name: my_resource_group_name
+     vm_name: my_vm_name
+     license_type: my_license_type
+     extensions_time_budget: my_extensions_time_budget
+   
+
+ - name: Update the VirtualMachine
+   azure_rm_virtualmachine:
+     resource_group_name: my_resource_group_name
+     vm_name: my_vm_name
+     license_type: my_license_type22
+     extensions_time_budget: my_extensions_time_budget22
+   
+
+ - name: Delete the VirtualMachine
+   azure_rm_virtualmachine:
+     resource_group_name: my_resource_group_name
+     vm_name: my_vm_name
+     force_deletion: true
+     state: absent
+   

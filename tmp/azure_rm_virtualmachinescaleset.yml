@@ -1,0 +1,42 @@
+ - name: Create a VirtualMachineScaleSet
+   azure_rm_virtualmachinescaleset:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     overprovision: true
+     do_not_run_extensions_on_overprovisioned_v_ms: true
+     single_placement_group: true
+     zone_balance: true
+   
+
+ - name: get the VirtualMachineScaleSet
+   azure_rm_virtualmachinescaleset_info:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+   
+
+ - name: Update the VirtualMachineScaleSet (no change)
+   azure_rm_virtualmachinescaleset:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     overprovision: true
+     do_not_run_extensions_on_overprovisioned_v_ms: true
+     single_placement_group: true
+     zone_balance: true
+   
+
+ - name: Update the VirtualMachineScaleSet
+   azure_rm_virtualmachinescaleset:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     overprovision: true22
+     do_not_run_extensions_on_overprovisioned_v_ms: true22
+     single_placement_group: true22
+     zone_balance: true2
+   
+
+ - name: Delete the VirtualMachineScaleSet
+   azure_rm_virtualmachinescaleset:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     state: absent
+   

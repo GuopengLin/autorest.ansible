@@ -1,0 +1,30 @@
+ - name: get the VirtualMachineScaleSetVM
+   azure_rm_virtualmachinescalesetvm_info:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+   
+
+ - name: Update the VirtualMachineScaleSetVM (no change)
+   azure_rm_virtualmachinescalesetvm:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     license_type: my_license_type
+   
+
+ - name: Update the VirtualMachineScaleSetVM
+   azure_rm_virtualmachinescalesetvm:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     license_type: my_license_type2
+   
+
+ - name: Delete the VirtualMachineScaleSetVM
+   azure_rm_virtualmachinescalesetvm:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     state: absent
+   

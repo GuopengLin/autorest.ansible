@@ -1,0 +1,33 @@
+ - name: Create a SshPublicKey
+   azure_rm_sshpublickey:
+     resource_group_name: my_resource_group_name
+     ssh_public_key_name: my_ssh_public_key_name
+     public_key: my_public_key
+   
+
+ - name: get the SshPublicKey
+   azure_rm_sshpublickey_info:
+     resource_group_name: my_resource_group_name
+     ssh_public_key_name: my_ssh_public_key_name
+   
+
+ - name: Update the SshPublicKey (no change)
+   azure_rm_sshpublickey:
+     resource_group_name: my_resource_group_name
+     ssh_public_key_name: my_ssh_public_key_name
+     public_key: my_public_key
+   
+
+ - name: Update the SshPublicKey
+   azure_rm_sshpublickey:
+     resource_group_name: my_resource_group_name
+     ssh_public_key_name: my_ssh_public_key_name
+     public_key: my_public_key22
+   
+
+ - name: Delete the SshPublicKey
+   azure_rm_sshpublickey:
+     resource_group_name: my_resource_group_name
+     ssh_public_key_name: my_ssh_public_key_name
+     state: absent
+   

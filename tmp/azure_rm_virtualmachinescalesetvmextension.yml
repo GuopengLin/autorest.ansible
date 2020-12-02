@@ -1,0 +1,59 @@
+ - name: Create a VirtualMachineScaleSetVMExtension
+   azure_rm_virtualmachinescalesetvmextension:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     vm_extension_name: my_vm_extension_name
+     force_update_tag: my_force_update_tag
+     publisher: my_publisher
+     type_properties_type: my_type_properties_type
+     type_handler_version: my_type_handler_version
+     auto_upgrade_minor_version: true
+     enable_automatic_upgrade: true
+   
+
+ - name: get the VirtualMachineScaleSetVMExtension
+   azure_rm_virtualmachinescalesetvmextension_info:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     vm_extension_name: my_vm_extension_name
+     expand: my_expand
+   
+
+ - name: Update the VirtualMachineScaleSetVMExtension (no change)
+   azure_rm_virtualmachinescalesetvmextension:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     vm_extension_name: my_vm_extension_name
+     force_update_tag: my_force_update_tag
+     publisher: my_publisher
+     type_properties_type: my_type_properties_type
+     type_handler_version: my_type_handler_version
+     auto_upgrade_minor_version: true
+     enable_automatic_upgrade: true
+   
+
+ - name: Update the VirtualMachineScaleSetVMExtension
+   azure_rm_virtualmachinescalesetvmextension:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     vm_extension_name: my_vm_extension_name
+     force_update_tag: my_force_update_tag22
+     publisher: my_publisher22
+     type_properties_type: my_type_properties_type2
+     type_handler_version: my_type_handler_version22
+     auto_upgrade_minor_version: true22
+     enable_automatic_upgrade: true22
+   
+
+ - name: Delete the VirtualMachineScaleSetVMExtension
+   azure_rm_virtualmachinescalesetvmextension:
+     resource_group_name: my_resource_group_name
+     vm_scale_set_name: my_vm_scale_set_name
+     instance_id: my_instance_id
+     vm_extension_name: my_vm_extension_name
+     state: absent
+   

@@ -1,0 +1,7 @@
+ - name: get the VirtualMachineExtensionImage
+   azure_rm_virtualmachineextensionimage_info:
+     location: my_location
+     publisher_name: my_publisher_name
+     type: my_type
+     version: my_version
+   
