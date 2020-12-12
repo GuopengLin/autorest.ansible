@@ -15,67 +15,67 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_dedicatedhostgroup
-    version_added: '2.9'
-    short_description: Manage Azure DedicatedHostGroup instance.
-    description:
-      - 'Create, update and delete instance of Azure DedicatedHostGroup.'
-    options:
-      resource_group:
+module: azure_rm_dedicatedhostgroup
+version_added: '2.9'
+short_description: Manage Azure DedicatedHostGroup instance.
+description:
+    - 'Create, update and delete instance of Azure DedicatedHostGroup.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      host_group_name:
+    host_group_name:
         description:
-          - The name of the dedicated host group.
+            - The name of the dedicated host group.
         required: true
         type: str
-      zones:
+    zones:
         description:
-          - >-
-            Availability Zone to use for this host group. Only single zone is
-            supported. The zone can be assigned only during creation. If not
-            provided, the group supports all zones in the region. If provided,
-            enforces each host in the group to be in the same zone.
+            - >-
+                Availability Zone to use for this host group. Only single zone is
+                supported. The zone can be assigned only during creation. If not
+                provided, the group supports all zones in the region. If provided,
+                enforces each host in the group to be in the same zone.
         type: list
-      platform_fault_domain_count:
+    platform_fault_domain_count:
         description:
-          - Number of fault domains that the host group can span.
+            - Number of fault domains that the host group can span.
         type: int
-      support_automatic_placement:
+    support_automatic_placement:
         description:
-          - >-
-            Specifies whether virtual machines or virtual machine scale sets can be
-            placed automatically on the dedicated host group. Automatic placement
-            means resources are allocated on dedicated hosts, that are chosen by
-            Azure, under the dedicated host group. The value is defaulted to 'true'
-            when not provided. :code:`<br>`:code:`<br>`Minimum api-version:
-            2020-06-01.
+            - >-
+                Specifies whether virtual machines or virtual machine scale sets can be
+                placed automatically on the dedicated host group. Automatic placement
+                means resources are allocated on dedicated hosts, that are chosen by
+                Azure, under the dedicated host group. The value is defaulted to 'true'
+                when not provided. :code:`<br>`:code:`<br>`Minimum api-version:
+                2020-06-01.
         type: bool
-      expand:
+    expand:
         description:
-          - >-
-            The expand expression to apply on the operation. The response shows the
-            list of instance view of the dedicated hosts under the dedicated host
-            group.
+            - >-
+                The expand expression to apply on the operation. The response shows the
+                list of instance view of the dedicated hosts under the dedicated host
+                group.
         type: constant
-      state:
+    state:
         description:
-          - Assert the state of the DedicatedHostGroup.
-          - >-
-            Use C(present) to create or update an DedicatedHostGroup and C(absent)
-            to delete it.
+            - Assert the state of the DedicatedHostGroup.
+            - >-
+                Use C(present) to create or update an DedicatedHostGroup and C(absent)
+                to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -96,79 +96,79 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    zones:
-      description:
+    returned: always
+    type: dict
+    sample: null
+zones:
+    description:
         - >-
-          Availability Zone to use for this host group. Only single zone is
-          supported. The zone can be assigned only during creation. If not provided,
-          the group supports all zones in the region. If provided, enforces each
-          host in the group to be in the same zone.
-      returned: always
-      type: list
-      sample: null
-    platform_fault_domain_count:
-      description:
+            Availability Zone to use for this host group. Only single zone is
+            supported. The zone can be assigned only during creation. If not provided,
+            the group supports all zones in the region. If provided, enforces each
+            host in the group to be in the same zone.
+    returned: always
+    type: list
+    sample: null
+platform_fault_domain_count:
+    description:
         - Number of fault domains that the host group can span.
-      returned: always
-      type: int
-      sample: null
-    hosts:
-      description:
+    returned: always
+    type: int
+    sample: null
+hosts:
+    description:
         - A list of references to all dedicated hosts in the dedicated host group.
-      returned: always
-      type: list
-      sample: null
-    instance_view:
-      description:
+    returned: always
+    type: list
+    sample: null
+instance_view:
+    description:
         - >-
-          The dedicated host group instance view, which has the list of instance
-          view of the dedicated hosts under the dedicated host group.
-      returned: always
-      type: dict
-      sample: null
-    support_automatic_placement:
-      description:
+            The dedicated host group instance view, which has the list of instance
+            view of the dedicated hosts under the dedicated host group.
+    returned: always
+    type: dict
+    sample: null
+support_automatic_placement:
+    description:
         - >-
-          Specifies whether virtual machines or virtual machine scale sets can be
-          placed automatically on the dedicated host group. Automatic placement
-          means resources are allocated on dedicated hosts, that are chosen by
-          Azure, under the dedicated host group. The value is defaulted to 'true'
-          when not provided. :code:`<br>`:code:`<br>`Minimum api-version:
-          2020-06-01.
-      returned: always
-      type: bool
-      sample: null
-    
+            Specifies whether virtual machines or virtual machine scale sets can be
+            placed automatically on the dedicated host group. Automatic placement
+            means resources are allocated on dedicated hosts, that are chosen by
+            Azure, under the dedicated host group. The value is defaulted to 'true'
+            when not provided. :code:`<br>`:code:`<br>`Minimum api-version:
+            2020-06-01.
+    returned: always
+    type: bool
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -279,6 +279,7 @@ class AzureRMDedicatedHostGroup(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

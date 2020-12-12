@@ -15,110 +15,110 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_diskencryptionset
-    version_added: '2.9'
-    short_description: Manage Azure DiskEncryptionSet instance.
-    description:
-      - 'Create, update and delete instance of Azure DiskEncryptionSet.'
-    options:
-      resource_group:
+module: azure_rm_diskencryptionset
+version_added: '2.9'
+short_description: Manage Azure DiskEncryptionSet instance.
+description:
+    - 'Create, update and delete instance of Azure DiskEncryptionSet.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      disk_encryption_set_name:
+    disk_encryption_set_name:
         description:
-          - >-
-            The name of the disk encryption set that is being created. The name
-            can't be changed after the disk encryption set is created. Supported
-            characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
-            is 80 characters.
+            - >-
+                The name of the disk encryption set that is being created. The name
+                can't be changed after the disk encryption set is created. Supported
+                characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
+                is 80 characters.
         required: true
         type: str
-      identity:
+    identity:
         description:
-          - >-
-            The managed identity for the disk encryption set. It should be given
-            permission on the key vault before it can be used to encrypt disks.
+            - >-
+                The managed identity for the disk encryption set. It should be given
+                permission on the key vault before it can be used to encrypt disks.
         type: dict
         suboptions:
-          type:
-            description:
-              - >-
-                The type of Managed Identity used by the DiskEncryptionSet. Only
-                SystemAssigned is supported.
-            type: str
-            choices:
-              - SystemAssigned
-      encryption_type:
+            type:
+                description:
+                    - >-
+                        The type of Managed Identity used by the DiskEncryptionSet. Only
+                        SystemAssigned is supported.
+                type: str
+                choices:
+                    - SystemAssigned
+    encryption_type:
         description:
-          - The type of key used to encrypt the data of the disk.
+            - The type of key used to encrypt the data of the disk.
         type: str
         choices:
-          - EncryptionAtRestWithCustomerKey
-          - EncryptionAtRestWithPlatformAndCustomerKeys
-      active_key:
+            - EncryptionAtRestWithCustomerKey
+            - EncryptionAtRestWithPlatformAndCustomerKeys
+    active_key:
         description:
-          - The key vault key which is currently used by this disk encryption set.
-          - >-
-            Key Vault Key Url and vault id of KeK, KeK is optional and when provided
-            is used to unwrap the encryptionKey
+            - The key vault key which is currently used by this disk encryption set.
+            - >-
+                Key Vault Key Url and vault id of KeK, KeK is optional and when provided
+                is used to unwrap the encryptionKey
         type: dict
         suboptions:
-          source_vault:
-            description:
-              - Resource id of the KeyVault containing the key or secret
-            required: true
-            type: dict
-            suboptions:
-              id:
+            source_vault:
                 description:
-                  - Resource Id
+                    - Resource id of the KeyVault containing the key or secret
+                required: true
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - Resource Id
+                        type: str
+            key_url:
+                description:
+                    - Url pointing to a key or secret in KeyVault
+                required: true
                 type: str
-          key_url:
-            description:
-              - Url pointing to a key or secret in KeyVault
-            required: true
-            type: str
-      previous_keys:
+    previous_keys:
         description:
-          - >-
-            A readonly collection of key vault keys previously used by this disk
-            encryption set while a key rotation is in progress. It will be empty if
-            there is no ongoing key rotation.
+            - >-
+                A readonly collection of key vault keys previously used by this disk
+                encryption set while a key rotation is in progress. It will be empty if
+                there is no ongoing key rotation.
         type: list
         suboptions:
-          source_vault:
-            description:
-              - Resource id of the KeyVault containing the key or secret
-            required: true
-            type: dict
-            suboptions:
-              id:
+            source_vault:
                 description:
-                  - Resource Id
+                    - Resource id of the KeyVault containing the key or secret
+                required: true
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - Resource Id
+                        type: str
+            key_url:
+                description:
+                    - Url pointing to a key or secret in KeyVault
+                required: true
                 type: str
-          key_url:
-            description:
-              - Url pointing to a key or secret in KeyVault
-            required: true
-            type: str
-      state:
+    state:
         description:
-          - Assert the state of the DiskEncryptionSet.
-          - >-
-            Use C(present) to create or update an DiskEncryptionSet and C(absent) to
-            delete it.
+            - Assert the state of the DiskEncryptionSet.
+            - >-
+                Use C(present) to create or update an DiskEncryptionSet and C(absent) to
+                delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -143,121 +143,121 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    identity:
-      description:
+    returned: always
+    type: dict
+    sample: null
+identity:
+    description:
         - >-
-          The managed identity for the disk encryption set. It should be given
-          permission on the key vault before it can be used to encrypt disks.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            The managed identity for the disk encryption set. It should be given
+            permission on the key vault before it can be used to encrypt disks.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         type:
-          description:
-            - >-
-              The type of Managed Identity used by the DiskEncryptionSet. Only
-              SystemAssigned is supported.
-          returned: always
-          type: str
-          sample: null
-    encryption_type:
-      description:
+            description:
+                - >-
+                    The type of Managed Identity used by the DiskEncryptionSet. Only
+                    SystemAssigned is supported.
+            returned: always
+            type: str
+            sample: null
+encryption_type:
+    description:
         - The type of key used to encrypt the data of the disk.
-      returned: always
-      type: str
-      sample: null
-    active_key:
-      description:
+    returned: always
+    type: str
+    sample: null
+active_key:
+    description:
         - The key vault key which is currently used by this disk encryption set.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+    returned: always
+    type: dict
+    sample: null
+    contains:
         source_vault:
-          description:
-            - Resource id of the KeyVault containing the key or secret
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            id:
-              description:
-                - Resource Id
-              returned: always
-              type: str
-              sample: null
+            description:
+                - Resource id of the KeyVault containing the key or secret
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - Resource Id
+                    returned: always
+                    type: str
+                    sample: null
         key_url:
-          description:
-            - Url pointing to a key or secret in KeyVault
-          returned: always
-          type: str
-          sample: null
-    previous_keys:
-      description:
+            description:
+                - Url pointing to a key or secret in KeyVault
+            returned: always
+            type: str
+            sample: null
+previous_keys:
+    description:
         - >-
-          A readonly collection of key vault keys previously used by this disk
-          encryption set while a key rotation is in progress. It will be empty if
-          there is no ongoing key rotation.
-      returned: always
-      type: list
-      sample: null
-      contains:
+            A readonly collection of key vault keys previously used by this disk
+            encryption set while a key rotation is in progress. It will be empty if
+            there is no ongoing key rotation.
+    returned: always
+    type: list
+    sample: null
+    contains:
         source_vault:
-          description:
-            - Resource id of the KeyVault containing the key or secret
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            id:
-              description:
-                - Resource Id
-              returned: always
-              type: str
-              sample: null
+            description:
+                - Resource id of the KeyVault containing the key or secret
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - Resource Id
+                    returned: always
+                    type: str
+                    sample: null
         key_url:
-          description:
-            - Url pointing to a key or secret in KeyVault
-          returned: always
-          type: str
-          sample: null
-    provisioning_state:
-      description:
+            description:
+                - Url pointing to a key or secret in KeyVault
+            returned: always
+            type: str
+            sample: null
+provisioning_state:
+    description:
         - The disk encryption set provisioning state.
-      returned: always
-      type: str
-      sample: null
-    
+    returned: always
+    type: str
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -414,6 +414,7 @@ class AzureRMDiskEncryptionSet(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

@@ -15,236 +15,236 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachinescalesetextension_info
-    version_added: '2.9'
-    short_description: Get VirtualMachineScaleSetExtension info.
-    description:
-      - Get info of VirtualMachineScaleSetExtension.
-    options:
-      resource_group:
+module: azure_rm_virtualmachinescalesetextension_info
+version_added: '2.9'
+short_description: Get VirtualMachineScaleSetExtension info.
+description:
+    - Get info of VirtualMachineScaleSetExtension.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      vm_scale_set_name:
+    vm_scale_set_name:
         description:
-          - The name of the VM scale set containing the extension.
+            - The name of the VM scale set containing the extension.
         required: true
         type: str
-      vmss_extension_name:
+    vmss_extension_name:
         description:
-          - The name of the VM scale set extension.
+            - The name of the VM scale set extension.
         type: str
-      expand:
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    virtual_machine_scale_set_extensions:
-      description: >-
+virtual_machine_scale_set_extensions:
+    description: >-
         A list of dict results where the key is the name of the
         VirtualMachineScaleSetExtension and the values are the facts for that
         VirtualMachineScaleSetExtension.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - The name of the extension.
-          returned: always
-          type: str
-          sample: null
-        type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
-        force_update_tag:
-          description:
-            - >-
-              If a value is provided and is different from the previous value, the
-              extension handler will be forced to update even if the extension
-              configuration has not changed.
-          returned: always
-          type: str
-          sample: null
-        publisher:
-          description:
-            - The name of the extension handler publisher.
-          returned: always
-          type: str
-          sample: null
-        type_properties_type:
-          description:
-            - >-
-              Specifies the type of the extension; an example is
-              "CustomScriptExtension".
-          returned: always
-          type: str
-          sample: null
-        type_handler_version:
-          description:
-            - Specifies the version of the script handler.
-          returned: always
-          type: str
-          sample: null
-        auto_upgrade_minor_version:
-          description:
-            - >-
-              Indicates whether the extension should use a newer minor version if
-              one is available at deployment time. Once deployed, however, the
-              extension will not upgrade minor versions unless redeployed, even with
-              this property set to true.
-          returned: always
-          type: bool
-          sample: null
-        enable_automatic_upgrade:
-          description:
-            - >-
-              Indicates whether the extension should be automatically upgraded by
-              the platform if there is a newer version of the extension available.
-          returned: always
-          type: bool
-          sample: null
-        settings:
-          description:
-            - Json formatted public settings for the extension.
-          returned: always
-          type: any
-          sample: null
-        protected_settings:
-          description:
-            - >-
-              The extension can contain either protectedSettings or
-              protectedSettingsFromKeyVault or no protected settings at all.
-          returned: always
-          type: any
-          sample: null
-        provisioning_state:
-          description:
-            - 'The provisioning state, which only appears in the response.'
-          returned: always
-          type: str
-          sample: null
-        provision_after_extensions:
-          description:
-            - >-
-              Collection of extension names after which this extension needs to be
-              provisioned.
-          returned: always
-          type: list
-          sample: null
-        value:
-          description:
-            - The list of VM scale set extensions.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            name:
-              description:
+            description:
                 - The name of the extension.
-              returned: always
-              type: str
-              sample: null
-            force_update_tag:
-              description:
+            returned: always
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
+        force_update_tag:
+            description:
                 - >-
-                  If a value is provided and is different from the previous value,
-                  the extension handler will be forced to update even if the
-                  extension configuration has not changed.
-              returned: always
-              type: str
-              sample: null
-            publisher:
-              description:
+                    If a value is provided and is different from the previous value, the
+                    extension handler will be forced to update even if the extension
+                    configuration has not changed.
+            returned: always
+            type: str
+            sample: null
+        publisher:
+            description:
                 - The name of the extension handler publisher.
-              returned: always
-              type: str
-              sample: null
-            type_properties_type:
-              description:
+            returned: always
+            type: str
+            sample: null
+        type_properties_type:
+            description:
                 - >-
-                  Specifies the type of the extension; an example is
-                  "CustomScriptExtension".
-              returned: always
-              type: str
-              sample: null
-            type_handler_version:
-              description:
+                    Specifies the type of the extension; an example is
+                    "CustomScriptExtension".
+            returned: always
+            type: str
+            sample: null
+        type_handler_version:
+            description:
                 - Specifies the version of the script handler.
-              returned: always
-              type: str
-              sample: null
-            auto_upgrade_minor_version:
-              description:
+            returned: always
+            type: str
+            sample: null
+        auto_upgrade_minor_version:
+            description:
                 - >-
-                  Indicates whether the extension should use a newer minor version
-                  if one is available at deployment time. Once deployed, however,
-                  the extension will not upgrade minor versions unless redeployed,
-                  even with this property set to true.
-              returned: always
-              type: bool
-              sample: null
-            enable_automatic_upgrade:
-              description:
+                    Indicates whether the extension should use a newer minor version if
+                    one is available at deployment time. Once deployed, however, the
+                    extension will not upgrade minor versions unless redeployed, even with
+                    this property set to true.
+            returned: always
+            type: bool
+            sample: null
+        enable_automatic_upgrade:
+            description:
                 - >-
-                  Indicates whether the extension should be automatically upgraded
-                  by the platform if there is a newer version of the extension
-                  available.
-              returned: always
-              type: bool
-              sample: null
-            settings:
-              description:
+                    Indicates whether the extension should be automatically upgraded by
+                    the platform if there is a newer version of the extension available.
+            returned: always
+            type: bool
+            sample: null
+        settings:
+            description:
                 - Json formatted public settings for the extension.
-              returned: always
-              type: any
-              sample: null
-            protected_settings:
-              description:
+            returned: always
+            type: any
+            sample: null
+        protected_settings:
+            description:
                 - >-
-                  The extension can contain either protectedSettings or
-                  protectedSettingsFromKeyVault or no protected settings at all.
-              returned: always
-              type: any
-              sample: null
-            provision_after_extensions:
-              description:
+                    The extension can contain either protectedSettings or
+                    protectedSettingsFromKeyVault or no protected settings at all.
+            returned: always
+            type: any
+            sample: null
+        provisioning_state:
+            description:
+                - 'The provisioning state, which only appears in the response.'
+            returned: always
+            type: str
+            sample: null
+        provision_after_extensions:
+            description:
                 - >-
-                  Collection of extension names after which this extension needs to
-                  be provisioned.
-              returned: always
-              type: list
-              sample: null
+                    Collection of extension names after which this extension needs to be
+                    provisioned.
+            returned: always
+            type: list
+            sample: null
+        value:
+            description:
+                - The list of VM scale set extensions.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                name:
+                    description:
+                        - The name of the extension.
+                    returned: always
+                    type: str
+                    sample: null
+                force_update_tag:
+                    description:
+                        - >-
+                            If a value is provided and is different from the previous value,
+                            the extension handler will be forced to update even if the
+                            extension configuration has not changed.
+                    returned: always
+                    type: str
+                    sample: null
+                publisher:
+                    description:
+                        - The name of the extension handler publisher.
+                    returned: always
+                    type: str
+                    sample: null
+                type_properties_type:
+                    description:
+                        - >-
+                            Specifies the type of the extension; an example is
+                            "CustomScriptExtension".
+                    returned: always
+                    type: str
+                    sample: null
+                type_handler_version:
+                    description:
+                        - Specifies the version of the script handler.
+                    returned: always
+                    type: str
+                    sample: null
+                auto_upgrade_minor_version:
+                    description:
+                        - >-
+                            Indicates whether the extension should use a newer minor version
+                            if one is available at deployment time. Once deployed, however,
+                            the extension will not upgrade minor versions unless redeployed,
+                            even with this property set to true.
+                    returned: always
+                    type: bool
+                    sample: null
+                enable_automatic_upgrade:
+                    description:
+                        - >-
+                            Indicates whether the extension should be automatically upgraded
+                            by the platform if there is a newer version of the extension
+                            available.
+                    returned: always
+                    type: bool
+                    sample: null
+                settings:
+                    description:
+                        - Json formatted public settings for the extension.
+                    returned: always
+                    type: any
+                    sample: null
+                protected_settings:
+                    description:
+                        - >-
+                            The extension can contain either protectedSettings or
+                            protectedSettingsFromKeyVault or no protected settings at all.
+                    returned: always
+                    type: any
+                    sample: null
+                provision_after_extensions:
+                    description:
+                        - >-
+                            Collection of extension names after which this extension needs to
+                            be provisioned.
+                    returned: always
+                    type: list
+                    sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of VM scale set extensions. Call
-              ListNext() with this to fetch the next page of VM scale set
-              extensions.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The uri to fetch the next page of VM scale set extensions. Call
+                    ListNext() with this to fetch the next page of VM scale set
+                    extensions.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

@@ -15,164 +15,164 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachineimage
-    version_added: '2.9'
-    short_description: Manage Azure VirtualMachineImage instance.
-    description:
-      - 'Create, update and delete instance of Azure VirtualMachineImage.'
-    options:
-      location:
+module: azure_rm_virtualmachineimage
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineImage instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineImage.'
+options:
+    location:
         description:
-          - The name of a supported Azure region.
+            - The name of a supported Azure region.
         required: true
         type: str
-      publisher_name:
+    publisher_name:
         description:
-          - A valid image publisher.
+            - A valid image publisher.
         required: true
         type: str
-      offer:
+    offer:
         description:
-          - A valid image publisher offer.
+            - A valid image publisher offer.
         required: true
         type: str
-      skus:
+    skus:
         description:
-          - A valid image SKU.
+            - A valid image SKU.
         required: true
         type: str
-      version:
+    version:
         description:
-          - A valid image SKU version.
+            - A valid image SKU version.
         required: true
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the VirtualMachineImage.
-          - >-
-            Use C(present) to create or update an VirtualMachineImage and C(absent)
-            to delete it.
+            - Assert the state of the VirtualMachineImage.
+            - >-
+                Use C(present) to create or update an VirtualMachineImage and C(absent)
+                to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    name:
-      description:
+name:
+    description:
         - The name of the resource.
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - The supported Azure location of the resource.
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - >-
-          Specifies the tags that are assigned to the virtual machine. For more
-          information about using tags, see `Using tags to organize your Azure
-          resources
-          <https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md>`_.
-      returned: always
-      type: dict
-      sample: null
-    plan:
-      description:
+            Specifies the tags that are assigned to the virtual machine. For more
+            information about using tags, see `Using tags to organize your Azure
+            resources
+            <https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md>`_.
+    returned: always
+    type: dict
+    sample: null
+plan:
+    description:
         - >-
-          Used for establishing the purchase context of any 3rd Party artifact
-          through MarketPlace.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Used for establishing the purchase context of any 3rd Party artifact
+            through MarketPlace.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         publisher:
-          description:
-            - The publisher ID.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The publisher ID.
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - The plan ID.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The plan ID.
+            returned: always
+            type: str
+            sample: null
         product:
-          description:
-            - >-
-              Specifies the product of the image from the marketplace. This is the
-              same value as Offer under the imageReference element.
-          returned: always
-          type: str
-          sample: null
-    os_disk_image:
-      description:
+            description:
+                - >-
+                    Specifies the product of the image from the marketplace. This is the
+                    same value as Offer under the imageReference element.
+            returned: always
+            type: str
+            sample: null
+os_disk_image:
+    description:
         - Contains the os disk image information.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+    returned: always
+    type: dict
+    sample: null
+    contains:
         operating_system:
-          description:
-            - The operating system of the osDiskImage.
-          returned: always
-          type: sealed-choice
-          sample: null
-    data_disk_images:
-      description:
+            description:
+                - The operating system of the osDiskImage.
+            returned: always
+            type: sealed-choice
+            sample: null
+data_disk_images:
+    description:
         - ''
-      returned: always
-      type: list
-      sample: null
-    automatic_os_upgrade_properties:
-      description:
+    returned: always
+    type: list
+    sample: null
+automatic_os_upgrade_properties:
+    description:
         - Describes automatic OS upgrade properties on the image.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+    returned: always
+    type: dict
+    sample: null
+    contains:
         automatic_os_upgrade_supported:
-          description:
-            - Specifies whether automatic OS upgrade is supported on the image.
-          returned: always
-          type: bool
-          sample: null
-    hyper_v_generation:
-      description:
+            description:
+                - Specifies whether automatic OS upgrade is supported on the image.
+            returned: always
+            type: bool
+            sample: null
+hyper_v_generation:
+    description:
         - Specifies the HyperVGeneration Type
-      returned: always
-      type: str
-      sample: null
-    disallowed:
-      description:
+    returned: always
+    type: str
+    sample: null
+disallowed:
+    description:
         - >-
-          Specifies disallowed configuration for the VirtualMachine created from the
-          image
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Specifies disallowed configuration for the VirtualMachine created from the
+            image
+    returned: always
+    type: dict
+    sample: null
+    contains:
         vm_disk_type:
-          description:
-            - VM disk types which are disallowed.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - VM disk types which are disallowed.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -281,6 +281,7 @@ class AzureRMVirtualMachineImage(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

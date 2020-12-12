@@ -24,7 +24,7 @@ export class ModuleOption {
     //     this.IncludeInDocumentation = true;
     //     this.IncludeInArgSpec = true;
     // }
-    constructor(swaggerOption:any, parent: ModuleOption, isResponse : boolean, optionSet: Set<string>) {
+    constructor(objectName: string, swaggerOption:any, parent: ModuleOption, isResponse : boolean, optionSet: Set<string>) {
         // this.SwaggerOption = swaggerOption;
         this.padding = "    ";
         if (parent != null)
@@ -32,6 +32,7 @@ export class ModuleOption {
         this.Parent = parent;
         this.IsResponse = isResponse;
         this.OptionSet = optionSet;
+        this.ModuleObjectName = objectName;
         this.Init(swaggerOption);
         // set optionset point to null to avoid the heap space overflow
         this.OptionSet = null;
@@ -42,7 +43,7 @@ export class ModuleOption {
         this.NameAnsible = ToSnakeCase(this.Name);
         if (this.NameAnsible == "resource_group_name")
             this.NameAnsible = "resource_group";
-        if (this.NameAnsible == "module_name")
+        if (this.NameAnsible == this.ModuleObjectName.toLowerCase()+"_name")
             this.NameAnsible = "name";
         this.NameSwagger = this.Name;
         this.Required = swaggerOption.required != undefined ? swaggerOption.required : false;
@@ -67,7 +68,7 @@ export class ModuleOption {
         if (schema.properties != undefined){
             let readOnly = true;
             for (let subParameter of schema.properties){
-                let subOption = new ModuleOption(subParameter,this, this.IsResponse, this.OptionSet);
+                let subOption = new ModuleOption(this.ModuleObjectName, subParameter,this, this.IsResponse, this.OptionSet);
                 if (!subOption.ReadOnly)
                     readOnly = false;
                 if (!subOption.ReadOnly)
@@ -81,7 +82,7 @@ export class ModuleOption {
             this.ElementType = this.ParseType(schema.elementType.type);
             if (schema.elementType.type == SwaggerModelType.SWAGGER_MODEL_OBJECT){
                 for (let subParameter of schema.elementType.properties){
-                    let subOption = new ModuleOption(subParameter,this, this.IsResponse, this.OptionSet);
+                    let subOption = new ModuleOption(this.ModuleObjectName, subParameter,this, this.IsResponse, this.OptionSet);
                     if (!subOption.ReadOnly)
                         readOnly = false;
                     if (!subOption.ReadOnly)
@@ -205,5 +206,5 @@ export class ModuleOption {
     public IsResponse: boolean;
     public OptionSet: Set<string>;
     public padding: string;
-
+    public ModuleObjectName: string;
 }

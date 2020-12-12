@@ -15,27 +15,27 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachineruncommand_info
-    version_added: '2.9'
-    short_description: Get VirtualMachineRunCommand info.
-    description:
-      - Get info of VirtualMachineRunCommand.
-    options:
-      location:
+module: azure_rm_virtualmachineruncommand_info
+version_added: '2.9'
+short_description: Get VirtualMachineRunCommand info.
+description:
+    - Get info of VirtualMachineRunCommand.
+options:
+    location:
         description:
-          - The location upon which run commands is queried.
+            - The location upon which run commands is queried.
         required: true
         type: str
-      command_id:
+    command_id:
         description:
-          - The command id.
+            - The command id.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -53,127 +53,127 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    virtual_machine_run_commands:
-      description: >-
+virtual_machine_run_commands:
+    description: >-
         A list of dict results where the key is the name of the
         VirtualMachineRunCommand and the values are the facts for that
         VirtualMachineRunCommand.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         value:
-          description:
-            - The list of virtual machine run commands.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            schema:
-              description:
-                - The VM run command schema.
-              returned: always
-              type: str
-              sample: null
-            id:
-              description:
-                - The VM run command id.
-              returned: always
-              type: str
-              sample: null
-            os_type:
-              description:
-                - The Operating System type.
-              returned: always
-              type: sealed-choice
-              sample: null
-            label:
-              description:
-                - The VM run command label.
-              returned: always
-              type: str
-              sample: null
             description:
-              description:
-                - The VM run command description.
-              returned: always
-              type: str
-              sample: null
+                - The list of virtual machine run commands.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                schema:
+                    description:
+                        - The VM run command schema.
+                    returned: always
+                    type: str
+                    sample: null
+                id:
+                    description:
+                        - The VM run command id.
+                    returned: always
+                    type: str
+                    sample: null
+                os_type:
+                    description:
+                        - The Operating System type.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                label:
+                    description:
+                        - The VM run command label.
+                    returned: always
+                    type: str
+                    sample: null
+                description:
+                    description:
+                        - The VM run command description.
+                    returned: always
+                    type: str
+                    sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of run commands. Call ListNext() with
-              this to fetch the next page of run commands.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    The uri to fetch the next page of run commands. Call ListNext() with
+                    this to fetch the next page of run commands.
+            returned: always
+            type: str
+            sample: null
         schema:
-          description:
-            - The VM run command schema.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The VM run command schema.
+            returned: always
+            type: str
+            sample: null
         id:
-          description:
-            - The VM run command id.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The VM run command id.
+            returned: always
+            type: str
+            sample: null
         os_type:
-          description:
-            - The Operating System type.
-          returned: always
-          type: sealed-choice
-          sample: null
+            description:
+                - The Operating System type.
+            returned: always
+            type: sealed-choice
+            sample: null
         label:
-          description:
-            - The VM run command label.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The VM run command label.
+            returned: always
+            type: str
+            sample: null
         description:
-          description:
-            - The VM run command description.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The VM run command description.
+            returned: always
+            type: str
+            sample: null
         script:
-          description:
-            - The script to be executed.
-          returned: always
-          type: list
-          sample: null
+            description:
+                - The script to be executed.
+            returned: always
+            type: list
+            sample: null
         parameters:
-          description:
-            - The parameters used by the script.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            name:
-              description:
-                - The run command parameter name.
-              returned: always
-              type: str
-              sample: null
-            type:
-              description:
-                - The run command parameter type.
-              returned: always
-              type: str
-              sample: null
-            default_value:
-              description:
-                - The run command parameter default value.
-              returned: always
-              type: str
-              sample: null
-            required:
-              description:
-                - The run command parameter required.
-              returned: always
-              type: bool
-              sample: null
-    
+            description:
+                - The parameters used by the script.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                name:
+                    description:
+                        - The run command parameter name.
+                    returned: always
+                    type: str
+                    sample: null
+                type:
+                    description:
+                        - The run command parameter type.
+                    returned: always
+                    type: str
+                    sample: null
+                default_value:
+                    description:
+                        - The run command parameter default value.
+                    returned: always
+                    type: str
+                    sample: null
+                required:
+                    description:
+                        - The run command parameter required.
+                    returned: always
+                    type: bool
+                    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

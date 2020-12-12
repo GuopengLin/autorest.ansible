@@ -15,42 +15,42 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_operation
-    version_added: '2.9'
-    short_description: Manage Azure Operation instance.
-    description:
-      - 'Create, update and delete instance of Azure Operation.'
-    options:
-      state:
+module: azure_rm_operation
+version_added: '2.9'
+short_description: Manage Azure Operation instance.
+description:
+    - 'Create, update and delete instance of Azure Operation.'
+options:
+    state:
         description:
-          - Assert the state of the Operation.
-          - >-
-            Use C(present) to create or update an Operation and C(absent) to delete
-            it.
+            - Assert the state of the Operation.
+            - >-
+                Use C(present) to create or update an Operation and C(absent) to delete
+                it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    {}
-    
+{}
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:
     from msrestazure.azure_exceptions import CloudError
-    from azure.mgmt.compute import ComputeManagementClient
+    from azure.mgmt.managed import ManagedServicesClient
     from msrestazure.azure_operation import AzureOperationPoller
     from msrest.polling import LROPoller
 except ImportError:
@@ -96,9 +96,9 @@ class AzureRMOperation(AzureRMModuleBaseExt):
         old_response = None
         response = None
 
-        self.mgmt_client = self.get_mgmt_svc_client(ComputeManagementClient,
+        self.mgmt_client = self.get_mgmt_svc_client(ManagedServicesClient,
                                                     base_url=self._cloud_environment.endpoints.resource_manager,
-                                                    api_version='2020-06-01')
+                                                    api_version='2020-02-01-preview')
 
         old_response = self.get_resource()
 
@@ -129,6 +129,7 @@ class AzureRMOperation(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

@@ -15,30 +15,30 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_image_info
-    version_added: '2.9'
-    short_description: Get Image info.
-    description:
-      - Get info of Image.
-    options:
-      resource_group:
+module: azure_rm_image_info
+version_added: '2.9'
+short_description: Get Image info.
+description:
+    - Get info of Image.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         type: str
-      image_name:
+    name:
         description:
-          - The name of the image.
+            - The name of the image.
         type: str
-      expand:
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -59,238 +59,238 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    images:
-      description: >-
+images:
+    description: >-
         A list of dict results where the key is the name of the Image and the values
         are the facts for that Image.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
-        name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
-        type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
-        location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
-        tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
-        source_virtual_machine:
-          description:
-            - The source virtual machine from which Image is created.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            id:
-              description:
+            description:
                 - Resource Id
-              returned: always
-              type: str
-              sample: null
-        storage_profile:
-          description:
-            - Specifies the storage settings for the virtual machine disks.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            os_disk:
-              description:
-                - >-
-                  Specifies information about the operating system disk used by the
-                  virtual machine. :code:`<br>`:code:`<br>` For more information
-                  about disks, see `About disks and VHDs for Azure virtual machines
-                  <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                os_type:
-                  description:
-                    - >-
-                      This property allows you to specify the type of the OS that is
-                      included in the disk if creating a VM from a custom image.
-                      :code:`<br>`:code:`<br>` Possible values are:
-                      :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
-                      **Linux**
-                  returned: always
-                  type: sealed-choice
-                  sample: null
-                os_state:
-                  description:
-                    - The OS State.
-                  returned: always
-                  type: sealed-choice
-                  sample: null
-            data_disks:
-              description:
-                - >-
-                  Specifies the parameters that are used to add a data disk to a
-                  virtual machine. :code:`<br>`:code:`<br>` For more information
-                  about disks, see `About disks and VHDs for Azure virtual machines
-                  <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
-              returned: always
-              type: list
-              sample: null
-              contains:
-                lun:
-                  description:
-                    - >-
-                      Specifies the logical unit number of the data disk. This value
-                      is used to identify data disks within the VM and therefore
-                      must be unique for each data disk attached to a VM.
-                  returned: always
-                  type: int
-                  sample: null
-            zone_resilient:
-              description:
-                - >-
-                  Specifies whether an image is zone resilient or not. Default is
-                  false. Zone resilient images can be created only in regions that
-                  provide Zone Redundant Storage (ZRS).
-              returned: always
-              type: bool
-              sample: null
-        provisioning_state:
-          description:
-            - The provisioning state.
-          returned: always
-          type: str
-          sample: null
-        hyper_v_generation:
-          description:
-            - >-
-              Gets the HyperVGenerationType of the VirtualMachine created from the
-              image
-          returned: always
-          type: str
-          sample: null
-        value:
-          description:
-            - The list of Images.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            source_virtual_machine:
-              description:
+            returned: always
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
+        source_virtual_machine:
+            description:
                 - The source virtual machine from which Image is created.
-              returned: always
-              type: dict
-              sample: null
-              contains:
+            returned: always
+            type: dict
+            sample: null
+            contains:
                 id:
-                  description:
-                    - Resource Id
-                  returned: always
-                  type: str
-                  sample: null
-            storage_profile:
-              description:
+                    description:
+                        - Resource Id
+                    returned: always
+                    type: str
+                    sample: null
+        storage_profile:
+            description:
                 - Specifies the storage settings for the virtual machine disks.
-              returned: always
-              type: dict
-              sample: null
-              contains:
+            returned: always
+            type: dict
+            sample: null
+            contains:
                 os_disk:
-                  description:
-                    - >-
-                      Specifies information about the operating system disk used by
-                      the virtual machine. :code:`<br>`:code:`<br>` For more
-                      information about disks, see `About disks and VHDs for Azure
-                      virtual machines
-                      <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    os_type:
-                      description:
+                    description:
                         - >-
-                          This property allows you to specify the type of the OS
-                          that is included in the disk if creating a VM from a
-                          custom image. :code:`<br>`:code:`<br>` Possible values
-                          are: :code:`<br>`:code:`<br>` **Windows**
-                          :code:`<br>`:code:`<br>` **Linux**
-                      returned: always
-                      type: sealed-choice
-                      sample: null
-                    os_state:
-                      description:
-                        - The OS State.
-                      returned: always
-                      type: sealed-choice
-                      sample: null
+                            Specifies information about the operating system disk used by the
+                            virtual machine. :code:`<br>`:code:`<br>` For more information
+                            about disks, see `About disks and VHDs for Azure virtual machines
+                            <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        os_type:
+                            description:
+                                - >-
+                                    This property allows you to specify the type of the OS that is
+                                    included in the disk if creating a VM from a custom image.
+                                    :code:`<br>`:code:`<br>` Possible values are:
+                                    :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
+                                    **Linux**
+                            returned: always
+                            type: sealed-choice
+                            sample: null
+                        os_state:
+                            description:
+                                - The OS State.
+                            returned: always
+                            type: sealed-choice
+                            sample: null
                 data_disks:
-                  description:
-                    - >-
-                      Specifies the parameters that are used to add a data disk to a
-                      virtual machine. :code:`<br>`:code:`<br>` For more information
-                      about disks, see `About disks and VHDs for Azure virtual
-                      machines
-                      <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
-                  returned: always
-                  type: list
-                  sample: null
-                  contains:
-                    lun:
-                      description:
+                    description:
                         - >-
-                          Specifies the logical unit number of the data disk. This
-                          value is used to identify data disks within the VM and
-                          therefore must be unique for each data disk attached to a
-                          VM.
-                      returned: always
-                      type: int
-                      sample: null
+                            Specifies the parameters that are used to add a data disk to a
+                            virtual machine. :code:`<br>`:code:`<br>` For more information
+                            about disks, see `About disks and VHDs for Azure virtual machines
+                            <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                    returned: always
+                    type: list
+                    sample: null
+                    contains:
+                        lun:
+                            description:
+                                - >-
+                                    Specifies the logical unit number of the data disk. This value
+                                    is used to identify data disks within the VM and therefore
+                                    must be unique for each data disk attached to a VM.
+                            returned: always
+                            type: int
+                            sample: null
                 zone_resilient:
-                  description:
-                    - >-
-                      Specifies whether an image is zone resilient or not. Default
-                      is false. Zone resilient images can be created only in regions
-                      that provide Zone Redundant Storage (ZRS).
-                  returned: always
-                  type: bool
-                  sample: null
-            hyper_v_generation:
-              description:
+                    description:
+                        - >-
+                            Specifies whether an image is zone resilient or not. Default is
+                            false. Zone resilient images can be created only in regions that
+                            provide Zone Redundant Storage (ZRS).
+                    returned: always
+                    type: bool
+                    sample: null
+        provisioning_state:
+            description:
+                - The provisioning state.
+            returned: always
+            type: str
+            sample: null
+        hyper_v_generation:
+            description:
                 - >-
-                  Gets the HyperVGenerationType of the VirtualMachine created from
-                  the image
-              returned: always
-              type: str
-              sample: null
+                    Gets the HyperVGenerationType of the VirtualMachine created from the
+                    image
+            returned: always
+            type: str
+            sample: null
+        value:
+            description:
+                - The list of Images.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                source_virtual_machine:
+                    description:
+                        - The source virtual machine from which Image is created.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        id:
+                            description:
+                                - Resource Id
+                            returned: always
+                            type: str
+                            sample: null
+                storage_profile:
+                    description:
+                        - Specifies the storage settings for the virtual machine disks.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        os_disk:
+                            description:
+                                - >-
+                                    Specifies information about the operating system disk used by
+                                    the virtual machine. :code:`<br>`:code:`<br>` For more
+                                    information about disks, see `About disks and VHDs for Azure
+                                    virtual machines
+                                    <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                os_type:
+                                    description:
+                                        - >-
+                                            This property allows you to specify the type of the OS
+                                            that is included in the disk if creating a VM from a
+                                            custom image. :code:`<br>`:code:`<br>` Possible values
+                                            are: :code:`<br>`:code:`<br>` **Windows**
+                                            :code:`<br>`:code:`<br>` **Linux**
+                                    returned: always
+                                    type: sealed-choice
+                                    sample: null
+                                os_state:
+                                    description:
+                                        - The OS State.
+                                    returned: always
+                                    type: sealed-choice
+                                    sample: null
+                        data_disks:
+                            description:
+                                - >-
+                                    Specifies the parameters that are used to add a data disk to a
+                                    virtual machine. :code:`<br>`:code:`<br>` For more information
+                                    about disks, see `About disks and VHDs for Azure virtual
+                                    machines
+                                    <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                            returned: always
+                            type: list
+                            sample: null
+                            contains:
+                                lun:
+                                    description:
+                                        - >-
+                                            Specifies the logical unit number of the data disk. This
+                                            value is used to identify data disks within the VM and
+                                            therefore must be unique for each data disk attached to a
+                                            VM.
+                                    returned: always
+                                    type: int
+                                    sample: null
+                        zone_resilient:
+                            description:
+                                - >-
+                                    Specifies whether an image is zone resilient or not. Default
+                                    is false. Zone resilient images can be created only in regions
+                                    that provide Zone Redundant Storage (ZRS).
+                            returned: always
+                            type: bool
+                            sample: null
+                hyper_v_generation:
+                    description:
+                        - >-
+                            Gets the HyperVGenerationType of the VirtualMachine created from
+                            the image
+                    returned: always
+                    type: str
+                    sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of Images. Call ListNext() with this to
-              fetch the next page of Images.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The uri to fetch the next page of Images. Call ListNext() with this to
+                    fetch the next page of Images.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
@@ -310,7 +310,7 @@ class AzureRMImageInfo(AzureRMModuleBase):
             resource_group=dict(
                 type='str'
             ),
-            image_name=dict(
+            name=dict(
                 type='str'
             ),
             expand=dict(
@@ -319,7 +319,7 @@ class AzureRMImageInfo(AzureRMModuleBase):
         )
 
         self.resource_group = None
-        self.image_name = None
+        self.name = None
         self.expand = None
 
         self.results = dict(changed=False)
@@ -346,7 +346,7 @@ class AzureRMImageInfo(AzureRMModuleBase):
                                                     api_version='2020-06-01')
 
         if (self.resource_group is not None and
-            self.image_name is not None):
+            self.name is not None):
             self.results['images'] = self.format_item(self.get())
         elif (self.resource_group is not None):
             self.results['images'] = self.format_item(self.list_by_resource_group())
@@ -359,7 +359,7 @@ class AzureRMImageInfo(AzureRMModuleBase):
 
         try:
             response = self.mgmt_client.images.get(resource_group=self.resource_group,
-                                                   image_name=self.image_name,
+                                                   name=self.name,
                                                    expand=self.expand)
         except CloudError as e:
             self.log('Could not get info for @(Model.ModuleOperationNameUpper).')

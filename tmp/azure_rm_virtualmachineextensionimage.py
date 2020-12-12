@@ -15,121 +15,121 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachineextensionimage
-    version_added: '2.9'
-    short_description: Manage Azure VirtualMachineExtensionImage instance.
-    description:
-      - 'Create, update and delete instance of Azure VirtualMachineExtensionImage.'
-    options:
-      location:
+module: azure_rm_virtualmachineextensionimage
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineExtensionImage instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineExtensionImage.'
+options:
+    location:
         description:
-          - The name of a supported Azure region.
+            - The name of a supported Azure region.
         required: true
         type: str
-      publisher_name:
+    publisher_name:
         description:
-          - undefined
+            - undefined
         required: true
         type: str
-      type:
+    type:
         description:
-          - undefined
+            - undefined
         required: true
         type: str
-      version:
+    version:
         description:
-          - undefined
+            - undefined
         required: true
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the VirtualMachineExtensionImage.
-          - >-
-            Use C(present) to create or update an VirtualMachineExtensionImage and
-            C(absent) to delete it.
+            - Assert the state of the VirtualMachineExtensionImage.
+            - >-
+                Use C(present) to create or update an VirtualMachineExtensionImage and
+                C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    operating_system:
-      description:
+    returned: always
+    type: dict
+    sample: null
+operating_system:
+    description:
         - The operating system this extension supports.
-      returned: always
-      type: str
-      sample: null
-    compute_role:
-      description:
+    returned: always
+    type: str
+    sample: null
+compute_role:
+    description:
         - The type of role (IaaS or PaaS) this extension supports.
-      returned: always
-      type: str
-      sample: null
-    handler_schema:
-      description:
+    returned: always
+    type: str
+    sample: null
+handler_schema:
+    description:
         - >-
-          The schema defined by publisher, where extension consumers should provide
-          settings in a matching schema.
-      returned: always
-      type: str
-      sample: null
-    vm_scale_set_enabled:
-      description:
+            The schema defined by publisher, where extension consumers should provide
+            settings in a matching schema.
+    returned: always
+    type: str
+    sample: null
+vm_scale_set_enabled:
+    description:
         - >-
-          Whether the extension can be used on xRP VMScaleSets. By default existing
-          extensions are usable on scalesets, but there might be cases where a
-          publisher wants to explicitly indicate the extension is only enabled for
-          CRP VMs but not VMSS.
-      returned: always
-      type: bool
-      sample: null
-    supports_multiple_extensions:
-      description:
+            Whether the extension can be used on xRP VMScaleSets. By default existing
+            extensions are usable on scalesets, but there might be cases where a
+            publisher wants to explicitly indicate the extension is only enabled for
+            CRP VMs but not VMSS.
+    returned: always
+    type: bool
+    sample: null
+supports_multiple_extensions:
+    description:
         - Whether the handler can support multiple extensions.
-      returned: always
-      type: bool
-      sample: null
-    
+    returned: always
+    type: bool
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -233,6 +233,7 @@ class AzureRMVirtualMachineExtensionImage(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

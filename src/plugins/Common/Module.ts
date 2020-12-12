@@ -131,7 +131,7 @@ export class Module {
     }
     private LoadMethods(swaggerMethods:any){
         for (let swaggerMethod of swaggerMethods){
-            let moduleMethod = new ModuleMethod(swaggerMethod);
+            let moduleMethod = new ModuleMethod(this.ObjectName, swaggerMethod);
             if (this.IsInfoModule && moduleMethod.HttpMethod != 'get' )
                 continue;
 
@@ -198,7 +198,7 @@ export class Module {
     public BasicURL: string = null;
     public LocationDisposition: string = null;
     public DeleteResponseNoLogFields: string[] = [];
-    public ResponseFieldStatements: string[] = [];
+
     public NeedsDeleteBeforeUpdate: boolean = false;
     public NeedsForceUpdate: boolean;
     public ModuleOperationName: string = null;

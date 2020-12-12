@@ -15,76 +15,76 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_diskaccesse
-    version_added: '2.9'
-    short_description: Manage Azure DiskAccesse instance.
-    description:
-      - 'Create, update and delete instance of Azure DiskAccesse.'
-    options:
-      resource_group:
+module: azure_rm_diskaccesse
+version_added: '2.9'
+short_description: Manage Azure DiskAccesse instance.
+description:
+    - 'Create, update and delete instance of Azure DiskAccesse.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      disk_access_name:
+    disk_access_name:
         description:
-          - >-
-            The name of the disk access resource that is being created. The name
-            can't be changed after the disk encryption set is created. Supported
-            characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
-            is 80 characters.
+            - >-
+                The name of the disk access resource that is being created. The name
+                can't be changed after the disk encryption set is created. Supported
+                characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
+                is 80 characters.
         required: true
         type: str
-      private_endpoint_connections:
+    private_endpoint_connections:
         description:
-          - >-
-            A readonly collection of private endpoint connections created on the
-            disk. Currently only one endpoint connection is supported.
+            - >-
+                A readonly collection of private endpoint connections created on the
+                disk. Currently only one endpoint connection is supported.
         type: list
         suboptions:
-          private_link_service_connection_state:
-            description:
-              - >-
-                A collection of information about the state of the connection
-                between DiskAccess and Virtual Network.
-            type: dict
-            suboptions:
-              status:
+            private_link_service_connection_state:
                 description:
-                  - >-
-                    Indicates whether the connection has been
-                    Approved/Rejected/Removed by the owner of the service.
-                type: str
-                choices:
-                  - Pending
-                  - Approved
-                  - Rejected
-              description:
-                description:
-                  - The reason for approval/rejection of the connection.
-                type: str
-              actions_required:
-                description:
-                  - >-
-                    A message indicating if changes on the service provider require
-                    any updates on the consumer.
-                type: str
-      state:
+                    - >-
+                        A collection of information about the state of the connection
+                        between DiskAccess and Virtual Network.
+                type: dict
+                suboptions:
+                    status:
+                        description:
+                            - >-
+                                Indicates whether the connection has been
+                                Approved/Rejected/Removed by the owner of the service.
+                        type: str
+                        choices:
+                            - Pending
+                            - Approved
+                            - Rejected
+                    description:
+                        description:
+                            - The reason for approval/rejection of the connection.
+                        type: str
+                    actions_required:
+                        description:
+                            - >-
+                                A message indicating if changes on the service provider require
+                                any updates on the consumer.
+                        type: str
+    state:
         description:
-          - Assert the state of the DiskAccesse.
-          - >-
-            Use C(present) to create or update an DiskAccesse and C(absent) to
-            delete it.
+            - Assert the state of the DiskAccesse.
+            - >-
+                Use C(present) to create or update an DiskAccesse and C(absent) to
+                delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -109,89 +109,89 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    private_endpoint_connections:
-      description:
+    returned: always
+    type: dict
+    sample: null
+private_endpoint_connections:
+    description:
         - >-
-          A readonly collection of private endpoint connections created on the disk.
-          Currently only one endpoint connection is supported.
-      returned: always
-      type: list
-      sample: null
-      contains:
+            A readonly collection of private endpoint connections created on the disk.
+            Currently only one endpoint connection is supported.
+    returned: always
+    type: list
+    sample: null
+    contains:
         private_link_service_connection_state:
-          description:
-            - >-
-              A collection of information about the state of the connection between
-              DiskAccess and Virtual Network.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            status:
-              description:
-                - >-
-                  Indicates whether the connection has been
-                  Approved/Rejected/Removed by the owner of the service.
-              returned: always
-              type: str
-              sample: null
             description:
-              description:
-                - The reason for approval/rejection of the connection.
-              returned: always
-              type: str
-              sample: null
-            actions_required:
-              description:
                 - >-
-                  A message indicating if changes on the service provider require
-                  any updates on the consumer.
-              returned: always
-              type: str
-              sample: null
-    provisioning_state:
-      description:
+                    A collection of information about the state of the connection between
+                    DiskAccess and Virtual Network.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                status:
+                    description:
+                        - >-
+                            Indicates whether the connection has been
+                            Approved/Rejected/Removed by the owner of the service.
+                    returned: always
+                    type: str
+                    sample: null
+                description:
+                    description:
+                        - The reason for approval/rejection of the connection.
+                    returned: always
+                    type: str
+                    sample: null
+                actions_required:
+                    description:
+                        - >-
+                            A message indicating if changes on the service provider require
+                            any updates on the consumer.
+                    returned: always
+                    type: str
+                    sample: null
+provisioning_state:
+    description:
         - The disk access resource provisioning state.
-      returned: always
-      type: str
-      sample: null
-    time_created:
-      description:
+    returned: always
+    type: str
+    sample: null
+time_created:
+    description:
         - The time when the disk access was created.
-      returned: always
-      type: str
-      sample: null
-    
+    returned: always
+    type: str
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -314,6 +314,7 @@ class AzureRMDiskAccesse(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

@@ -15,207 +15,207 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachinescalesetextension
-    version_added: '2.9'
-    short_description: Manage Azure VirtualMachineScaleSetExtension instance.
-    description:
-      - 'Create, update and delete instance of Azure VirtualMachineScaleSetExtension.'
-    options:
-      resource_group:
+module: azure_rm_virtualmachinescalesetextension
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineScaleSetExtension instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineScaleSetExtension.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      vm_scale_set_name:
+    vm_scale_set_name:
         description:
-          - >-
-            The name of the VM scale set where the extension should be create or
-            updated.
-          - The name of the VM scale set where the extension should be updated.
-          - The name of the VM scale set where the extension should be deleted.
-          - The name of the VM scale set containing the extension.
+            - >-
+                The name of the VM scale set where the extension should be create or
+                updated.
+            - The name of the VM scale set where the extension should be updated.
+            - The name of the VM scale set where the extension should be deleted.
+            - The name of the VM scale set containing the extension.
         required: true
         type: str
-      vmss_extension_name:
+    vmss_extension_name:
         description:
-          - The name of the VM scale set extension.
+            - The name of the VM scale set extension.
         required: true
         type: str
-      name:
+    name:
         description:
-          - The name of the extension.
+            - The name of the extension.
         type: str
-      force_update_tag:
+    force_update_tag:
         description:
-          - >-
-            If a value is provided and is different from the previous value, the
-            extension handler will be forced to update even if the extension
-            configuration has not changed.
+            - >-
+                If a value is provided and is different from the previous value, the
+                extension handler will be forced to update even if the extension
+                configuration has not changed.
         type: str
-      publisher:
+    publisher:
         description:
-          - The name of the extension handler publisher.
+            - The name of the extension handler publisher.
         type: str
-      type_properties_type:
+    type_properties_type:
         description:
-          - >-
-            Specifies the type of the extension; an example is
-            "CustomScriptExtension".
+            - >-
+                Specifies the type of the extension; an example is
+                "CustomScriptExtension".
         type: str
-      type_handler_version:
+    type_handler_version:
         description:
-          - Specifies the version of the script handler.
+            - Specifies the version of the script handler.
         type: str
-      auto_upgrade_minor_version:
+    auto_upgrade_minor_version:
         description:
-          - >-
-            Indicates whether the extension should use a newer minor version if one
-            is available at deployment time. Once deployed, however, the extension
-            will not upgrade minor versions unless redeployed, even with this
-            property set to true.
+            - >-
+                Indicates whether the extension should use a newer minor version if one
+                is available at deployment time. Once deployed, however, the extension
+                will not upgrade minor versions unless redeployed, even with this
+                property set to true.
         type: bool
-      enable_automatic_upgrade:
+    enable_automatic_upgrade:
         description:
-          - >-
-            Indicates whether the extension should be automatically upgraded by the
-            platform if there is a newer version of the extension available.
+            - >-
+                Indicates whether the extension should be automatically upgraded by the
+                platform if there is a newer version of the extension available.
         type: bool
-      settings:
+    settings:
         description:
-          - Json formatted public settings for the extension.
+            - Json formatted public settings for the extension.
         type: any
-      protected_settings:
+    protected_settings:
         description:
-          - >-
-            The extension can contain either protectedSettings or
-            protectedSettingsFromKeyVault or no protected settings at all.
+            - >-
+                The extension can contain either protectedSettings or
+                protectedSettingsFromKeyVault or no protected settings at all.
         type: any
-      provision_after_extensions:
+    provision_after_extensions:
         description:
-          - >-
-            Collection of extension names after which this extension needs to be
-            provisioned.
+            - >-
+                Collection of extension names after which this extension needs to be
+                provisioned.
         type: list
-      expand:
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the VirtualMachineScaleSetExtension.
-          - >-
-            Use C(present) to create or update an VirtualMachineScaleSetExtension
-            and C(absent) to delete it.
+            - Assert the state of the VirtualMachineScaleSetExtension.
+            - >-
+                Use C(present) to create or update an VirtualMachineScaleSetExtension
+                and C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - The name of the extension.
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    force_update_tag:
-      description:
+    returned: always
+    type: str
+    sample: null
+force_update_tag:
+    description:
         - >-
-          If a value is provided and is different from the previous value, the
-          extension handler will be forced to update even if the extension
-          configuration has not changed.
-      returned: always
-      type: str
-      sample: null
-    publisher:
-      description:
+            If a value is provided and is different from the previous value, the
+            extension handler will be forced to update even if the extension
+            configuration has not changed.
+    returned: always
+    type: str
+    sample: null
+publisher:
+    description:
         - The name of the extension handler publisher.
-      returned: always
-      type: str
-      sample: null
-    type_properties_type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type_properties_type:
+    description:
         - >-
-          Specifies the type of the extension; an example is
-          "CustomScriptExtension".
-      returned: always
-      type: str
-      sample: null
-    type_handler_version:
-      description:
+            Specifies the type of the extension; an example is
+            "CustomScriptExtension".
+    returned: always
+    type: str
+    sample: null
+type_handler_version:
+    description:
         - Specifies the version of the script handler.
-      returned: always
-      type: str
-      sample: null
-    auto_upgrade_minor_version:
-      description:
+    returned: always
+    type: str
+    sample: null
+auto_upgrade_minor_version:
+    description:
         - >-
-          Indicates whether the extension should use a newer minor version if one is
-          available at deployment time. Once deployed, however, the extension will
-          not upgrade minor versions unless redeployed, even with this property set
-          to true.
-      returned: always
-      type: bool
-      sample: null
-    enable_automatic_upgrade:
-      description:
+            Indicates whether the extension should use a newer minor version if one is
+            available at deployment time. Once deployed, however, the extension will
+            not upgrade minor versions unless redeployed, even with this property set
+            to true.
+    returned: always
+    type: bool
+    sample: null
+enable_automatic_upgrade:
+    description:
         - >-
-          Indicates whether the extension should be automatically upgraded by the
-          platform if there is a newer version of the extension available.
-      returned: always
-      type: bool
-      sample: null
-    settings:
-      description:
+            Indicates whether the extension should be automatically upgraded by the
+            platform if there is a newer version of the extension available.
+    returned: always
+    type: bool
+    sample: null
+settings:
+    description:
         - Json formatted public settings for the extension.
-      returned: always
-      type: any
-      sample: null
-    protected_settings:
-      description:
+    returned: always
+    type: any
+    sample: null
+protected_settings:
+    description:
         - >-
-          The extension can contain either protectedSettings or
-          protectedSettingsFromKeyVault or no protected settings at all.
-      returned: always
-      type: any
-      sample: null
-    provisioning_state:
-      description:
+            The extension can contain either protectedSettings or
+            protectedSettingsFromKeyVault or no protected settings at all.
+    returned: always
+    type: any
+    sample: null
+provisioning_state:
+    description:
         - 'The provisioning state, which only appears in the response.'
-      returned: always
-      type: str
-      sample: null
-    provision_after_extensions:
-      description:
+    returned: always
+    type: str
+    sample: null
+provision_after_extensions:
+    description:
         - >-
-          Collection of extension names after which this extension needs to be
-          provisioned.
-      returned: always
-      type: list
-      sample: null
-    
+            Collection of extension names after which this extension needs to be
+            provisioned.
+    returned: always
+    type: list
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -359,6 +359,7 @@ class AzureRMVirtualMachineScaleSetExtension(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

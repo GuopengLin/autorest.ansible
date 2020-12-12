@@ -15,50 +15,50 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_galleryapplicationversion_info
-    version_added: '2.9'
-    short_description: Get GalleryApplicationVersion info.
-    description:
-      - Get info of GalleryApplicationVersion.
-    options:
-      resource_group:
+module: azure_rm_galleryapplicationversion_info
+version_added: '2.9'
+short_description: Get GalleryApplicationVersion info.
+description:
+    - Get info of GalleryApplicationVersion.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      gallery_name:
+    gallery_name:
         description:
-          - >-
-            The name of the Shared Application Gallery in which the Application
-            Definition resides.
+            - >-
+                The name of the Shared Application Gallery in which the Application
+                Definition resides.
         required: true
         type: str
-      gallery_application_name:
+    gallery_application_name:
         description:
-          - >-
-            The name of the gallery Application Definition in which the Application
-            Version resides.
-          - >-
-            The name of the Shared Application Gallery Application Definition from
-            which the Application Versions are to be listed.
+            - >-
+                The name of the gallery Application Definition in which the Application
+                Version resides.
+            - >-
+                The name of the Shared Application Gallery Application Definition from
+                which the Application Versions are to be listed.
         required: true
         type: str
-      gallery_application_version_name:
+    gallery_application_version_name:
         description:
-          - The name of the gallery Application Version to be retrieved.
+            - The name of the gallery Application Version to be retrieved.
         type: str
-      expand:
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: str
         choices:
-          - ReplicationStatus
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - ReplicationStatus
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -88,161 +88,161 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    gallery_application_versions:
-      description: >-
+gallery_application_versions:
+    description: >-
         A list of dict results where the key is the name of the
         GalleryApplicationVersion and the values are the facts for that
         GalleryApplicationVersion.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
         location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
         tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
         publishing_profile:
-          description:
-            - The publishing profile of a gallery Image Version.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            source:
-              description:
-                - >-
-                  The source image from which the Image Version is going to be
-                  created.
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                file_name:
-                  description:
-                    - Required. The fileName of the artifact.
-                  returned: always
-                  type: str
-                  sample: null
-                media_link:
-                  description:
-                    - >-
-                      Required. The mediaLink of the artifact, must be a readable
-                      storage blob.
-                  returned: always
-                  type: str
-                  sample: null
-            content_type:
-              description:
-                - >-
-                  Optional. May be used to help process this file. The type of file
-                  contained in the source, e.g. zip, json, etc.
-              returned: always
-              type: str
-              sample: null
-            enable_health_check:
-              description:
-                - Optional. Whether or not this application reports health.
-              returned: always
-              type: bool
-              sample: null
-        provisioning_state:
-          description:
-            - 'The provisioning state, which only appears in the response.'
-          returned: always
-          type: str
-          sample: null
-        replication_status:
-          description:
-            - This is the replication status of the gallery Image Version.
-          returned: always
-          type: dict
-          sample: null
-        value:
-          description:
-            - A list of gallery Application Versions.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            publishing_profile:
-              description:
+            description:
                 - The publishing profile of a gallery Image Version.
-              returned: always
-              type: dict
-              sample: null
-              contains:
+            returned: always
+            type: dict
+            sample: null
+            contains:
                 source:
-                  description:
-                    - >-
-                      The source image from which the Image Version is going to be
-                      created.
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    file_name:
-                      description:
-                        - Required. The fileName of the artifact.
-                      returned: always
-                      type: str
-                      sample: null
-                    media_link:
-                      description:
+                    description:
                         - >-
-                          Required. The mediaLink of the artifact, must be a
-                          readable storage blob.
-                      returned: always
-                      type: str
-                      sample: null
+                            The source image from which the Image Version is going to be
+                            created.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        file_name:
+                            description:
+                                - Required. The fileName of the artifact.
+                            returned: always
+                            type: str
+                            sample: null
+                        media_link:
+                            description:
+                                - >-
+                                    Required. The mediaLink of the artifact, must be a readable
+                                    storage blob.
+                            returned: always
+                            type: str
+                            sample: null
                 content_type:
-                  description:
-                    - >-
-                      Optional. May be used to help process this file. The type of
-                      file contained in the source, e.g. zip, json, etc.
-                  returned: always
-                  type: str
-                  sample: null
+                    description:
+                        - >-
+                            Optional. May be used to help process this file. The type of file
+                            contained in the source, e.g. zip, json, etc.
+                    returned: always
+                    type: str
+                    sample: null
                 enable_health_check:
-                  description:
-                    - Optional. Whether or not this application reports health.
-                  returned: always
-                  type: bool
-                  sample: null
+                    description:
+                        - Optional. Whether or not this application reports health.
+                    returned: always
+                    type: bool
+                    sample: null
+        provisioning_state:
+            description:
+                - 'The provisioning state, which only appears in the response.'
+            returned: always
+            type: str
+            sample: null
+        replication_status:
+            description:
+                - This is the replication status of the gallery Image Version.
+            returned: always
+            type: dict
+            sample: null
+        value:
+            description:
+                - A list of gallery Application Versions.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                publishing_profile:
+                    description:
+                        - The publishing profile of a gallery Image Version.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        source:
+                            description:
+                                - >-
+                                    The source image from which the Image Version is going to be
+                                    created.
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                file_name:
+                                    description:
+                                        - Required. The fileName of the artifact.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                media_link:
+                                    description:
+                                        - >-
+                                            Required. The mediaLink of the artifact, must be a
+                                            readable storage blob.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                        content_type:
+                            description:
+                                - >-
+                                    Optional. May be used to help process this file. The type of
+                                    file contained in the source, e.g. zip, json, etc.
+                            returned: always
+                            type: str
+                            sample: null
+                        enable_health_check:
+                            description:
+                                - Optional. Whether or not this application reports health.
+                            returned: always
+                            type: bool
+                            sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of gallery Application Versions. Call
-              ListNext() with this to fetch the next page of gallery Application
-              Versions.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The uri to fetch the next page of gallery Application Versions. Call
+                    ListNext() with this to fetch the next page of gallery Application
+                    Versions.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

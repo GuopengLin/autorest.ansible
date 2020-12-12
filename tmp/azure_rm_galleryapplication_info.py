@@ -15,37 +15,37 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_galleryapplication_info
-    version_added: '2.9'
-    short_description: Get GalleryApplication info.
-    description:
-      - Get info of GalleryApplication.
-    options:
-      resource_group:
+module: azure_rm_galleryapplication_info
+version_added: '2.9'
+short_description: Get GalleryApplication info.
+description:
+    - Get info of GalleryApplication.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      gallery_name:
+    gallery_name:
         description:
-          - >-
-            The name of the Shared Application Gallery from which the Application
-            Definitions are to be retrieved.
-          - >-
-            The name of the Shared Application Gallery from which Application
-            Definitions are to be listed.
+            - >-
+                The name of the Shared Application Gallery from which the Application
+                Definitions are to be retrieved.
+            - >-
+                The name of the Shared Application Gallery from which Application
+                Definitions are to be listed.
         required: true
         type: str
-      gallery_application_name:
+    gallery_application_name:
         description:
-          - The name of the gallery Application Definition to be retrieved.
+            - The name of the gallery Application Definition to be retrieved.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -65,150 +65,150 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    gallery_applications:
-      description: >-
+gallery_applications:
+    description: >-
         A list of dict results where the key is the name of the GalleryApplication
         and the values are the facts for that GalleryApplication.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
-        name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
-        type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
-        location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
-        tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
-        description:
-          description:
-            - >-
-              The description of this gallery Application Definition resource. This
-              property is updatable.
-          returned: always
-          type: str
-          sample: null
-        eula:
-          description:
-            - The Eula agreement for the gallery Application Definition.
-          returned: always
-          type: str
-          sample: null
-        privacy_statement_uri:
-          description:
-            - The privacy statement uri.
-          returned: always
-          type: str
-          sample: null
-        release_note_uri:
-          description:
-            - The release note uri.
-          returned: always
-          type: str
-          sample: null
-        end_of_life_date:
-          description:
-            - >-
-              The end of life date of the gallery Application Definition. This
-              property can be used for decommissioning purposes. This property is
-              updatable.
-          returned: always
-          type: str
-          sample: null
-        supported_os_type:
-          description:
-            - >-
-              This property allows you to specify the supported type of the OS that
-              application is built for. :code:`<br>`:code:`<br>` Possible values
-              are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
-              **Linux**
-          returned: always
-          type: sealed-choice
-          sample: null
-        value:
-          description:
-            - A list of Gallery Applications.
-          returned: always
-          type: list
-          sample: null
-          contains:
             description:
-              description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
+        description:
+            description:
                 - >-
-                  The description of this gallery Application Definition resource.
-                  This property is updatable.
-              returned: always
-              type: str
-              sample: null
-            eula:
-              description:
+                    The description of this gallery Application Definition resource. This
+                    property is updatable.
+            returned: always
+            type: str
+            sample: null
+        eula:
+            description:
                 - The Eula agreement for the gallery Application Definition.
-              returned: always
-              type: str
-              sample: null
-            privacy_statement_uri:
-              description:
+            returned: always
+            type: str
+            sample: null
+        privacy_statement_uri:
+            description:
                 - The privacy statement uri.
-              returned: always
-              type: str
-              sample: null
-            release_note_uri:
-              description:
+            returned: always
+            type: str
+            sample: null
+        release_note_uri:
+            description:
                 - The release note uri.
-              returned: always
-              type: str
-              sample: null
-            end_of_life_date:
-              description:
+            returned: always
+            type: str
+            sample: null
+        end_of_life_date:
+            description:
                 - >-
-                  The end of life date of the gallery Application Definition. This
-                  property can be used for decommissioning purposes. This property
-                  is updatable.
-              returned: always
-              type: str
-              sample: null
-            supported_os_type:
-              description:
+                    The end of life date of the gallery Application Definition. This
+                    property can be used for decommissioning purposes. This property is
+                    updatable.
+            returned: always
+            type: str
+            sample: null
+        supported_os_type:
+            description:
                 - >-
-                  This property allows you to specify the supported type of the OS
-                  that application is built for. :code:`<br>`:code:`<br>` Possible
-                  values are: :code:`<br>`:code:`<br>` **Windows**
-                  :code:`<br>`:code:`<br>` **Linux**
-              returned: always
-              type: sealed-choice
-              sample: null
+                    This property allows you to specify the supported type of the OS that
+                    application is built for. :code:`<br>`:code:`<br>` Possible values
+                    are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
+                    **Linux**
+            returned: always
+            type: sealed-choice
+            sample: null
+        value:
+            description:
+                - A list of Gallery Applications.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                description:
+                    description:
+                        - >-
+                            The description of this gallery Application Definition resource.
+                            This property is updatable.
+                    returned: always
+                    type: str
+                    sample: null
+                eula:
+                    description:
+                        - The Eula agreement for the gallery Application Definition.
+                    returned: always
+                    type: str
+                    sample: null
+                privacy_statement_uri:
+                    description:
+                        - The privacy statement uri.
+                    returned: always
+                    type: str
+                    sample: null
+                release_note_uri:
+                    description:
+                        - The release note uri.
+                    returned: always
+                    type: str
+                    sample: null
+                end_of_life_date:
+                    description:
+                        - >-
+                            The end of life date of the gallery Application Definition. This
+                            property can be used for decommissioning purposes. This property
+                            is updatable.
+                    returned: always
+                    type: str
+                    sample: null
+                supported_os_type:
+                    description:
+                        - >-
+                            This property allows you to specify the supported type of the OS
+                            that application is built for. :code:`<br>`:code:`<br>` Possible
+                            values are: :code:`<br>`:code:`<br>` **Windows**
+                            :code:`<br>`:code:`<br>` **Linux**
+                    returned: always
+                    type: sealed-choice
+                    sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of Application Definitions in the
-              Application Gallery. Call ListNext() with this to fetch the next page
-              of gallery Application Definitions.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The uri to fetch the next page of Application Definitions in the
+                    Application Gallery. Call ListNext() with this to fetch the next page
+                    of gallery Application Definitions.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

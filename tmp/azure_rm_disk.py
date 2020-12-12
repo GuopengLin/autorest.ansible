@@ -15,333 +15,333 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_disk
-    version_added: '2.9'
-    short_description: Manage Azure Disk instance.
-    description:
-      - 'Create, update and delete instance of Azure Disk.'
-    options:
-      resource_group:
+module: azure_rm_disk
+version_added: '2.9'
+short_description: Manage Azure Disk instance.
+description:
+    - 'Create, update and delete instance of Azure Disk.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      disk_name:
+    name:
         description:
-          - >-
-            The name of the managed disk that is being created. The name can't be
-            changed after the disk is created. Supported characters for the name are
-            a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.
+            - >-
+                The name of the managed disk that is being created. The name can't be
+                changed after the disk is created. Supported characters for the name are
+                a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.
         required: true
         type: str
-      managed_by_extended:
+    managed_by_extended:
         description:
-          - >-
-            List of relative URIs containing the IDs of the VMs that have the disk
-            attached. maxShares should be set to a value greater than one for disks
-            to allow attaching them to multiple VMs.
+            - >-
+                List of relative URIs containing the IDs of the VMs that have the disk
+                attached. maxShares should be set to a value greater than one for disks
+                to allow attaching them to multiple VMs.
         type: list
-      sku:
+    sku:
         description:
-          - >-
-            The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS,
-            or UltraSSD_LRS.
+            - >-
+                The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS,
+                or UltraSSD_LRS.
         type: dict
         suboptions:
-          name:
-            description:
-              - The sku name.
-            type: str
-            choices:
-              - Standard_LRS
-              - Premium_LRS
-              - StandardSSD_LRS
-              - UltraSSD_LRS
-      zones:
+            name:
+                description:
+                    - The sku name.
+                type: str
+                choices:
+                    - Standard_LRS
+                    - Premium_LRS
+                    - StandardSSD_LRS
+                    - UltraSSD_LRS
+    zones:
         description:
-          - The Logical zone list for Disk.
+            - The Logical zone list for Disk.
         type: list
-      os_type:
+    os_type:
         description:
-          - The Operating System type.
-          - the Operating System type.
+            - The Operating System type.
+            - the Operating System type.
         type: sealed-choice
-      hyper_v_generation:
+    hyper_v_generation:
         description:
-          - >-
-            The hypervisor generation of the Virtual Machine. Applicable to OS disks
-            only.
+            - >-
+                The hypervisor generation of the Virtual Machine. Applicable to OS disks
+                only.
         type: str
         choices:
-          - V1
-          - V2
-      creation_data:
+            - V1
+            - V2
+    creation_data:
         description:
-          - >-
-            Disk source information. CreationData information cannot be changed
-            after the disk has been created.
+            - >-
+                Disk source information. CreationData information cannot be changed
+                after the disk has been created.
         type: dict
         suboptions:
-          create_option:
-            description:
-              - This enumerates the possible sources of a disk's creation.
-            required: true
-            type: str
-            choices:
-              - Empty
-              - Attach
-              - FromImage
-              - Import
-              - Copy
-              - Restore
-              - Upload
-          storage_account_id:
-            description:
-              - >-
-                Required if createOption is Import. The Azure Resource Manager
-                identifier of the storage account containing the blob to import as a
-                disk.
-            type: str
-          image_reference:
-            description:
-              - Disk source information.
-            type: dict
-            suboptions:
-              id:
+            create_option:
                 description:
-                  - >-
-                    A relative uri containing either a Platform Image Repository or
-                    user image reference.
+                    - This enumerates the possible sources of a disk's creation.
                 required: true
                 type: str
-              lun:
+                choices:
+                    - Empty
+                    - Attach
+                    - FromImage
+                    - Import
+                    - Copy
+                    - Restore
+                    - Upload
+            storage_account_id:
                 description:
-                  - >-
-                    If the disk is created from an image's data disk, this is an
-                    index that indicates which of the data disks in the image to
-                    use. For OS disks, this field is null.
-                type: int
-          gallery_image_reference:
-            description:
-              - >-
-                Required if creating from a Gallery Image. The id of the
-                ImageDiskReference will be the ARM id of the shared galley image
-                version from which to create a disk.
-            type: dict
-            suboptions:
-              id:
-                description:
-                  - >-
-                    A relative uri containing either a Platform Image Repository or
-                    user image reference.
-                required: true
+                    - >-
+                        Required if createOption is Import. The Azure Resource Manager
+                        identifier of the storage account containing the blob to import as a
+                        disk.
                 type: str
-              lun:
+            image_reference:
                 description:
-                  - >-
-                    If the disk is created from an image's data disk, this is an
-                    index that indicates which of the data disks in the image to
-                    use. For OS disks, this field is null.
+                    - Disk source information.
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - >-
+                                A relative uri containing either a Platform Image Repository or
+                                user image reference.
+                        required: true
+                        type: str
+                    lun:
+                        description:
+                            - >-
+                                If the disk is created from an image's data disk, this is an
+                                index that indicates which of the data disks in the image to
+                                use. For OS disks, this field is null.
+                        type: int
+            gallery_image_reference:
+                description:
+                    - >-
+                        Required if creating from a Gallery Image. The id of the
+                        ImageDiskReference will be the ARM id of the shared galley image
+                        version from which to create a disk.
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - >-
+                                A relative uri containing either a Platform Image Repository or
+                                user image reference.
+                        required: true
+                        type: str
+                    lun:
+                        description:
+                            - >-
+                                If the disk is created from an image's data disk, this is an
+                                index that indicates which of the data disks in the image to
+                                use. For OS disks, this field is null.
+                        type: int
+            source_uri:
+                description:
+                    - >-
+                        If createOption is Import, this is the URI of a blob to be imported
+                        into a managed disk.
+                type: str
+            source_resource_id:
+                description:
+                    - >-
+                        If createOption is Copy, this is the ARM id of the source snapshot
+                        or disk.
+                type: str
+            upload_size_bytes:
+                description:
+                    - >-
+                        If createOption is Upload, this is the size of the contents of the
+                        upload including the VHD footer. This value should be between
+                        20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520
+                        bytes (32 TiB + 512 bytes for the VHD footer).
                 type: int
-          source_uri:
-            description:
-              - >-
-                If createOption is Import, this is the URI of a blob to be imported
-                into a managed disk.
-            type: str
-          source_resource_id:
-            description:
-              - >-
-                If createOption is Copy, this is the ARM id of the source snapshot
-                or disk.
-            type: str
-          upload_size_bytes:
-            description:
-              - >-
-                If createOption is Upload, this is the size of the contents of the
-                upload including the VHD footer. This value should be between
-                20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520
-                bytes (32 TiB + 512 bytes for the VHD footer).
-            type: int
-          logical_sector_size:
-            description:
-              - >-
-                Logical sector size in bytes for Ultra disks. Supported values are
-                512 ad 4096. 4096 is the default.
-            type: int
-      disk_size_gb:
+            logical_sector_size:
+                description:
+                    - >-
+                        Logical sector size in bytes for Ultra disks. Supported values are
+                        512 ad 4096. 4096 is the default.
+                type: int
+    disk_size_gb:
         description:
-          - >-
-            If creationData.createOption is Empty, this field is mandatory and it
-            indicates the size of the disk to create. If this field is present for
-            updates or creation with other options, it indicates a resize. Resizes
-            are only allowed if the disk is not attached to a running VM, and can
-            only increase the disk's size.
+            - >-
+                If creationData.createOption is Empty, this field is mandatory and it
+                indicates the size of the disk to create. If this field is present for
+                updates or creation with other options, it indicates a resize. Resizes
+                are only allowed if the disk is not attached to a running VM, and can
+                only increase the disk's size.
         type: int
-      encryption_settings_collection:
+    encryption_settings_collection:
         description:
-          - >-
-            Encryption settings collection used for Azure Disk Encryption, can
-            contain multiple encryption settings per disk or snapshot.
-          - >-
-            Encryption settings collection used be Azure Disk Encryption, can
-            contain multiple encryption settings per disk or snapshot.
+            - >-
+                Encryption settings collection used for Azure Disk Encryption, can
+                contain multiple encryption settings per disk or snapshot.
+            - >-
+                Encryption settings collection used be Azure Disk Encryption, can
+                contain multiple encryption settings per disk or snapshot.
         type: dict
         suboptions:
-          enabled:
-            description:
-              - >-
-                Set this flag to true and provide DiskEncryptionKey and optional
-                KeyEncryptionKey to enable encryption. Set this flag to false and
-                remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
-                If EncryptionSettings is null in the request object, the existing
-                settings remain unchanged.
-            required: true
-            type: bool
-          encryption_settings:
-            description:
-              - 'A collection of encryption settings, one for each disk volume.'
-            type: list
-            suboptions:
-              disk_encryption_key:
+            enabled:
                 description:
-                  - Key Vault Secret Url and vault id of the disk encryption key
-                type: dict
-                suboptions:
-                  source_vault:
-                    description:
-                      - Resource id of the KeyVault containing the key or secret
-                    required: true
-                    type: dict
-                    suboptions:
-                      id:
-                        description:
-                          - Resource Id
-                        type: str
-                  secret_url:
-                    description:
-                      - Url pointing to a key or secret in KeyVault
-                    required: true
-                    type: str
-              key_encryption_key:
+                    - >-
+                        Set this flag to true and provide DiskEncryptionKey and optional
+                        KeyEncryptionKey to enable encryption. Set this flag to false and
+                        remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
+                        If EncryptionSettings is null in the request object, the existing
+                        settings remain unchanged.
+                required: true
+                type: bool
+            encryption_settings:
                 description:
-                  - >-
-                    Key Vault Key Url and vault id of the key encryption key.
-                    KeyEncryptionKey is optional and when provided is used to unwrap
-                    the disk encryption key.
-                type: dict
+                    - 'A collection of encryption settings, one for each disk volume.'
+                type: list
                 suboptions:
-                  source_vault:
-                    description:
-                      - Resource id of the KeyVault containing the key or secret
-                    required: true
-                    type: dict
-                    suboptions:
-                      id:
+                    disk_encryption_key:
                         description:
-                          - Resource Id
-                        type: str
-                  key_url:
-                    description:
-                      - Url pointing to a key or secret in KeyVault
-                    required: true
-                    type: str
-          encryption_settings_version:
-            description:
-              - >-
-                Describes what type of encryption is used for the disks. Once this
-                field is set, it cannot be overwritten. '1.0' corresponds to Azure
-                Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
-                Encryption.
-            type: str
-      disk_iops_read_write:
+                            - Key Vault Secret Url and vault id of the disk encryption key
+                        type: dict
+                        suboptions:
+                            source_vault:
+                                description:
+                                    - Resource id of the KeyVault containing the key or secret
+                                required: true
+                                type: dict
+                                suboptions:
+                                    id:
+                                        description:
+                                            - Resource Id
+                                        type: str
+                            secret_url:
+                                description:
+                                    - Url pointing to a key or secret in KeyVault
+                                required: true
+                                type: str
+                    key_encryption_key:
+                        description:
+                            - >-
+                                Key Vault Key Url and vault id of the key encryption key.
+                                KeyEncryptionKey is optional and when provided is used to unwrap
+                                the disk encryption key.
+                        type: dict
+                        suboptions:
+                            source_vault:
+                                description:
+                                    - Resource id of the KeyVault containing the key or secret
+                                required: true
+                                type: dict
+                                suboptions:
+                                    id:
+                                        description:
+                                            - Resource Id
+                                        type: str
+                            key_url:
+                                description:
+                                    - Url pointing to a key or secret in KeyVault
+                                required: true
+                                type: str
+            encryption_settings_version:
+                description:
+                    - >-
+                        Describes what type of encryption is used for the disks. Once this
+                        field is set, it cannot be overwritten. '1.0' corresponds to Azure
+                        Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
+                        Encryption.
+                type: str
+    disk_iops_read_write:
         description:
-          - >-
-            The number of IOPS allowed for this disk; only settable for UltraSSD
-            disks. One operation can transfer between 4k and 256k bytes.
+            - >-
+                The number of IOPS allowed for this disk; only settable for UltraSSD
+                disks. One operation can transfer between 4k and 256k bytes.
         type: int
-      disk_m_bps_read_write:
+    disk_m_bps_read_write:
         description:
-          - >-
-            The bandwidth allowed for this disk; only settable for UltraSSD disks.
-            MBps means millions of bytes per second - MB here uses the ISO notation,
-            of powers of 10.
+            - >-
+                The bandwidth allowed for this disk; only settable for UltraSSD disks.
+                MBps means millions of bytes per second - MB here uses the ISO notation,
+                of powers of 10.
         type: int
-      disk_iops_read_only:
+    disk_iops_read_only:
         description:
-          - >-
-            The total number of IOPS that will be allowed across all VMs mounting
-            the shared disk as ReadOnly. One operation can transfer between 4k and
-            256k bytes.
+            - >-
+                The total number of IOPS that will be allowed across all VMs mounting
+                the shared disk as ReadOnly. One operation can transfer between 4k and
+                256k bytes.
         type: int
-      disk_m_bps_read_only:
+    disk_m_bps_read_only:
         description:
-          - >-
-            The total throughput (MBps) that will be allowed across all VMs mounting
-            the shared disk as ReadOnly. MBps means millions of bytes per second -
-            MB here uses the ISO notation, of powers of 10.
+            - >-
+                The total throughput (MBps) that will be allowed across all VMs mounting
+                the shared disk as ReadOnly. MBps means millions of bytes per second -
+                MB here uses the ISO notation, of powers of 10.
         type: int
-      encryption:
+    encryption:
         description:
-          - >-
-            Encryption property can be used to encrypt data at rest with customer
-            managed keys or platform managed keys.
+            - >-
+                Encryption property can be used to encrypt data at rest with customer
+                managed keys or platform managed keys.
         type: dict
         suboptions:
-          disk_encryption_set_id:
-            description:
-              - >-
-                ResourceId of the disk encryption set to use for enabling encryption
-                at rest.
-            type: str
-          type:
-            description:
-              - The type of key used to encrypt the data of the disk.
-            type: str
-            choices:
-              - EncryptionAtRestWithPlatformKey
-              - EncryptionAtRestWithCustomerKey
-              - EncryptionAtRestWithPlatformAndCustomerKeys
-      max_shares:
+            disk_encryption_set_id:
+                description:
+                    - >-
+                        ResourceId of the disk encryption set to use for enabling encryption
+                        at rest.
+                type: str
+            type:
+                description:
+                    - The type of key used to encrypt the data of the disk.
+                type: str
+                choices:
+                    - EncryptionAtRestWithPlatformKey
+                    - EncryptionAtRestWithCustomerKey
+                    - EncryptionAtRestWithPlatformAndCustomerKeys
+    max_shares:
         description:
-          - >-
-            The maximum number of VMs that can attach to the disk at the same time.
-            Value greater than one indicates a disk that can be mounted on multiple
-            VMs at the same time.
+            - >-
+                The maximum number of VMs that can attach to the disk at the same time.
+                Value greater than one indicates a disk that can be mounted on multiple
+                VMs at the same time.
         type: int
-      network_access_policy:
+    network_access_policy:
         description:
-          - Policy for accessing the disk via network.
+            - Policy for accessing the disk via network.
         type: str
         choices:
-          - AllowAll
-          - AllowPrivate
-          - DenyAll
-      disk_access_id:
+            - AllowAll
+            - AllowPrivate
+            - DenyAll
+    disk_access_id:
         description:
-          - ARM id of the DiskAccess resource for using private endpoints on disks.
+            - ARM id of the DiskAccess resource for using private endpoints on disks.
         type: str
-      tier:
+    tier:
         description:
-          - >-
-            Performance tier of the disk (e.g, P4, S10) as described here:
-            https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does
-            not apply to Ultra disks.
+            - >-
+                Performance tier of the disk (e.g, P4, S10) as described here:
+                https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does
+                not apply to Ultra disks.
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the Disk.
-          - Use C(present) to create or update an Disk and C(absent) to delete it.
+            - Assert the state of the Disk.
+            - Use C(present) to create or update an Disk and C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -482,426 +482,426 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    managed_by:
-      description:
+    returned: always
+    type: dict
+    sample: null
+managed_by:
+    description:
         - A relative URI containing the ID of the VM that has the disk attached.
-      returned: always
-      type: str
-      sample: null
-    managed_by_extended:
-      description:
+    returned: always
+    type: str
+    sample: null
+managed_by_extended:
+    description:
         - >-
-          List of relative URIs containing the IDs of the VMs that have the disk
-          attached. maxShares should be set to a value greater than one for disks to
-          allow attaching them to multiple VMs.
-      returned: always
-      type: list
-      sample: null
-    sku:
-      description:
+            List of relative URIs containing the IDs of the VMs that have the disk
+            attached. maxShares should be set to a value greater than one for disks to
+            allow attaching them to multiple VMs.
+    returned: always
+    type: list
+    sample: null
+sku:
+    description:
         - >-
-          The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, or
-          UltraSSD_LRS.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, or
+            UltraSSD_LRS.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         name:
-          description:
-            - The sku name.
-          returned: always
-          type: str
-          sample: null
-    zones:
-      description:
+            description:
+                - The sku name.
+            returned: always
+            type: str
+            sample: null
+zones:
+    description:
         - The Logical zone list for Disk.
-      returned: always
-      type: list
-      sample: null
-    time_created:
-      description:
+    returned: always
+    type: list
+    sample: null
+time_created:
+    description:
         - The time when the disk was created.
-      returned: always
-      type: str
-      sample: null
-    os_type:
-      description:
+    returned: always
+    type: str
+    sample: null
+os_type:
+    description:
         - The Operating System type.
-      returned: always
-      type: sealed-choice
-      sample: null
-    hyper_v_generation:
-      description:
+    returned: always
+    type: sealed-choice
+    sample: null
+hyper_v_generation:
+    description:
         - >-
-          The hypervisor generation of the Virtual Machine. Applicable to OS disks
-          only.
-      returned: always
-      type: str
-      sample: null
-    creation_data:
-      description:
+            The hypervisor generation of the Virtual Machine. Applicable to OS disks
+            only.
+    returned: always
+    type: str
+    sample: null
+creation_data:
+    description:
         - >-
-          Disk source information. CreationData information cannot be changed after
-          the disk has been created.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Disk source information. CreationData information cannot be changed after
+            the disk has been created.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         create_option:
-          description:
-            - This enumerates the possible sources of a disk's creation.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - This enumerates the possible sources of a disk's creation.
+            returned: always
+            type: str
+            sample: null
         storage_account_id:
-          description:
-            - >-
-              Required if createOption is Import. The Azure Resource Manager
-              identifier of the storage account containing the blob to import as a
-              disk.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    Required if createOption is Import. The Azure Resource Manager
+                    identifier of the storage account containing the blob to import as a
+                    disk.
+            returned: always
+            type: str
+            sample: null
         image_reference:
-          description:
-            - Disk source information.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            id:
-              description:
-                - >-
-                  A relative uri containing either a Platform Image Repository or
-                  user image reference.
-              returned: always
-              type: str
-              sample: null
-            lun:
-              description:
-                - >-
-                  If the disk is created from an image's data disk, this is an index
-                  that indicates which of the data disks in the image to use. For OS
-                  disks, this field is null.
-              returned: always
-              type: int
-              sample: null
+            description:
+                - Disk source information.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - >-
+                            A relative uri containing either a Platform Image Repository or
+                            user image reference.
+                    returned: always
+                    type: str
+                    sample: null
+                lun:
+                    description:
+                        - >-
+                            If the disk is created from an image's data disk, this is an index
+                            that indicates which of the data disks in the image to use. For OS
+                            disks, this field is null.
+                    returned: always
+                    type: int
+                    sample: null
         gallery_image_reference:
-          description:
-            - >-
-              Required if creating from a Gallery Image. The id of the
-              ImageDiskReference will be the ARM id of the shared galley image
-              version from which to create a disk.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            id:
-              description:
+            description:
                 - >-
-                  A relative uri containing either a Platform Image Repository or
-                  user image reference.
-              returned: always
-              type: str
-              sample: null
-            lun:
-              description:
-                - >-
-                  If the disk is created from an image's data disk, this is an index
-                  that indicates which of the data disks in the image to use. For OS
-                  disks, this field is null.
-              returned: always
-              type: int
-              sample: null
+                    Required if creating from a Gallery Image. The id of the
+                    ImageDiskReference will be the ARM id of the shared galley image
+                    version from which to create a disk.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - >-
+                            A relative uri containing either a Platform Image Repository or
+                            user image reference.
+                    returned: always
+                    type: str
+                    sample: null
+                lun:
+                    description:
+                        - >-
+                            If the disk is created from an image's data disk, this is an index
+                            that indicates which of the data disks in the image to use. For OS
+                            disks, this field is null.
+                    returned: always
+                    type: int
+                    sample: null
         source_uri:
-          description:
-            - >-
-              If createOption is Import, this is the URI of a blob to be imported
-              into a managed disk.
-          returned: always
-          type: str
-          sample: null
-        source_resource_id:
-          description:
-            - >-
-              If createOption is Copy, this is the ARM id of the source snapshot or
-              disk.
-          returned: always
-          type: str
-          sample: null
-        upload_size_bytes:
-          description:
-            - >-
-              If createOption is Upload, this is the size of the contents of the
-              upload including the VHD footer. This value should be between 20972032
-              (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32
-              TiB + 512 bytes for the VHD footer).
-          returned: always
-          type: int
-          sample: null
-        logical_sector_size:
-          description:
-            - >-
-              Logical sector size in bytes for Ultra disks. Supported values are 512
-              ad 4096. 4096 is the default.
-          returned: always
-          type: int
-          sample: null
-    disk_size_gb:
-      description:
-        - >-
-          If creationData.createOption is Empty, this field is mandatory and it
-          indicates the size of the disk to create. If this field is present for
-          updates or creation with other options, it indicates a resize. Resizes are
-          only allowed if the disk is not attached to a running VM, and can only
-          increase the disk's size.
-      returned: always
-      type: int
-      sample: null
-    disk_size_bytes:
-      description:
-        - The size of the disk in bytes. This field is read only.
-      returned: always
-      type: int
-      sample: null
-    unique_id:
-      description:
-        - Unique Guid identifying the resource.
-      returned: always
-      type: str
-      sample: null
-    encryption_settings_collection:
-      description:
-        - >-
-          Encryption settings collection used for Azure Disk Encryption, can contain
-          multiple encryption settings per disk or snapshot.
-      returned: always
-      type: dict
-      sample: null
-      contains:
-        enabled:
-          description:
-            - >-
-              Set this flag to true and provide DiskEncryptionKey and optional
-              KeyEncryptionKey to enable encryption. Set this flag to false and
-              remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
-              If EncryptionSettings is null in the request object, the existing
-              settings remain unchanged.
-          returned: always
-          type: bool
-          sample: null
-        encryption_settings:
-          description:
-            - 'A collection of encryption settings, one for each disk volume.'
-          returned: always
-          type: list
-          sample: null
-          contains:
-            disk_encryption_key:
-              description:
-                - Key Vault Secret Url and vault id of the disk encryption key
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                source_vault:
-                  description:
-                    - Resource id of the KeyVault containing the key or secret
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    id:
-                      description:
-                        - Resource Id
-                      returned: always
-                      type: str
-                      sample: null
-                secret_url:
-                  description:
-                    - Url pointing to a key or secret in KeyVault
-                  returned: always
-                  type: str
-                  sample: null
-            key_encryption_key:
-              description:
+            description:
                 - >-
-                  Key Vault Key Url and vault id of the key encryption key.
-                  KeyEncryptionKey is optional and when provided is used to unwrap
-                  the disk encryption key.
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                source_vault:
-                  description:
-                    - Resource id of the KeyVault containing the key or secret
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    id:
-                      description:
-                        - Resource Id
-                      returned: always
-                      type: str
-                      sample: null
-                key_url:
-                  description:
-                    - Url pointing to a key or secret in KeyVault
-                  returned: always
-                  type: str
-                  sample: null
+                    If createOption is Import, this is the URI of a blob to be imported
+                    into a managed disk.
+            returned: always
+            type: str
+            sample: null
+        source_resource_id:
+            description:
+                - >-
+                    If createOption is Copy, this is the ARM id of the source snapshot or
+                    disk.
+            returned: always
+            type: str
+            sample: null
+        upload_size_bytes:
+            description:
+                - >-
+                    If createOption is Upload, this is the size of the contents of the
+                    upload including the VHD footer. This value should be between 20972032
+                    (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32
+                    TiB + 512 bytes for the VHD footer).
+            returned: always
+            type: int
+            sample: null
+        logical_sector_size:
+            description:
+                - >-
+                    Logical sector size in bytes for Ultra disks. Supported values are 512
+                    ad 4096. 4096 is the default.
+            returned: always
+            type: int
+            sample: null
+disk_size_gb:
+    description:
+        - >-
+            If creationData.createOption is Empty, this field is mandatory and it
+            indicates the size of the disk to create. If this field is present for
+            updates or creation with other options, it indicates a resize. Resizes are
+            only allowed if the disk is not attached to a running VM, and can only
+            increase the disk's size.
+    returned: always
+    type: int
+    sample: null
+disk_size_bytes:
+    description:
+        - The size of the disk in bytes. This field is read only.
+    returned: always
+    type: int
+    sample: null
+unique_id:
+    description:
+        - Unique Guid identifying the resource.
+    returned: always
+    type: str
+    sample: null
+encryption_settings_collection:
+    description:
+        - >-
+            Encryption settings collection used for Azure Disk Encryption, can contain
+            multiple encryption settings per disk or snapshot.
+    returned: always
+    type: dict
+    sample: null
+    contains:
+        enabled:
+            description:
+                - >-
+                    Set this flag to true and provide DiskEncryptionKey and optional
+                    KeyEncryptionKey to enable encryption. Set this flag to false and
+                    remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
+                    If EncryptionSettings is null in the request object, the existing
+                    settings remain unchanged.
+            returned: always
+            type: bool
+            sample: null
+        encryption_settings:
+            description:
+                - 'A collection of encryption settings, one for each disk volume.'
+            returned: always
+            type: list
+            sample: null
+            contains:
+                disk_encryption_key:
+                    description:
+                        - Key Vault Secret Url and vault id of the disk encryption key
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    returned: always
+                                    type: str
+                                    sample: null
+                        secret_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
+                key_encryption_key:
+                    description:
+                        - >-
+                            Key Vault Key Url and vault id of the key encryption key.
+                            KeyEncryptionKey is optional and when provided is used to unwrap
+                            the disk encryption key.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    returned: always
+                                    type: str
+                                    sample: null
+                        key_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
         encryption_settings_version:
-          description:
-            - >-
-              Describes what type of encryption is used for the disks. Once this
-              field is set, it cannot be overwritten. '1.0' corresponds to Azure
-              Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
-              Encryption.
-          returned: always
-          type: str
-          sample: null
-    provisioning_state:
-      description:
+            description:
+                - >-
+                    Describes what type of encryption is used for the disks. Once this
+                    field is set, it cannot be overwritten. '1.0' corresponds to Azure
+                    Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
+                    Encryption.
+            returned: always
+            type: str
+            sample: null
+provisioning_state:
+    description:
         - The disk provisioning state.
-      returned: always
-      type: str
-      sample: null
-    disk_iops_read_write:
-      description:
+    returned: always
+    type: str
+    sample: null
+disk_iops_read_write:
+    description:
         - >-
-          The number of IOPS allowed for this disk; only settable for UltraSSD
-          disks. One operation can transfer between 4k and 256k bytes.
-      returned: always
-      type: int
-      sample: null
-    disk_m_bps_read_write:
-      description:
+            The number of IOPS allowed for this disk; only settable for UltraSSD
+            disks. One operation can transfer between 4k and 256k bytes.
+    returned: always
+    type: int
+    sample: null
+disk_m_bps_read_write:
+    description:
         - >-
-          The bandwidth allowed for this disk; only settable for UltraSSD disks.
-          MBps means millions of bytes per second - MB here uses the ISO notation,
-          of powers of 10.
-      returned: always
-      type: int
-      sample: null
-    disk_iops_read_only:
-      description:
+            The bandwidth allowed for this disk; only settable for UltraSSD disks.
+            MBps means millions of bytes per second - MB here uses the ISO notation,
+            of powers of 10.
+    returned: always
+    type: int
+    sample: null
+disk_iops_read_only:
+    description:
         - >-
-          The total number of IOPS that will be allowed across all VMs mounting the
-          shared disk as ReadOnly. One operation can transfer between 4k and 256k
-          bytes.
-      returned: always
-      type: int
-      sample: null
-    disk_m_bps_read_only:
-      description:
+            The total number of IOPS that will be allowed across all VMs mounting the
+            shared disk as ReadOnly. One operation can transfer between 4k and 256k
+            bytes.
+    returned: always
+    type: int
+    sample: null
+disk_m_bps_read_only:
+    description:
         - >-
-          The total throughput (MBps) that will be allowed across all VMs mounting
-          the shared disk as ReadOnly. MBps means millions of bytes per second - MB
-          here uses the ISO notation, of powers of 10.
-      returned: always
-      type: int
-      sample: null
-    disk_state:
-      description:
+            The total throughput (MBps) that will be allowed across all VMs mounting
+            the shared disk as ReadOnly. MBps means millions of bytes per second - MB
+            here uses the ISO notation, of powers of 10.
+    returned: always
+    type: int
+    sample: null
+disk_state:
+    description:
         - The state of the disk.
-      returned: always
-      type: str
-      sample: null
-    encryption:
-      description:
+    returned: always
+    type: str
+    sample: null
+encryption:
+    description:
         - >-
-          Encryption property can be used to encrypt data at rest with customer
-          managed keys or platform managed keys.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Encryption property can be used to encrypt data at rest with customer
+            managed keys or platform managed keys.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         disk_encryption_set_id:
-          description:
-            - >-
-              ResourceId of the disk encryption set to use for enabling encryption
-              at rest.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    ResourceId of the disk encryption set to use for enabling encryption
+                    at rest.
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - The type of key used to encrypt the data of the disk.
-          returned: always
-          type: str
-          sample: null
-    max_shares:
-      description:
+            description:
+                - The type of key used to encrypt the data of the disk.
+            returned: always
+            type: str
+            sample: null
+max_shares:
+    description:
         - >-
-          The maximum number of VMs that can attach to the disk at the same time.
-          Value greater than one indicates a disk that can be mounted on multiple
-          VMs at the same time.
-      returned: always
-      type: int
-      sample: null
-    share_info:
-      description:
+            The maximum number of VMs that can attach to the disk at the same time.
+            Value greater than one indicates a disk that can be mounted on multiple
+            VMs at the same time.
+    returned: always
+    type: int
+    sample: null
+share_info:
+    description:
         - >-
-          Details of the list of all VMs that have the disk attached. maxShares
-          should be set to a value greater than one for disks to allow attaching
-          them to multiple VMs.
-      returned: always
-      type: list
-      sample: null
-    network_access_policy:
-      description:
+            Details of the list of all VMs that have the disk attached. maxShares
+            should be set to a value greater than one for disks to allow attaching
+            them to multiple VMs.
+    returned: always
+    type: list
+    sample: null
+network_access_policy:
+    description:
         - Policy for accessing the disk via network.
-      returned: always
-      type: str
-      sample: null
-    disk_access_id:
-      description:
+    returned: always
+    type: str
+    sample: null
+disk_access_id:
+    description:
         - ARM id of the DiskAccess resource for using private endpoints on disks.
-      returned: always
-      type: str
-      sample: null
-    tier:
-      description:
+    returned: always
+    type: str
+    sample: null
+tier:
+    description:
         - >-
-          Performance tier of the disk (e.g, P4, S10) as described here:
-          https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not
-          apply to Ultra disks.
-      returned: always
-      type: str
-      sample: null
-    
+            Performance tier of the disk (e.g, P4, S10) as described here:
+            https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not
+            apply to Ultra disks.
+    returned: always
+    type: str
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -926,7 +926,7 @@ class AzureRMDisk(AzureRMModuleBaseExt):
                 type='str',
                 required=True
             ),
-            disk_name=dict(
+            name=dict(
                 type='str',
                 required=True
             ),
@@ -1163,7 +1163,7 @@ class AzureRMDisk(AzureRMModuleBaseExt):
         )
 
         self.resource_group = None
-        self.disk_name = None
+        self.name = None
         self.body = {}
 
         self.results = dict(changed=False)
@@ -1220,13 +1220,14 @@ class AzureRMDisk(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 
     def create_update_resource(self):
         try:
             response = self.mgmt_client.disks.create_or_update(resource_group=self.resource_group,
-                                                               disk_name=self.disk_name,
+                                                               name=self.name,
                                                                disk=self.body)
             if isinstance(response, AzureOperationPoller) or isinstance(response, LROPoller):
                 response = self.get_poller_result(response)
@@ -1238,7 +1239,7 @@ class AzureRMDisk(AzureRMModuleBaseExt):
     def delete_resource(self):
         try:
             response = self.mgmt_client.disks.delete(resource_group=self.resource_group,
-                                                     disk_name=self.disk_name)
+                                                     name=self.name)
         except CloudError as e:
             self.log('Error attempting to delete the Disk instance.')
             self.fail('Error deleting the Disk instance: {0}'.format(str(e)))
@@ -1248,7 +1249,7 @@ class AzureRMDisk(AzureRMModuleBaseExt):
     def get_resource(self):
         try:
             response = self.mgmt_client.disks.get(resource_group=self.resource_group,
-                                                  disk_name=self.disk_name)
+                                                  name=self.name)
         except CloudError as e:
             return False
         return response.as_dict()

@@ -15,38 +15,38 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachinescalesetrollingupgrade
-    version_added: '2.9'
-    short_description: Manage Azure VirtualMachineScaleSetRollingUpgrade instance.
-    description:
-      - >-
+module: azure_rm_virtualmachinescalesetrollingupgrade
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineScaleSetRollingUpgrade instance.
+description:
+    - >-
         Create, update and delete instance of Azure
         VirtualMachineScaleSetRollingUpgrade.
-    options:
-      state:
+options:
+    state:
         description:
-          - Assert the state of the VirtualMachineScaleSetRollingUpgrade.
-          - >-
-            Use C(present) to create or update an
-            VirtualMachineScaleSetRollingUpgrade and C(absent) to delete it.
+            - Assert the state of the VirtualMachineScaleSetRollingUpgrade.
+            - >-
+                Use C(present) to create or update an
+                VirtualMachineScaleSetRollingUpgrade and C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    {}
-    
+{}
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -131,6 +131,7 @@ class AzureRMVirtualMachineScaleSetRollingUpgrade(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

@@ -15,30 +15,30 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_diskaccesse_info
-    version_added: '2.9'
-    short_description: Get DiskAccesse info.
-    description:
-      - Get info of DiskAccesse.
-    options:
-      resource_group:
+module: azure_rm_diskaccesse_info
+version_added: '2.9'
+short_description: Get DiskAccesse info.
+description:
+    - Get info of DiskAccesse.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         type: str
-      disk_access_name:
+    disk_access_name:
         description:
-          - >-
-            The name of the disk access resource that is being created. The name
-            can't be changed after the disk encryption set is created. Supported
-            characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
-            is 80 characters.
+            - >-
+                The name of the disk access resource that is being created. The name
+                can't be changed after the disk encryption set is created. Supported
+                characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
+                is 80 characters.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -71,153 +71,153 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    disk_accesses:
-      description: >-
+disk_accesses:
+    description: >-
         A list of dict results where the key is the name of the DiskAccesse and the
         values are the facts for that DiskAccesse.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
         location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
         tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
         private_endpoint_connections:
-          description:
-            - >-
-              A readonly collection of private endpoint connections created on the
-              disk. Currently only one endpoint connection is supported.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            private_link_service_connection_state:
-              description:
+            description:
                 - >-
-                  A collection of information about the state of the connection
-                  between DiskAccess and Virtual Network.
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                status:
-                  description:
-                    - >-
-                      Indicates whether the connection has been
-                      Approved/Rejected/Removed by the owner of the service.
-                  returned: always
-                  type: str
-                  sample: null
-                description:
-                  description:
-                    - The reason for approval/rejection of the connection.
-                  returned: always
-                  type: str
-                  sample: null
-                actions_required:
-                  description:
-                    - >-
-                      A message indicating if changes on the service provider
-                      require any updates on the consumer.
-                  returned: always
-                  type: str
-                  sample: null
-        provisioning_state:
-          description:
-            - The disk access resource provisioning state.
-          returned: always
-          type: str
-          sample: null
-        time_created:
-          description:
-            - The time when the disk access was created.
-          returned: always
-          type: str
-          sample: null
-        value:
-          description:
-            - |-
-              A list of disk access resources.
-              Array of private link resources
-          returned: always
-          type: list
-          sample: null
-          contains:
-            private_endpoint_connections:
-              description:
-                - >-
-                  A readonly collection of private endpoint connections created on
-                  the disk. Currently only one endpoint connection is supported.
-              returned: always
-              type: list
-              sample: null
-              contains:
+                    A readonly collection of private endpoint connections created on the
+                    disk. Currently only one endpoint connection is supported.
+            returned: always
+            type: list
+            sample: null
+            contains:
                 private_link_service_connection_state:
-                  description:
-                    - >-
-                      A collection of information about the state of the connection
-                      between DiskAccess and Virtual Network.
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    status:
-                      description:
-                        - >-
-                          Indicates whether the connection has been
-                          Approved/Rejected/Removed by the owner of the service.
-                      returned: always
-                      type: str
-                      sample: null
                     description:
-                      description:
-                        - The reason for approval/rejection of the connection.
-                      returned: always
-                      type: str
-                      sample: null
-                    actions_required:
-                      description:
                         - >-
-                          A message indicating if changes on the service provider
-                          require any updates on the consumer.
-                      returned: always
-                      type: str
-                      sample: null
+                            A collection of information about the state of the connection
+                            between DiskAccess and Virtual Network.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        status:
+                            description:
+                                - >-
+                                    Indicates whether the connection has been
+                                    Approved/Rejected/Removed by the owner of the service.
+                            returned: always
+                            type: str
+                            sample: null
+                        description:
+                            description:
+                                - The reason for approval/rejection of the connection.
+                            returned: always
+                            type: str
+                            sample: null
+                        actions_required:
+                            description:
+                                - >-
+                                    A message indicating if changes on the service provider
+                                    require any updates on the consumer.
+                            returned: always
+                            type: str
+                            sample: null
+        provisioning_state:
+            description:
+                - The disk access resource provisioning state.
+            returned: always
+            type: str
+            sample: null
+        time_created:
+            description:
+                - The time when the disk access was created.
+            returned: always
+            type: str
+            sample: null
+        value:
+            description:
+                - |-
+                    A list of disk access resources.
+                    Array of private link resources
+            returned: always
+            type: list
+            sample: null
+            contains:
+                private_endpoint_connections:
+                    description:
+                        - >-
+                            A readonly collection of private endpoint connections created on
+                            the disk. Currently only one endpoint connection is supported.
+                    returned: always
+                    type: list
+                    sample: null
+                    contains:
+                        private_link_service_connection_state:
+                            description:
+                                - >-
+                                    A collection of information about the state of the connection
+                                    between DiskAccess and Virtual Network.
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                status:
+                                    description:
+                                        - >-
+                                            Indicates whether the connection has been
+                                            Approved/Rejected/Removed by the owner of the service.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                description:
+                                    description:
+                                        - The reason for approval/rejection of the connection.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                actions_required:
+                                    description:
+                                        - >-
+                                            A message indicating if changes on the service provider
+                                            require any updates on the consumer.
+                                    returned: always
+                                    type: str
+                                    sample: null
         next_link:
-          description:
-            - >-
-              The uri to fetch the next page of disk access resources. Call
-              ListNext() with this to fetch the next page of disk access resources.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The uri to fetch the next page of disk access resources. Call
+                    ListNext() with this to fetch the next page of disk access resources.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

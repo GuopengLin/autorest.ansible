@@ -154,19 +154,20 @@ export function GenerateModuleSdk(module: Module) : string[] {
     output.push("        else:");
     output.push("            self.results['changed'] = False");
     output.push("            response = old_response");
+    output.push("            self.result['state'] = response");
     output.push("");
-    {
-        var stmtsx = module.ResponseFieldStatements;
-
-        if (stmtsx.length > 0)
-        {
-            output.push("        if response:");
-            stmtsx.forEach(element => {
-                output.push("           " + element);
-            });
-            output.push("");
-        }
-    }
+    // {
+    //     var stmtsx = module.ResponseFieldStatements;
+    //
+    //     if (stmtsx.length > 0)
+    //     {
+    //         output.push("        if response:");
+    //         stmtsx.forEach(element => {
+    //             output.push("           " + element);
+    //         });
+    //         output.push("");
+    //     }
+    // }
     output.push("        return self.results");
     output.push("");
     if (module.GetMethod('create_or_update') != null || module.GetMethod('create') != null){

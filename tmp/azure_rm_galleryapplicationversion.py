@@ -15,110 +15,110 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_galleryapplicationversion
-    version_added: '2.9'
-    short_description: Manage Azure GalleryApplicationVersion instance.
-    description:
-      - 'Create, update and delete instance of Azure GalleryApplicationVersion.'
-    options:
-      resource_group:
+module: azure_rm_galleryapplicationversion
+version_added: '2.9'
+short_description: Manage Azure GalleryApplicationVersion instance.
+description:
+    - 'Create, update and delete instance of Azure GalleryApplicationVersion.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      gallery_name:
+    gallery_name:
         description:
-          - >-
-            The name of the Shared Application Gallery in which the Application
-            Definition resides.
+            - >-
+                The name of the Shared Application Gallery in which the Application
+                Definition resides.
         required: true
         type: str
-      gallery_application_name:
+    gallery_application_name:
         description:
-          - >-
-            The name of the gallery Application Definition in which the Application
-            Version is to be created.
-          - >-
-            The name of the gallery Application Definition in which the Application
-            Version is to be updated.
-          - >-
-            The name of the gallery Application Definition in which the Application
-            Version resides.
+            - >-
+                The name of the gallery Application Definition in which the Application
+                Version is to be created.
+            - >-
+                The name of the gallery Application Definition in which the Application
+                Version is to be updated.
+            - >-
+                The name of the gallery Application Definition in which the Application
+                Version resides.
         required: true
         type: str
-      gallery_application_version_name:
+    gallery_application_version_name:
         description:
-          - >-
-            The name of the gallery Application Version to be created. Needs to
-            follow semantic version name pattern: The allowed characters are digit
-            and period. Digits must be within the range of a 32-bit integer. Format:
-            :code:`<MajorVersion>`.:code:`<MinorVersion>`.:code:`<Patch>`
-          - >-
-            The name of the gallery Application Version to be updated. Needs to
-            follow semantic version name pattern: The allowed characters are digit
-            and period. Digits must be within the range of a 32-bit integer. Format:
-            :code:`<MajorVersion>`.:code:`<MinorVersion>`.:code:`<Patch>`
-          - The name of the gallery Application Version to be retrieved.
-          - The name of the gallery Application Version to be deleted.
+            - >-
+                The name of the gallery Application Version to be created. Needs to
+                follow semantic version name pattern: The allowed characters are digit
+                and period. Digits must be within the range of a 32-bit integer. Format:
+                :code:`<MajorVersion>`.:code:`<MinorVersion>`.:code:`<Patch>`
+            - >-
+                The name of the gallery Application Version to be updated. Needs to
+                follow semantic version name pattern: The allowed characters are digit
+                and period. Digits must be within the range of a 32-bit integer. Format:
+                :code:`<MajorVersion>`.:code:`<MinorVersion>`.:code:`<Patch>`
+            - The name of the gallery Application Version to be retrieved.
+            - The name of the gallery Application Version to be deleted.
         required: true
         type: str
-      publishing_profile:
+    publishing_profile:
         description:
-          - The publishing profile of a gallery Image Version.
+            - The publishing profile of a gallery Image Version.
         type: dict
         suboptions:
-          source:
-            description:
-              - >-
-                The source image from which the Image Version is going to be
-                created.
-            required: true
-            type: dict
-            suboptions:
-              file_name:
+            source:
                 description:
-                  - Required. The fileName of the artifact.
+                    - >-
+                        The source image from which the Image Version is going to be
+                        created.
                 required: true
-                type: str
-              media_link:
+                type: dict
+                suboptions:
+                    file_name:
+                        description:
+                            - Required. The fileName of the artifact.
+                        required: true
+                        type: str
+                    media_link:
+                        description:
+                            - >-
+                                Required. The mediaLink of the artifact, must be a readable
+                                storage blob.
+                        required: true
+                        type: str
+            content_type:
                 description:
-                  - >-
-                    Required. The mediaLink of the artifact, must be a readable
-                    storage blob.
-                required: true
+                    - >-
+                        Optional. May be used to help process this file. The type of file
+                        contained in the source, e.g. zip, json, etc.
                 type: str
-          content_type:
-            description:
-              - >-
-                Optional. May be used to help process this file. The type of file
-                contained in the source, e.g. zip, json, etc.
-            type: str
-          enable_health_check:
-            description:
-              - Optional. Whether or not this application reports health.
-            type: bool
-      expand:
+            enable_health_check:
+                description:
+                    - Optional. Whether or not this application reports health.
+                type: bool
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: str
         choices:
-          - ReplicationStatus
-      state:
+            - ReplicationStatus
+    state:
         description:
-          - Assert the state of the GalleryApplicationVersion.
-          - >-
-            Use C(present) to create or update an GalleryApplicationVersion and
-            C(absent) to delete it.
+            - Assert the state of the GalleryApplicationVersion.
+            - >-
+                Use C(present) to create or update an GalleryApplicationVersion and
+                C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -149,91 +149,91 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    publishing_profile:
-      description:
+    returned: always
+    type: dict
+    sample: null
+publishing_profile:
+    description:
         - The publishing profile of a gallery Image Version.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+    returned: always
+    type: dict
+    sample: null
+    contains:
         source:
-          description:
-            - The source image from which the Image Version is going to be created.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            file_name:
-              description:
-                - Required. The fileName of the artifact.
-              returned: always
-              type: str
-              sample: null
-            media_link:
-              description:
-                - >-
-                  Required. The mediaLink of the artifact, must be a readable
-                  storage blob.
-              returned: always
-              type: str
-              sample: null
+            description:
+                - The source image from which the Image Version is going to be created.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                file_name:
+                    description:
+                        - Required. The fileName of the artifact.
+                    returned: always
+                    type: str
+                    sample: null
+                media_link:
+                    description:
+                        - >-
+                            Required. The mediaLink of the artifact, must be a readable
+                            storage blob.
+                    returned: always
+                    type: str
+                    sample: null
         content_type:
-          description:
-            - >-
-              Optional. May be used to help process this file. The type of file
-              contained in the source, e.g. zip, json, etc.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    Optional. May be used to help process this file. The type of file
+                    contained in the source, e.g. zip, json, etc.
+            returned: always
+            type: str
+            sample: null
         enable_health_check:
-          description:
-            - Optional. Whether or not this application reports health.
-          returned: always
-          type: bool
-          sample: null
-    provisioning_state:
-      description:
+            description:
+                - Optional. Whether or not this application reports health.
+            returned: always
+            type: bool
+            sample: null
+provisioning_state:
+    description:
         - 'The provisioning state, which only appears in the response.'
-      returned: always
-      type: str
-      sample: null
-    replication_status:
-      description:
+    returned: always
+    type: str
+    sample: null
+replication_status:
+    description:
         - This is the replication status of the gallery Image Version.
-      returned: always
-      type: dict
-      sample: null
-    
+    returned: always
+    type: dict
+    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -373,6 +373,7 @@ class AzureRMGalleryApplicationVersion(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

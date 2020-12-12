@@ -15,86 +15,86 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachinesize_info
-    version_added: '2.9'
-    short_description: Get VirtualMachineSize info.
-    description:
-      - Get info of VirtualMachineSize.
-    options:
-      location:
+module: azure_rm_virtualmachinesize_info
+version_added: '2.9'
+short_description: Get VirtualMachineSize info.
+description:
+    - Get info of VirtualMachineSize.
+options:
+    location:
         description:
-          - The location upon which virtual-machine-sizes is queried.
+            - The location upon which virtual-machine-sizes is queried.
         required: true
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    virtual_machine_sizes:
-      description: >-
+virtual_machine_sizes:
+    description: >-
         A list of dict results where the key is the name of the VirtualMachineSize
         and the values are the facts for that VirtualMachineSize.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         value:
-          description:
-            - The list of virtual machine sizes.
-          returned: always
-          type: list
-          sample: null
-          contains:
-            name:
-              description:
-                - The name of the virtual machine size.
-              returned: always
-              type: str
-              sample: null
-            number_of_cores:
-              description:
-                - The number of cores supported by the virtual machine size.
-              returned: always
-              type: int
-              sample: null
-            os_disk_size_in_mb:
-              description:
-                - 'The OS disk size, in MB, allowed by the virtual machine size.'
-              returned: always
-              type: int
-              sample: null
-            resource_disk_size_in_mb:
-              description:
-                - >-
-                  The resource disk size, in MB, allowed by the virtual machine
-                  size.
-              returned: always
-              type: int
-              sample: null
-            memory_in_mb:
-              description:
-                - >-
-                  The amount of memory, in MB, supported by the virtual machine
-                  size.
-              returned: always
-              type: int
-              sample: null
-            max_data_disk_count:
-              description:
-                - >-
-                  The maximum number of data disks that can be attached to the
-                  virtual machine size.
-              returned: always
-              type: int
-              sample: null
-    
+            description:
+                - The list of virtual machine sizes.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                name:
+                    description:
+                        - The name of the virtual machine size.
+                    returned: always
+                    type: str
+                    sample: null
+                number_of_cores:
+                    description:
+                        - The number of cores supported by the virtual machine size.
+                    returned: always
+                    type: int
+                    sample: null
+                os_disk_size_in_mb:
+                    description:
+                        - 'The OS disk size, in MB, allowed by the virtual machine size.'
+                    returned: always
+                    type: int
+                    sample: null
+                resource_disk_size_in_mb:
+                    description:
+                        - >-
+                            The resource disk size, in MB, allowed by the virtual machine
+                            size.
+                    returned: always
+                    type: int
+                    sample: null
+                memory_in_mb:
+                    description:
+                        - >-
+                            The amount of memory, in MB, supported by the virtual machine
+                            size.
+                    returned: always
+                    type: int
+                    sample: null
+                max_data_disk_count:
+                    description:
+                        - >-
+                            The maximum number of data disks that can be attached to the
+                            virtual machine size.
+                    returned: always
+                    type: int
+                    sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

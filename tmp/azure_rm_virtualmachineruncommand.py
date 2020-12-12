@@ -15,112 +15,112 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_virtualmachineruncommand
-    version_added: '2.9'
-    short_description: Manage Azure VirtualMachineRunCommand instance.
-    description:
-      - 'Create, update and delete instance of Azure VirtualMachineRunCommand.'
-    options:
-      location:
+module: azure_rm_virtualmachineruncommand
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineRunCommand instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineRunCommand.'
+options:
+    location:
         description:
-          - The location upon which run commands is queried.
+            - The location upon which run commands is queried.
         required: true
         type: str
-      command_id:
+    command_id:
         description:
-          - The command id.
+            - The command id.
         required: true
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the VirtualMachineRunCommand.
-          - >-
-            Use C(present) to create or update an VirtualMachineRunCommand and
-            C(absent) to delete it.
+            - Assert the state of the VirtualMachineRunCommand.
+            - >-
+                Use C(present) to create or update an VirtualMachineRunCommand and
+                C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    schema:
-      description:
-        - The VM run command schema.
-      returned: always
-      type: str
-      sample: null
-    id:
-      description:
-        - The VM run command id.
-      returned: always
-      type: str
-      sample: null
-    os_type:
-      description:
-        - The Operating System type.
-      returned: always
-      type: sealed-choice
-      sample: null
-    label:
-      description:
-        - The VM run command label.
-      returned: always
-      type: str
-      sample: null
+schema:
     description:
-      description:
+        - The VM run command schema.
+    returned: always
+    type: str
+    sample: null
+id:
+    description:
+        - The VM run command id.
+    returned: always
+    type: str
+    sample: null
+os_type:
+    description:
+        - The Operating System type.
+    returned: always
+    type: sealed-choice
+    sample: null
+label:
+    description:
+        - The VM run command label.
+    returned: always
+    type: str
+    sample: null
+description:
+    description:
         - The VM run command description.
-      returned: always
-      type: str
-      sample: null
-    script:
-      description:
+    returned: always
+    type: str
+    sample: null
+script:
+    description:
         - The script to be executed.
-      returned: always
-      type: list
-      sample: null
-    parameters:
-      description:
+    returned: always
+    type: list
+    sample: null
+parameters:
+    description:
         - The parameters used by the script.
-      returned: always
-      type: list
-      sample: null
-      contains:
+    returned: always
+    type: list
+    sample: null
+    contains:
         name:
-          description:
-            - The run command parameter name.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The run command parameter name.
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - The run command parameter type.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The run command parameter type.
+            returned: always
+            type: str
+            sample: null
         default_value:
-          description:
-            - The run command parameter default value.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The run command parameter default value.
+            returned: always
+            type: str
+            sample: null
         required:
-          description:
-            - The run command parameter required.
-          returned: always
-          type: bool
-          sample: null
-    
+            description:
+                - The run command parameter required.
+            returned: always
+            type: bool
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -214,6 +214,7 @@ class AzureRMVirtualMachineRunCommand(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

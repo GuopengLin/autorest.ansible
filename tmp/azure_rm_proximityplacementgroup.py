@@ -15,190 +15,190 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_proximityplacementgroup
-    version_added: '2.9'
-    short_description: Manage Azure ProximityPlacementGroup instance.
-    description:
-      - 'Create, update and delete instance of Azure ProximityPlacementGroup.'
-    options:
-      resource_group:
+module: azure_rm_proximityplacementgroup
+version_added: '2.9'
+short_description: Manage Azure ProximityPlacementGroup instance.
+description:
+    - 'Create, update and delete instance of Azure ProximityPlacementGroup.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      proximity_placement_group_name:
+    proximity_placement_group_name:
         description:
-          - The name of the proximity placement group.
+            - The name of the proximity placement group.
         required: true
         type: str
-      proximity_placement_group_type:
+    proximity_placement_group_type:
         description:
-          - >-
-            Specifies the type of the proximity placement group.
-            :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>`
-            **Standard** : Co-locate resources within an Azure region or
-            Availability Zone. :code:`<br>`:code:`<br>` **Ultra** : For future use.
+            - >-
+                Specifies the type of the proximity placement group.
+                :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>`
+                **Standard** : Co-locate resources within an Azure region or
+                Availability Zone. :code:`<br>`:code:`<br>` **Ultra** : For future use.
         type: str
         choices:
-          - Standard
-          - Ultra
-      virtual_machines:
+            - Standard
+            - Ultra
+    virtual_machines:
         description:
-          - >-
-            A list of references to all virtual machines in the proximity placement
-            group.
+            - >-
+                A list of references to all virtual machines in the proximity placement
+                group.
         type: list
         suboptions:
-          colocation_status:
-            description:
-              - >-
-                Describes colocation status of a resource in the Proximity Placement
-                Group.
-            type: dict
-            suboptions:
-              code:
+            colocation_status:
                 description:
-                  - The status code.
-                type: str
-              level:
-                description:
-                  - The level code.
-                type: sealed-choice
-              display_status:
-                description:
-                  - The short localizable label for the status.
-                type: str
-              message:
-                description:
-                  - >-
-                    The detailed status message, including for alerts and error
-                    messages.
-                type: str
-              time:
-                description:
-                  - The time of the status.
-                type: str
-      virtual_machine_scale_sets:
+                    - >-
+                        Describes colocation status of a resource in the Proximity Placement
+                        Group.
+                type: dict
+                suboptions:
+                    code:
+                        description:
+                            - The status code.
+                        type: str
+                    level:
+                        description:
+                            - The level code.
+                        type: sealed-choice
+                    display_status:
+                        description:
+                            - The short localizable label for the status.
+                        type: str
+                    message:
+                        description:
+                            - >-
+                                The detailed status message, including for alerts and error
+                                messages.
+                        type: str
+                    time:
+                        description:
+                            - The time of the status.
+                        type: str
+    virtual_machine_scale_sets:
         description:
-          - >-
-            A list of references to all virtual machine scale sets in the proximity
-            placement group.
+            - >-
+                A list of references to all virtual machine scale sets in the proximity
+                placement group.
         type: list
         suboptions:
-          colocation_status:
-            description:
-              - >-
-                Describes colocation status of a resource in the Proximity Placement
-                Group.
-            type: dict
-            suboptions:
-              code:
+            colocation_status:
                 description:
-                  - The status code.
-                type: str
-              level:
-                description:
-                  - The level code.
-                type: sealed-choice
-              display_status:
-                description:
-                  - The short localizable label for the status.
-                type: str
-              message:
-                description:
-                  - >-
-                    The detailed status message, including for alerts and error
-                    messages.
-                type: str
-              time:
-                description:
-                  - The time of the status.
-                type: str
-      availability_sets:
+                    - >-
+                        Describes colocation status of a resource in the Proximity Placement
+                        Group.
+                type: dict
+                suboptions:
+                    code:
+                        description:
+                            - The status code.
+                        type: str
+                    level:
+                        description:
+                            - The level code.
+                        type: sealed-choice
+                    display_status:
+                        description:
+                            - The short localizable label for the status.
+                        type: str
+                    message:
+                        description:
+                            - >-
+                                The detailed status message, including for alerts and error
+                                messages.
+                        type: str
+                    time:
+                        description:
+                            - The time of the status.
+                        type: str
+    availability_sets:
         description:
-          - >-
-            A list of references to all availability sets in the proximity placement
-            group.
+            - >-
+                A list of references to all availability sets in the proximity placement
+                group.
         type: list
         suboptions:
-          colocation_status:
-            description:
-              - >-
-                Describes colocation status of a resource in the Proximity Placement
-                Group.
-            type: dict
-            suboptions:
-              code:
+            colocation_status:
                 description:
-                  - The status code.
-                type: str
-              level:
-                description:
-                  - The level code.
-                type: sealed-choice
-              display_status:
-                description:
-                  - The short localizable label for the status.
-                type: str
-              message:
-                description:
-                  - >-
-                    The detailed status message, including for alerts and error
-                    messages.
-                type: str
-              time:
-                description:
-                  - The time of the status.
-                type: str
-      colocation_status:
+                    - >-
+                        Describes colocation status of a resource in the Proximity Placement
+                        Group.
+                type: dict
+                suboptions:
+                    code:
+                        description:
+                            - The status code.
+                        type: str
+                    level:
+                        description:
+                            - The level code.
+                        type: sealed-choice
+                    display_status:
+                        description:
+                            - The short localizable label for the status.
+                        type: str
+                    message:
+                        description:
+                            - >-
+                                The detailed status message, including for alerts and error
+                                messages.
+                        type: str
+                    time:
+                        description:
+                            - The time of the status.
+                        type: str
+    colocation_status:
         description:
-          - Describes colocation status of the Proximity Placement Group.
+            - Describes colocation status of the Proximity Placement Group.
         type: dict
         suboptions:
-          code:
-            description:
-              - The status code.
-            type: str
-          level:
-            description:
-              - The level code.
-            type: sealed-choice
-          display_status:
-            description:
-              - The short localizable label for the status.
-            type: str
-          message:
-            description:
-              - >-
-                The detailed status message, including for alerts and error
-                messages.
-            type: str
-          time:
-            description:
-              - The time of the status.
-            type: str
-      include_colocation_status:
+            code:
+                description:
+                    - The status code.
+                type: str
+            level:
+                description:
+                    - The level code.
+                type: sealed-choice
+            display_status:
+                description:
+                    - The short localizable label for the status.
+                type: str
+            message:
+                description:
+                    - >-
+                        The detailed status message, including for alerts and error
+                        messages.
+                type: str
+            time:
+                description:
+                    - The time of the status.
+                type: str
+    include_colocation_status:
         description:
-          - >-
-            includeColocationStatus=true enables fetching the colocation status of
-            all the resources in the proximity placement group.
+            - >-
+                includeColocationStatus=true enables fetching the colocation status of
+                all the resources in the proximity placement group.
         type: str
-      state:
+    state:
         description:
-          - Assert the state of the ProximityPlacementGroup.
-          - >-
-            Use C(present) to create or update an ProximityPlacementGroup and
-            C(absent) to delete it.
+            - Assert the state of the ProximityPlacementGroup.
+            - >-
+                Use C(present) to create or update an ProximityPlacementGroup and
+                C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -222,234 +222,234 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    proximity_placement_group_type:
-      description:
+    returned: always
+    type: dict
+    sample: null
+proximity_placement_group_type:
+    description:
         - >-
-          Specifies the type of the proximity placement group.
-          :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>`
-          **Standard** : Co-locate resources within an Azure region or Availability
-          Zone. :code:`<br>`:code:`<br>` **Ultra** : For future use.
-      returned: always
-      type: str
-      sample: null
-    virtual_machines:
-      description:
+            Specifies the type of the proximity placement group.
+            :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>`
+            **Standard** : Co-locate resources within an Azure region or Availability
+            Zone. :code:`<br>`:code:`<br>` **Ultra** : For future use.
+    returned: always
+    type: str
+    sample: null
+virtual_machines:
+    description:
         - >-
-          A list of references to all virtual machines in the proximity placement
-          group.
-      returned: always
-      type: list
-      sample: null
-      contains:
+            A list of references to all virtual machines in the proximity placement
+            group.
+    returned: always
+    type: list
+    sample: null
+    contains:
         colocation_status:
-          description:
-            - >-
-              Describes colocation status of a resource in the Proximity Placement
-              Group.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            code:
-              description:
-                - The status code.
-              returned: always
-              type: str
-              sample: null
-            level:
-              description:
-                - The level code.
-              returned: always
-              type: sealed-choice
-              sample: null
-            display_status:
-              description:
-                - The short localizable label for the status.
-              returned: always
-              type: str
-              sample: null
-            message:
-              description:
+            description:
                 - >-
-                  The detailed status message, including for alerts and error
-                  messages.
-              returned: always
-              type: str
-              sample: null
-            time:
-              description:
-                - The time of the status.
-              returned: always
-              type: str
-              sample: null
-    virtual_machine_scale_sets:
-      description:
+                    Describes colocation status of a resource in the Proximity Placement
+                    Group.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                code:
+                    description:
+                        - The status code.
+                    returned: always
+                    type: str
+                    sample: null
+                level:
+                    description:
+                        - The level code.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                display_status:
+                    description:
+                        - The short localizable label for the status.
+                    returned: always
+                    type: str
+                    sample: null
+                message:
+                    description:
+                        - >-
+                            The detailed status message, including for alerts and error
+                            messages.
+                    returned: always
+                    type: str
+                    sample: null
+                time:
+                    description:
+                        - The time of the status.
+                    returned: always
+                    type: str
+                    sample: null
+virtual_machine_scale_sets:
+    description:
         - >-
-          A list of references to all virtual machine scale sets in the proximity
-          placement group.
-      returned: always
-      type: list
-      sample: null
-      contains:
+            A list of references to all virtual machine scale sets in the proximity
+            placement group.
+    returned: always
+    type: list
+    sample: null
+    contains:
         colocation_status:
-          description:
-            - >-
-              Describes colocation status of a resource in the Proximity Placement
-              Group.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            code:
-              description:
-                - The status code.
-              returned: always
-              type: str
-              sample: null
-            level:
-              description:
-                - The level code.
-              returned: always
-              type: sealed-choice
-              sample: null
-            display_status:
-              description:
-                - The short localizable label for the status.
-              returned: always
-              type: str
-              sample: null
-            message:
-              description:
+            description:
                 - >-
-                  The detailed status message, including for alerts and error
-                  messages.
-              returned: always
-              type: str
-              sample: null
-            time:
-              description:
-                - The time of the status.
-              returned: always
-              type: str
-              sample: null
-    availability_sets:
-      description:
+                    Describes colocation status of a resource in the Proximity Placement
+                    Group.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                code:
+                    description:
+                        - The status code.
+                    returned: always
+                    type: str
+                    sample: null
+                level:
+                    description:
+                        - The level code.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                display_status:
+                    description:
+                        - The short localizable label for the status.
+                    returned: always
+                    type: str
+                    sample: null
+                message:
+                    description:
+                        - >-
+                            The detailed status message, including for alerts and error
+                            messages.
+                    returned: always
+                    type: str
+                    sample: null
+                time:
+                    description:
+                        - The time of the status.
+                    returned: always
+                    type: str
+                    sample: null
+availability_sets:
+    description:
         - >-
-          A list of references to all availability sets in the proximity placement
-          group.
-      returned: always
-      type: list
-      sample: null
-      contains:
+            A list of references to all availability sets in the proximity placement
+            group.
+    returned: always
+    type: list
+    sample: null
+    contains:
         colocation_status:
-          description:
-            - >-
-              Describes colocation status of a resource in the Proximity Placement
-              Group.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            code:
-              description:
-                - The status code.
-              returned: always
-              type: str
-              sample: null
-            level:
-              description:
-                - The level code.
-              returned: always
-              type: sealed-choice
-              sample: null
-            display_status:
-              description:
-                - The short localizable label for the status.
-              returned: always
-              type: str
-              sample: null
-            message:
-              description:
+            description:
                 - >-
-                  The detailed status message, including for alerts and error
-                  messages.
-              returned: always
-              type: str
-              sample: null
-            time:
-              description:
-                - The time of the status.
-              returned: always
-              type: str
-              sample: null
-    colocation_status:
-      description:
+                    Describes colocation status of a resource in the Proximity Placement
+                    Group.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                code:
+                    description:
+                        - The status code.
+                    returned: always
+                    type: str
+                    sample: null
+                level:
+                    description:
+                        - The level code.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                display_status:
+                    description:
+                        - The short localizable label for the status.
+                    returned: always
+                    type: str
+                    sample: null
+                message:
+                    description:
+                        - >-
+                            The detailed status message, including for alerts and error
+                            messages.
+                    returned: always
+                    type: str
+                    sample: null
+                time:
+                    description:
+                        - The time of the status.
+                    returned: always
+                    type: str
+                    sample: null
+colocation_status:
+    description:
         - Describes colocation status of the Proximity Placement Group.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+    returned: always
+    type: dict
+    sample: null
+    contains:
         code:
-          description:
-            - The status code.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The status code.
+            returned: always
+            type: str
+            sample: null
         level:
-          description:
-            - The level code.
-          returned: always
-          type: sealed-choice
-          sample: null
+            description:
+                - The level code.
+            returned: always
+            type: sealed-choice
+            sample: null
         display_status:
-          description:
-            - The short localizable label for the status.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The short localizable label for the status.
+            returned: always
+            type: str
+            sample: null
         message:
-          description:
-            - 'The detailed status message, including for alerts and error messages.'
-          returned: always
-          type: str
-          sample: null
+            description:
+                - 'The detailed status message, including for alerts and error messages.'
+            returned: always
+            type: str
+            sample: null
         time:
-          description:
-            - The time of the status.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - The time of the status.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -681,6 +681,7 @@ class AzureRMProximityPlacementGroup(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

@@ -15,26 +15,26 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_sshpublickey_info
-    version_added: '2.9'
-    short_description: Get SshPublicKey info.
-    description:
-      - Get info of SshPublicKey.
-    options:
-      resource_group:
+module: azure_rm_sshpublickey_info
+version_added: '2.9'
+short_description: Get SshPublicKey info.
+description:
+    - Get info of SshPublicKey.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         type: str
-      ssh_public_key_name:
+    ssh_public_key_name:
         description:
-          - The name of the SSH public key.
+            - The name of the SSH public key.
         type: str
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -47,83 +47,83 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    ssh_public_keys:
-      description: >-
+ssh_public_keys:
+    description: >-
         A list of dict results where the key is the name of the SshPublicKey and the
         values are the facts for that SshPublicKey.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         value:
-          description:
-            - The list of SSH public keys
-          returned: always
-          type: list
-          sample: null
-          contains:
-            public_key:
-              description:
-                - >-
-                  SSH public key used to authenticate to a virtual machine through
-                  ssh. If this property is not initially provided when the resource
-                  is created, the publicKey property will be populated when
-                  generateKeyPair is called. If the public key is provided upon
-                  resource creation, the provided public key needs to be at least
-                  2048-bit and in ssh-rsa format.
-              returned: always
-              type: str
-              sample: null
+            description:
+                - The list of SSH public keys
+            returned: always
+            type: list
+            sample: null
+            contains:
+                public_key:
+                    description:
+                        - >-
+                            SSH public key used to authenticate to a virtual machine through
+                            ssh. If this property is not initially provided when the resource
+                            is created, the publicKey property will be populated when
+                            generateKeyPair is called. If the public key is provided upon
+                            resource creation, the provided public key needs to be at least
+                            2048-bit and in ssh-rsa format.
+                    returned: always
+                    type: str
+                    sample: null
         next_link:
-          description:
-            - >-
-              The URI to fetch the next page of SSH public keys. Call ListNext()
-              with this URI to fetch the next page of SSH public keys.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    The URI to fetch the next page of SSH public keys. Call ListNext()
+                    with this URI to fetch the next page of SSH public keys.
+            returned: always
+            type: str
+            sample: null
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
         location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
         tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
         public_key:
-          description:
-            - >-
-              SSH public key used to authenticate to a virtual machine through ssh.
-              If this property is not initially provided when the resource is
-              created, the publicKey property will be populated when generateKeyPair
-              is called. If the public key is provided upon resource creation, the
-              provided public key needs to be at least 2048-bit and in ssh-rsa
-              format.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    SSH public key used to authenticate to a virtual machine through ssh.
+                    If this property is not initially provided when the resource is
+                    created, the publicKey property will be populated when generateKeyPair
+                    is called. If the public key is provided upon resource creation, the
+                    provided public key needs to be at least 2048-bit and in ssh-rsa
+                    format.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

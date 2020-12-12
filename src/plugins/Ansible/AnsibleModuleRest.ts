@@ -215,18 +215,18 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
     output.push("            self.results['changed'] = False");
     output.push("            response = old_response");
     output.push("");
-    {
-        var stmtsx = module.ResponseFieldStatements;
-
-        if (stmtsx.length > 0)
-        {
-            output.push("        if response:");
-            stmtsx.forEach(element => {
-                output.push("           " + element);
-            });
-            output.push("");
-        }
-    }
+    // {
+    //     var stmtsx = module.ResponseFieldStatements;
+    //
+    //     if (stmtsx.length > 0)
+    //     {
+    //         output.push("        if response:");
+    //         stmtsx.forEach(element => {
+    //             output.push("           " + element);
+    //         });
+    //         output.push("");
+    //     }
+    // }
     output.push("        return self.results");
     //}
     output.push("");

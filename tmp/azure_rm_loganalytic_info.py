@@ -15,32 +15,32 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_loganalytic_info
-    version_added: '2.9'
-    short_description: Get LogAnalytic info.
-    description:
-      - Get info of LogAnalytic.
-    options: {}
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+module: azure_rm_loganalytic_info
+version_added: '2.9'
+short_description: Get LogAnalytic info.
+description:
+    - Get info of LogAnalytic.
+options: {}
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    log_analytics:
-      description: >-
+log_analytics:
+    description: >-
         A list of dict results where the key is the name of the LogAnalytic and the
         values are the facts for that LogAnalytic.
-      returned: always
-      type: complex
-      contains: {}
-    
+    returned: always
+    type: complex
+    contains: {}
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase

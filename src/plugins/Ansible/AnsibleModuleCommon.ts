@@ -124,7 +124,10 @@ export function AppendModuleExamples(output: string[], module: Module, isInfoMod
         output.push("      " + module.ModuleName + ": ");
         if (!(JSON.stringify(example.Value) === '{}')){
             yaml.dump(example.Value).split('\n').forEach(element => {
-                output.push("        "+element);
+                if (element.length > 0){
+                    output.push("        "+element);
+                }
+
             });
         }
 
@@ -170,7 +173,6 @@ export function AppendModuleReturnDoc(output: string[], module: Module, isInfoMo
     // yaml.dump(doc).split(/\r?\n/).forEach(element => {
     //     output.push("    "+element);
     // });
-
     output.push("'''");
 
 }

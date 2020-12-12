@@ -26,7 +26,7 @@ options:
             - The name of the resource group.
         required: true
         type: str
-    gallery_name:
+    name:
         description:
             - >-
                 The name of the Shared Image Gallery. The allowed characters are
@@ -67,7 +67,6 @@ EXAMPLES = '''
         location: West US
         properties:
           description: This is the gallery description.
-        
 
     - name: Update a simple gallery.
       azure_rm_gallery: 
@@ -75,13 +74,11 @@ EXAMPLES = '''
         resource_group_name: myResourceGroup
         properties:
           description: This is the gallery description.
-        
 
     - name: Delete a gallery.
       azure_rm_gallery: 
         gallery_name: myGalleryName
         resource_group_name: myResourceGroup
-        
 
 '''
 
@@ -161,7 +158,7 @@ class AzureRMGallery(AzureRMModuleBaseExt):
                 type='str',
                 required=True
             ),
-            gallery_name=dict(
+            name=dict(
                 type='str',
                 required=True
             ),
@@ -177,7 +174,7 @@ class AzureRMGallery(AzureRMModuleBaseExt):
         )
 
         self.resource_group = None
-        self.gallery_name = None
+        self.name = None
         self.body = {}
 
         self.results = dict(changed=False)
@@ -234,13 +231,14 @@ class AzureRMGallery(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 
     def create_update_resource(self):
         try:
             response = self.mgmt_client.galleries.create_or_update(resource_group=self.resource_group,
-                                                                   gallery_name=self.gallery_name,
+                                                                   name=self.name,
                                                                    gallery=self.body)
             if isinstance(response, AzureOperationPoller) or isinstance(response, LROPoller):
                 response = self.get_poller_result(response)
@@ -252,7 +250,7 @@ class AzureRMGallery(AzureRMModuleBaseExt):
     def delete_resource(self):
         try:
             response = self.mgmt_client.galleries.delete(resource_group=self.resource_group,
-                                                         gallery_name=self.gallery_name)
+                                                         name=self.name)
         except CloudError as e:
             self.log('Error attempting to delete the Gallery instance.')
             self.fail('Error deleting the Gallery instance: {0}'.format(str(e)))
@@ -262,7 +260,7 @@ class AzureRMGallery(AzureRMModuleBaseExt):
     def get_resource(self):
         try:
             response = self.mgmt_client.galleries.get(resource_group=self.resource_group,
-                                                      gallery_name=self.gallery_name)
+                                                      name=self.name)
         except CloudError as e:
             return False
         return response.as_dict()

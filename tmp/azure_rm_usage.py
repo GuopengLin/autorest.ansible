@@ -15,34 +15,34 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_usage
-    version_added: '2.9'
-    short_description: Manage Azure Usage instance.
-    description:
-      - 'Create, update and delete instance of Azure Usage.'
-    options:
-      state:
+module: azure_rm_usage
+version_added: '2.9'
+short_description: Manage Azure Usage instance.
+description:
+    - 'Create, update and delete instance of Azure Usage.'
+options:
+    state:
         description:
-          - Assert the state of the Usage.
-          - Use C(present) to create or update an Usage and C(absent) to delete it.
+            - Assert the state of the Usage.
+            - Use C(present) to create or update an Usage and C(absent) to delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
 '''
 
 RETURN = '''
-    {}
-    
+{}
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -127,6 +127,7 @@ class AzureRMUsage(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

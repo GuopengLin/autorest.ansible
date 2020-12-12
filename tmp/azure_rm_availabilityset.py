@@ -15,118 +15,118 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_availabilityset
-    version_added: '2.9'
-    short_description: Manage Azure AvailabilitySet instance.
-    description:
-      - 'Create, update and delete instance of Azure AvailabilitySet.'
-    options:
-      resource_group:
+module: azure_rm_availabilityset
+version_added: '2.9'
+short_description: Manage Azure AvailabilitySet instance.
+description:
+    - 'Create, update and delete instance of Azure AvailabilitySet.'
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      availability_set_name:
+    availability_set_name:
         description:
-          - The name of the availability set.
+            - The name of the availability set.
         required: true
         type: str
-      sku:
+    sku:
         description:
-          - >-
-            Sku of the availability set, only name is required to be set. See
-            AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
-            virtual machines with managed disks and 'Classic' for virtual machines
-            with unmanaged disks. Default value is 'Classic'.
+            - >-
+                Sku of the availability set, only name is required to be set. See
+                AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
+                virtual machines with managed disks and 'Classic' for virtual machines
+                with unmanaged disks. Default value is 'Classic'.
         type: dict
         suboptions:
-          name:
-            description:
-              - The sku name.
-            type: str
-          tier:
-            description:
-              - >-
-                Specifies the tier of virtual machines in a scale set.:code:`<br
-                />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
-                **Standard**\ :code:`<br />`:code:`<br />` **Basic**
-            type: str
-          capacity:
-            description:
-              - Specifies the number of virtual machines in the scale set.
-            type: int
-      platform_update_domain_count:
+            name:
+                description:
+                    - The sku name.
+                type: str
+            tier:
+                description:
+                    - >-
+                        Specifies the tier of virtual machines in a scale set.:code:`<br
+                        />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                        **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+                type: str
+            capacity:
+                description:
+                    - Specifies the number of virtual machines in the scale set.
+                type: int
+    platform_update_domain_count:
         description:
-          - Update Domain count.
+            - Update Domain count.
         type: int
-      platform_fault_domain_count:
+    platform_fault_domain_count:
         description:
-          - Fault Domain count.
+            - Fault Domain count.
         type: int
-      virtual_machines:
+    virtual_machines:
         description:
-          - A list of references to all virtual machines in the availability set.
+            - A list of references to all virtual machines in the availability set.
         type: list
         suboptions:
-          id:
-            description:
-              - Resource Id
-            type: str
-      proximity_placement_group:
+            id:
+                description:
+                    - Resource Id
+                type: str
+    proximity_placement_group:
         description:
-          - >-
-            Specifies information about the proximity placement group that the
-            availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
-            api-version: 2018-04-01.
+            - >-
+                Specifies information about the proximity placement group that the
+                availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
+                api-version: 2018-04-01.
         type: dict
         suboptions:
-          id:
-            description:
-              - Resource Id
-            type: str
-      statuses:
+            id:
+                description:
+                    - Resource Id
+                type: str
+    statuses:
         description:
-          - The resource status information.
+            - The resource status information.
         type: list
         suboptions:
-          code:
-            description:
-              - The status code.
-            type: str
-          level:
-            description:
-              - The level code.
-            type: sealed-choice
-          display_status:
-            description:
-              - The short localizable label for the status.
-            type: str
-          message:
-            description:
-              - >-
-                The detailed status message, including for alerts and error
-                messages.
-            type: str
-          time:
-            description:
-              - The time of the status.
-            type: str
-      state:
+            code:
+                description:
+                    - The status code.
+                type: str
+            level:
+                description:
+                    - The level code.
+                type: sealed-choice
+            display_status:
+                description:
+                    - The short localizable label for the status.
+                type: str
+            message:
+                description:
+                    - >-
+                        The detailed status message, including for alerts and error
+                        messages.
+                type: str
+            time:
+                description:
+                    - The time of the status.
+                type: str
+    state:
         description:
-          - Assert the state of the AvailabilitySet.
-          - >-
-            Use C(present) to create or update an AvailabilitySet and C(absent) to
-            delete it.
+            - Assert the state of the AvailabilitySet.
+            - >-
+                Use C(present) to create or update an AvailabilitySet and C(absent) to
+                delete it.
         default: present
         choices:
-          - absent
-          - present
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -143,147 +143,147 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    id:
-      description:
+id:
+    description:
         - Resource Id
-      returned: always
-      type: str
-      sample: null
-    name:
-      description:
+    returned: always
+    type: str
+    sample: null
+name:
+    description:
         - Resource name
-      returned: always
-      type: str
-      sample: null
-    type:
-      description:
+    returned: always
+    type: str
+    sample: null
+type:
+    description:
         - Resource type
-      returned: always
-      type: str
-      sample: null
-    location:
-      description:
+    returned: always
+    type: str
+    sample: null
+location:
+    description:
         - Resource location
-      returned: always
-      type: str
-      sample: null
-    tags:
-      description:
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
         - Resource tags
-      returned: always
-      type: dict
-      sample: null
-    sku:
-      description:
+    returned: always
+    type: dict
+    sample: null
+sku:
+    description:
         - >-
-          Sku of the availability set, only name is required to be set. See
-          AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
-          virtual machines with managed disks and 'Classic' for virtual machines
-          with unmanaged disks. Default value is 'Classic'.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Sku of the availability set, only name is required to be set. See
+            AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
+            virtual machines with managed disks and 'Classic' for virtual machines
+            with unmanaged disks. Default value is 'Classic'.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         name:
-          description:
-            - The sku name.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The sku name.
+            returned: always
+            type: str
+            sample: null
         tier:
-          description:
-            - >-
-              Specifies the tier of virtual machines in a scale set.:code:`<br
-              />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
-              **Standard**\ :code:`<br />`:code:`<br />` **Basic**
-          returned: always
-          type: str
-          sample: null
+            description:
+                - >-
+                    Specifies the tier of virtual machines in a scale set.:code:`<br
+                    />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                    **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+            returned: always
+            type: str
+            sample: null
         capacity:
-          description:
-            - Specifies the number of virtual machines in the scale set.
-          returned: always
-          type: int
-          sample: null
-    platform_update_domain_count:
-      description:
+            description:
+                - Specifies the number of virtual machines in the scale set.
+            returned: always
+            type: int
+            sample: null
+platform_update_domain_count:
+    description:
         - Update Domain count.
-      returned: always
-      type: int
-      sample: null
-    platform_fault_domain_count:
-      description:
+    returned: always
+    type: int
+    sample: null
+platform_fault_domain_count:
+    description:
         - Fault Domain count.
-      returned: always
-      type: int
-      sample: null
-    virtual_machines:
-      description:
+    returned: always
+    type: int
+    sample: null
+virtual_machines:
+    description:
         - A list of references to all virtual machines in the availability set.
-      returned: always
-      type: list
-      sample: null
-      contains:
+    returned: always
+    type: list
+    sample: null
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
-    proximity_placement_group:
-      description:
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
+proximity_placement_group:
+    description:
         - >-
-          Specifies information about the proximity placement group that the
-          availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
-          api-version: 2018-04-01.
-      returned: always
-      type: dict
-      sample: null
-      contains:
+            Specifies information about the proximity placement group that the
+            availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
+            api-version: 2018-04-01.
+    returned: always
+    type: dict
+    sample: null
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
-    statuses:
-      description:
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
+statuses:
+    description:
         - The resource status information.
-      returned: always
-      type: list
-      sample: null
-      contains:
+    returned: always
+    type: list
+    sample: null
+    contains:
         code:
-          description:
-            - The status code.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The status code.
+            returned: always
+            type: str
+            sample: null
         level:
-          description:
-            - The level code.
-          returned: always
-          type: sealed-choice
-          sample: null
+            description:
+                - The level code.
+            returned: always
+            type: sealed-choice
+            sample: null
         display_status:
-          description:
-            - The short localizable label for the status.
-          returned: always
-          type: str
-          sample: null
+            description:
+                - The short localizable label for the status.
+            returned: always
+            type: str
+            sample: null
         message:
-          description:
-            - 'The detailed status message, including for alerts and error messages.'
-          returned: always
-          type: str
-          sample: null
+            description:
+                - 'The detailed status message, including for alerts and error messages.'
+            returned: always
+            type: str
+            sample: null
         time:
-          description:
-            - The time of the status.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - The time of the status.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
@@ -452,6 +452,7 @@ class AzureRMAvailabilitySet(AzureRMModuleBaseExt):
         else:
             self.results['changed'] = False
             response = old_response
+            self.result['state'] = response
 
         return self.results
 

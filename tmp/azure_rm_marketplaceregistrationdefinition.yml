@@ -1,0 +1,5 @@
+ - name: get the MarketplaceRegistrationDefinition
+   azure_rm_marketplaceregistrationdefinition_info:
+     scope: my_scope
+     marketplace_identifier: my_marketplace_identifier
+   

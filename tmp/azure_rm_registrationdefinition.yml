@@ -1,0 +1,30 @@
+ - name: Create a RegistrationDefinition
+   azure_rm_registrationdefinition:
+     registration_definition_id: my_registration_definition_id
+     scope: my_scope
+   
+
+ - name: get the RegistrationDefinition
+   azure_rm_registrationdefinition_info:
+     scope: my_scope
+     registration_definition_id: my_registration_definition_id
+   
+
+ - name: Update the RegistrationDefinition (no change)
+   azure_rm_registrationdefinition:
+     registration_definition_id: my_registration_definition_id
+     scope: my_scope
+   
+
+ - name: Update the RegistrationDefinition
+   azure_rm_registrationdefinition:
+     registration_definition_id: my_registration_definition_id
+     scope: my_scope
+   
+
+ - name: Delete the RegistrationDefinition
+   azure_rm_registrationdefinition:
+     registration_definition_id: my_registration_definition_id
+     scope: my_scope
+     state: absent
+   

@@ -35,6 +35,8 @@ export class AnsibleCodeModel {
 
             mainModule.MgmtClientName ="GenericRestClient";
             mainModule.PythonMgmtClient = this.model.info.pascal_case_title;
+
+            // mainModule.PythonNamespace = "azure.mgmt."+ this.model.info.title.substring(0, this.model.info.title.length-6).toLowerCase();
             mainModule.PythonNamespace = "azure.mgmt."+ ToSnakeCase(this.model.info.title).split("_")[0];
             infoModule.MgmtClientName = "GenericRestClient";
             infoModule.PythonMgmtClient =  this.model.info.pascal_case_title;

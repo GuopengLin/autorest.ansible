@@ -25,7 +25,7 @@ options:
         description:
             - The name of the resource group.
         type: str
-    gallery_name:
+    name:
         description:
             - The name of the Shared Image Gallery.
         type: str
@@ -42,12 +42,10 @@ EXAMPLES = '''
       azure_rm_gallery_info: 
         gallery_name: myGalleryName
         resource_group_name: myResourceGroup
-        
 
     - name: List galleries in a resource group.
       azure_rm_gallery_info: 
         resource_group_name: myResourceGroup
-        
 
     - name: List galleries in a subscription.
       azure_rm_gallery_info: 
@@ -155,13 +153,13 @@ class AzureRMGalleryInfo(AzureRMModuleBase):
             resource_group=dict(
                 type='str'
             ),
-            gallery_name=dict(
+            name=dict(
                 type='str'
             )
         )
 
         self.resource_group = None
-        self.gallery_name = None
+        self.name = None
 
         self.results = dict(changed=False)
         self.mgmt_client = None
@@ -187,7 +185,7 @@ class AzureRMGalleryInfo(AzureRMModuleBase):
                                                     api_version='2019-12-01')
 
         if (self.resource_group is not None and
-            self.gallery_name is not None):
+            self.name is not None):
             self.results['galleries'] = self.format_item(self.get())
         elif (self.resource_group is not None):
             self.results['galleries'] = self.format_item(self.list_by_resource_group())
@@ -200,7 +198,7 @@ class AzureRMGalleryInfo(AzureRMModuleBase):
 
         try:
             response = self.mgmt_client.galleries.get(resource_group=self.resource_group,
-                                                      gallery_name=self.gallery_name)
+                                                      name=self.name)
         except CloudError as e:
             self.log('Could not get info for @(Model.ModuleOperationNameUpper).')
 

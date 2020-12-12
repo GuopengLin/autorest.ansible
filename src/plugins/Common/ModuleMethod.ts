@@ -2,8 +2,9 @@ import {ModuleOption, ModuleOptionKind} from "./ModuleOption";
 import {ToSnakeCase} from "../../utils/helper";
 
 export class ModuleMethod {
-    constructor(swaggerMethod: any) {
+    constructor(objectName: string,swaggerMethod: any) {
         // this.SwaggerMethod = swaggerMethod;
+        this.ModuleObjectName = objectName;
         this.Init(swaggerMethod);
     }
 
@@ -35,7 +36,7 @@ export class ModuleMethod {
 
     private LoadOption(parameters: any){
         for (let parameter of parameters){
-            let option = new ModuleOption(parameter, null, false, new Set<string>());
+            let option = new ModuleOption(this.ModuleObjectName, parameter, null, false, new Set<string>());
             if (this.IsAnsibleIgnoredOption(option.Name))
                 continue;
             if (option.ReadOnly)
@@ -49,7 +50,7 @@ export class ModuleMethod {
 
     private LoadResponseOption(parameters: any){
         for (let parameter of parameters){
-            let option = new ModuleOption(parameter, null, true, new Set<string>());
+            let option = new ModuleOption(this.ModuleObjectName, parameter, null, true, new Set<string>());
             this.ResponseOptions.push(option);
         }
     }
@@ -69,6 +70,7 @@ export class ModuleMethod {
     }
     public Name: string = null;
     public Options: ModuleOption[] = [];
+    public ModuleObjectName: string;
     public RequiredOptions: ModuleOption[] = [];
     public ResponseOptions: ModuleOption[] = [];
     public Url: string = "";

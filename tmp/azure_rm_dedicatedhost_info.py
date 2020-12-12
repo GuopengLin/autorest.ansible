@@ -15,36 +15,36 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 DOCUMENTATION = '''
 ---
-    module: azure_rm_dedicatedhost_info
-    version_added: '2.9'
-    short_description: Get DedicatedHost info.
-    description:
-      - Get info of DedicatedHost.
-    options:
-      resource_group:
+module: azure_rm_dedicatedhost_info
+version_added: '2.9'
+short_description: Get DedicatedHost info.
+description:
+    - Get info of DedicatedHost.
+options:
+    resource_group:
         description:
-          - The name of the resource group.
+            - The name of the resource group.
         required: true
         type: str
-      host_group_name:
+    host_group_name:
         description:
-          - The name of the dedicated host group.
+            - The name of the dedicated host group.
         required: true
         type: str
-      host_name:
+    host_name:
         description:
-          - The name of the dedicated host.
+            - The name of the dedicated host.
         type: str
-      expand:
+    expand:
         description:
-          - The expand expression to apply on the operation.
+            - The expand expression to apply on the operation.
         type: constant
-    extends_documentation_fragment:
-      - azure.azcollection.azure
-      - azure.azcollection.azure_tags
-    author:
-      - GuopengLin (@t-glin)
-    
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
 '''
 
 EXAMPLES = '''
@@ -58,361 +58,361 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-    dedicated_hosts:
-      description: >-
+dedicated_hosts:
+    description: >-
         A list of dict results where the key is the name of the DedicatedHost and
         the values are the facts for that DedicatedHost.
-      returned: always
-      type: complex
-      contains:
+    returned: always
+    type: complex
+    contains:
         id:
-          description:
-            - Resource Id
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource Id
+            returned: always
+            type: str
+            sample: null
         name:
-          description:
-            - Resource name
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource name
+            returned: always
+            type: str
+            sample: null
         type:
-          description:
-            - Resource type
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource type
+            returned: always
+            type: str
+            sample: null
         location:
-          description:
-            - Resource location
-          returned: always
-          type: str
-          sample: null
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
         tags:
-          description:
-            - Resource tags
-          returned: always
-          type: dict
-          sample: null
+            description:
+                - Resource tags
+            returned: always
+            type: dict
+            sample: null
         sku:
-          description:
-            - >-
-              SKU of the dedicated host for Hardware Generation and VM family. Only
-              name is required to be set. List Microsoft.Compute SKUs for a list of
-              possible values.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            name:
-              description:
-                - The sku name.
-              returned: always
-              type: str
-              sample: null
-            tier:
-              description:
+            description:
                 - >-
-                  Specifies the tier of virtual machines in a scale set.:code:`<br
-                  />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
-                  **Standard**\ :code:`<br />`:code:`<br />` **Basic**
-              returned: always
-              type: str
-              sample: null
-            capacity:
-              description:
-                - Specifies the number of virtual machines in the scale set.
-              returned: always
-              type: int
-              sample: null
-        platform_fault_domain:
-          description:
-            - Fault domain of the dedicated host within a dedicated host group.
-          returned: always
-          type: int
-          sample: null
-        auto_replace_on_failure:
-          description:
-            - >-
-              Specifies whether the dedicated host should be replaced automatically
-              in case of a failure. The value is defaulted to 'true' when not
-              provided.
-          returned: always
-          type: bool
-          sample: null
-        host_id:
-          description:
-            - >-
-              A unique id generated and assigned to the dedicated host by the
-              platform. :code:`<br>`:code:`<br>` Does not change throughout the
-              lifetime of the host.
-          returned: always
-          type: str
-          sample: null
-        virtual_machines:
-          description:
-            - A list of references to all virtual machines in the Dedicated Host.
-          returned: always
-          type: list
-          sample: null
-        license_type:
-          description:
-            - >-
-              Specifies the software license type that will be applied to the VMs
-              deployed on the dedicated host. :code:`<br>`:code:`<br>` Possible
-              values are: :code:`<br>`:code:`<br>` **None** :code:`<br>`:code:`<br>`
-              **Windows_Server_Hybrid** :code:`<br>`:code:`<br>`
-              **Windows_Server_Perpetual** :code:`<br>`:code:`<br>` Default:
-              **None**
-          returned: always
-          type: sealed-choice
-          sample: null
-        provisioning_time:
-          description:
-            - The date when the host was first provisioned.
-          returned: always
-          type: str
-          sample: null
-        provisioning_state:
-          description:
-            - 'The provisioning state, which only appears in the response.'
-          returned: always
-          type: str
-          sample: null
-        instance_view:
-          description:
-            - The dedicated host instance view.
-          returned: always
-          type: dict
-          sample: null
-          contains:
-            available_capacity:
-              description:
-                - Unutilized capacity of the dedicated host.
-              returned: always
-              type: dict
-              sample: null
-              contains:
-                allocatable_v_ms:
-                  description:
-                    - >-
-                      The unutilized capacity of the dedicated host represented in
-                      terms of each VM size that is allowed to be deployed to the
-                      dedicated host.
-                  returned: always
-                  type: list
-                  sample: null
-                  contains:
-                    vm_size:
-                      description:
-                        - >-
-                          VM size in terms of which the unutilized capacity is
-                          represented.
-                      returned: always
-                      type: str
-                      sample: null
-                    count:
-                      description:
-                        - >-
-                          Maximum number of VMs of size vmSize that can fit in the
-                          dedicated host's remaining capacity.
-                      returned: always
-                      type: number
-                      sample: null
-            statuses:
-              description:
-                - The resource status information.
-              returned: always
-              type: list
-              sample: null
-              contains:
-                code:
-                  description:
-                    - The status code.
-                  returned: always
-                  type: str
-                  sample: null
-                level:
-                  description:
-                    - The level code.
-                  returned: always
-                  type: sealed-choice
-                  sample: null
-                display_status:
-                  description:
-                    - The short localizable label for the status.
-                  returned: always
-                  type: str
-                  sample: null
-                message:
-                  description:
-                    - >-
-                      The detailed status message, including for alerts and error
-                      messages.
-                  returned: always
-                  type: str
-                  sample: null
-                time:
-                  description:
-                    - The time of the status.
-                  returned: always
-                  type: str
-                  sample: null
-        value:
-          description:
-            - The list of dedicated hosts
-          returned: always
-          type: list
-          sample: null
-          contains:
-            sku:
-              description:
-                - >-
-                  SKU of the dedicated host for Hardware Generation and VM family.
-                  Only name is required to be set. List Microsoft.Compute SKUs for a
-                  list of possible values.
-              returned: always
-              type: dict
-              sample: null
-              contains:
+                    SKU of the dedicated host for Hardware Generation and VM family. Only
+                    name is required to be set. List Microsoft.Compute SKUs for a list of
+                    possible values.
+            returned: always
+            type: dict
+            sample: null
+            contains:
                 name:
-                  description:
-                    - The sku name.
-                  returned: always
-                  type: str
-                  sample: null
+                    description:
+                        - The sku name.
+                    returned: always
+                    type: str
+                    sample: null
                 tier:
-                  description:
-                    - >-
-                      Specifies the tier of virtual machines in a scale
-                      set.:code:`<br />`:code:`<br />` Possible Values::code:`<br
-                      />`:code:`<br />` **Standard**\ :code:`<br />`:code:`<br />`
-                      **Basic**
-                  returned: always
-                  type: str
-                  sample: null
+                    description:
+                        - >-
+                            Specifies the tier of virtual machines in a scale set.:code:`<br
+                            />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                            **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+                    returned: always
+                    type: str
+                    sample: null
                 capacity:
-                  description:
-                    - Specifies the number of virtual machines in the scale set.
-                  returned: always
-                  type: int
-                  sample: null
-            platform_fault_domain:
-              description:
+                    description:
+                        - Specifies the number of virtual machines in the scale set.
+                    returned: always
+                    type: int
+                    sample: null
+        platform_fault_domain:
+            description:
                 - Fault domain of the dedicated host within a dedicated host group.
-              returned: always
-              type: int
-              sample: null
-            auto_replace_on_failure:
-              description:
+            returned: always
+            type: int
+            sample: null
+        auto_replace_on_failure:
+            description:
                 - >-
-                  Specifies whether the dedicated host should be replaced
-                  automatically in case of a failure. The value is defaulted to
-                  'true' when not provided.
-              returned: always
-              type: bool
-              sample: null
-            license_type:
-              description:
+                    Specifies whether the dedicated host should be replaced automatically
+                    in case of a failure. The value is defaulted to 'true' when not
+                    provided.
+            returned: always
+            type: bool
+            sample: null
+        host_id:
+            description:
                 - >-
-                  Specifies the software license type that will be applied to the
-                  VMs deployed on the dedicated host. :code:`<br>`:code:`<br>`
-                  Possible values are: :code:`<br>`:code:`<br>` **None**
-                  :code:`<br>`:code:`<br>` **Windows_Server_Hybrid**
-                  :code:`<br>`:code:`<br>` **Windows_Server_Perpetual**
-                  :code:`<br>`:code:`<br>` Default: **None**
-              returned: always
-              type: sealed-choice
-              sample: null
-            instance_view:
-              description:
+                    A unique id generated and assigned to the dedicated host by the
+                    platform. :code:`<br>`:code:`<br>` Does not change throughout the
+                    lifetime of the host.
+            returned: always
+            type: str
+            sample: null
+        virtual_machines:
+            description:
+                - A list of references to all virtual machines in the Dedicated Host.
+            returned: always
+            type: list
+            sample: null
+        license_type:
+            description:
+                - >-
+                    Specifies the software license type that will be applied to the VMs
+                    deployed on the dedicated host. :code:`<br>`:code:`<br>` Possible
+                    values are: :code:`<br>`:code:`<br>` **None** :code:`<br>`:code:`<br>`
+                    **Windows_Server_Hybrid** :code:`<br>`:code:`<br>`
+                    **Windows_Server_Perpetual** :code:`<br>`:code:`<br>` Default:
+                    **None**
+            returned: always
+            type: sealed-choice
+            sample: null
+        provisioning_time:
+            description:
+                - The date when the host was first provisioned.
+            returned: always
+            type: str
+            sample: null
+        provisioning_state:
+            description:
+                - 'The provisioning state, which only appears in the response.'
+            returned: always
+            type: str
+            sample: null
+        instance_view:
+            description:
                 - The dedicated host instance view.
-              returned: always
-              type: dict
-              sample: null
-              contains:
+            returned: always
+            type: dict
+            sample: null
+            contains:
                 available_capacity:
-                  description:
-                    - Unutilized capacity of the dedicated host.
-                  returned: always
-                  type: dict
-                  sample: null
-                  contains:
-                    allocatable_v_ms:
-                      description:
-                        - >-
-                          The unutilized capacity of the dedicated host represented
-                          in terms of each VM size that is allowed to be deployed to
-                          the dedicated host.
-                      returned: always
-                      type: list
-                      sample: null
-                      contains:
-                        vm_size:
-                          description:
-                            - >-
-                              VM size in terms of which the unutilized capacity is
-                              represented.
-                          returned: always
-                          type: str
-                          sample: null
-                        count:
-                          description:
-                            - >-
-                              Maximum number of VMs of size vmSize that can fit in
-                              the dedicated host's remaining capacity.
-                          returned: always
-                          type: number
-                          sample: null
+                    description:
+                        - Unutilized capacity of the dedicated host.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        allocatable_v_ms:
+                            description:
+                                - >-
+                                    The unutilized capacity of the dedicated host represented in
+                                    terms of each VM size that is allowed to be deployed to the
+                                    dedicated host.
+                            returned: always
+                            type: list
+                            sample: null
+                            contains:
+                                vm_size:
+                                    description:
+                                        - >-
+                                            VM size in terms of which the unutilized capacity is
+                                            represented.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                count:
+                                    description:
+                                        - >-
+                                            Maximum number of VMs of size vmSize that can fit in the
+                                            dedicated host's remaining capacity.
+                                    returned: always
+                                    type: number
+                                    sample: null
                 statuses:
-                  description:
-                    - The resource status information.
-                  returned: always
-                  type: list
-                  sample: null
-                  contains:
-                    code:
-                      description:
-                        - The status code.
-                      returned: always
-                      type: str
-                      sample: null
-                    level:
-                      description:
-                        - The level code.
-                      returned: always
-                      type: sealed-choice
-                      sample: null
-                    display_status:
-                      description:
-                        - The short localizable label for the status.
-                      returned: always
-                      type: str
-                      sample: null
-                    message:
-                      description:
+                    description:
+                        - The resource status information.
+                    returned: always
+                    type: list
+                    sample: null
+                    contains:
+                        code:
+                            description:
+                                - The status code.
+                            returned: always
+                            type: str
+                            sample: null
+                        level:
+                            description:
+                                - The level code.
+                            returned: always
+                            type: sealed-choice
+                            sample: null
+                        display_status:
+                            description:
+                                - The short localizable label for the status.
+                            returned: always
+                            type: str
+                            sample: null
+                        message:
+                            description:
+                                - >-
+                                    The detailed status message, including for alerts and error
+                                    messages.
+                            returned: always
+                            type: str
+                            sample: null
+                        time:
+                            description:
+                                - The time of the status.
+                            returned: always
+                            type: str
+                            sample: null
+        value:
+            description:
+                - The list of dedicated hosts
+            returned: always
+            type: list
+            sample: null
+            contains:
+                sku:
+                    description:
                         - >-
-                          The detailed status message, including for alerts and
-                          error messages.
-                      returned: always
-                      type: str
-                      sample: null
-                    time:
-                      description:
-                        - The time of the status.
-                      returned: always
-                      type: str
-                      sample: null
+                            SKU of the dedicated host for Hardware Generation and VM family.
+                            Only name is required to be set. List Microsoft.Compute SKUs for a
+                            list of possible values.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        name:
+                            description:
+                                - The sku name.
+                            returned: always
+                            type: str
+                            sample: null
+                        tier:
+                            description:
+                                - >-
+                                    Specifies the tier of virtual machines in a scale
+                                    set.:code:`<br />`:code:`<br />` Possible Values::code:`<br
+                                    />`:code:`<br />` **Standard**\ :code:`<br />`:code:`<br />`
+                                    **Basic**
+                            returned: always
+                            type: str
+                            sample: null
+                        capacity:
+                            description:
+                                - Specifies the number of virtual machines in the scale set.
+                            returned: always
+                            type: int
+                            sample: null
+                platform_fault_domain:
+                    description:
+                        - Fault domain of the dedicated host within a dedicated host group.
+                    returned: always
+                    type: int
+                    sample: null
+                auto_replace_on_failure:
+                    description:
+                        - >-
+                            Specifies whether the dedicated host should be replaced
+                            automatically in case of a failure. The value is defaulted to
+                            'true' when not provided.
+                    returned: always
+                    type: bool
+                    sample: null
+                license_type:
+                    description:
+                        - >-
+                            Specifies the software license type that will be applied to the
+                            VMs deployed on the dedicated host. :code:`<br>`:code:`<br>`
+                            Possible values are: :code:`<br>`:code:`<br>` **None**
+                            :code:`<br>`:code:`<br>` **Windows_Server_Hybrid**
+                            :code:`<br>`:code:`<br>` **Windows_Server_Perpetual**
+                            :code:`<br>`:code:`<br>` Default: **None**
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                instance_view:
+                    description:
+                        - The dedicated host instance view.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        available_capacity:
+                            description:
+                                - Unutilized capacity of the dedicated host.
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                allocatable_v_ms:
+                                    description:
+                                        - >-
+                                            The unutilized capacity of the dedicated host represented
+                                            in terms of each VM size that is allowed to be deployed to
+                                            the dedicated host.
+                                    returned: always
+                                    type: list
+                                    sample: null
+                                    contains:
+                                        vm_size:
+                                            description:
+                                                - >-
+                                                    VM size in terms of which the unutilized capacity is
+                                                    represented.
+                                            returned: always
+                                            type: str
+                                            sample: null
+                                        count:
+                                            description:
+                                                - >-
+                                                    Maximum number of VMs of size vmSize that can fit in
+                                                    the dedicated host's remaining capacity.
+                                            returned: always
+                                            type: number
+                                            sample: null
+                        statuses:
+                            description:
+                                - The resource status information.
+                            returned: always
+                            type: list
+                            sample: null
+                            contains:
+                                code:
+                                    description:
+                                        - The status code.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                level:
+                                    description:
+                                        - The level code.
+                                    returned: always
+                                    type: sealed-choice
+                                    sample: null
+                                display_status:
+                                    description:
+                                        - The short localizable label for the status.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                message:
+                                    description:
+                                        - >-
+                                            The detailed status message, including for alerts and
+                                            error messages.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                time:
+                                    description:
+                                        - The time of the status.
+                                    returned: always
+                                    type: str
+                                    sample: null
         next_link:
-          description:
-            - >-
-              The URI to fetch the next page of dedicated hosts. Call ListNext()
-              with this URI to fetch the next page of dedicated hosts.
-          returned: always
-          type: str
-          sample: null
-    
+            description:
+                - >-
+                    The URI to fetch the next page of dedicated hosts. Call ListNext()
+                    with this URI to fetch the next page of dedicated hosts.
+            returned: always
+            type: str
+            sample: null
+
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
