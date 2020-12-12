@@ -169,7 +169,7 @@ registration_definitions:
                                             Maximum access duration in ISO 8601 format.  The default
                                             value is "PT8H".
                                     returned: always
-                                    type: duration
+                                    type: str
                                     sample: null
                 registration_definition_name:
                     description:
@@ -352,7 +352,7 @@ registration_definitions:
                                                     Maximum access duration in ISO 8601 format.  The
                                                     default value is "PT8H".
                                             returned: always
-                                            type: duration
+                                            type: str
                                             sample: null
                         registration_definition_name:
                             description:

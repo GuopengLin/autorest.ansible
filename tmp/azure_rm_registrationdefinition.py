@@ -123,7 +123,7 @@ options:
                                     - >-
                                         Maximum access duration in ISO 8601 format.  The default
                                         value is "PT8H".
-                                type: duration
+                                type: str
             registration_definition_name:
                 description:
                     - Name of the registration definition.
@@ -300,7 +300,7 @@ properties:
                                     Maximum access duration in ISO 8601 format.  The default value
                                     is "PT8H".
                             returned: always
-                            type: duration
+                            type: str
                             sample: null
         registration_definition_name:
             description:
@@ -458,7 +458,7 @@ class AzureRMRegistrationDefinition(AzureRMModuleBaseExt):
                                         required=True
                                     ),
                                     maximum_activation_duration=dict(
-                                        type='duration',
+                                        type='str',
                                         disposition='maximum_activation_duration'
                                     )
                                 )

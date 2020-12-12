@@ -162,6 +162,8 @@ export class ModuleOption {
             return 'dict';
         if (type == SwaggerModelType.SWAGGER_MODEL_ENUM)
             return 'str';
+        if (type == SwaggerModelType.SWAGGER_MODEL_DURATION)
+            return 'str';
         return type;
     }
 
