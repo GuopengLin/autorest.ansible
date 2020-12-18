@@ -18,13 +18,16 @@ import {
 import { Indent } from "../../utils/helper";
 import {Module} from "../Common/Module";
 
-export function GenerateModuleSdk(module: Module) : string[] {
+export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
     
     var output: string[] = [];
-    AppendModuleHeader(output);
-    AppendModuleDocumentation(output, module, false, false);
-    AppendModuleExamples(output, module, false);
-    AppendModuleReturnDoc(output, module, false);
+    if (!skipDoc){
+        AppendModuleHeader(output);
+        AppendModuleDocumentation(output, module, false, false);
+        AppendModuleExamples(output, module, false);
+        AppendModuleReturnDoc(output, module, false);
+    }
+
 
     output.push("");
     // output.push("import time");

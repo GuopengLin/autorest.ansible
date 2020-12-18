@@ -14,7 +14,7 @@ export  enum ArtifactType {
 }
 
 
-export function GenerateAll(model:AnsibleCodeModel, type:ArtifactType) {
+export function GenerateAll(model:AnsibleCodeModel, type:ArtifactType, skipDoc: boolean) {
     let modules = model.Modules;
     let tests = model.Tests;
     let files = {};
@@ -25,14 +25,14 @@ export function GenerateAll(model:AnsibleCodeModel, type:ArtifactType) {
                 files[path+module.ModuleName+".py"] = GenerateModuleRestInfo(module, false);
             }
             if (type == ArtifactType.ArtifactTypeAnsibleSdk){
-                files[path+module.ModuleName+".py"] = GenerateModuleSdkInfo(module);
+                files[path+module.ModuleName+".py"] = GenerateModuleSdkInfo(module, skipDoc);
             }
         }else {
             if (type == ArtifactType.ArtifactTypeAnsibleRest){
                 files[path+module.ModuleName+".py"] = GenerateModuleRest(module, false);
             }
             if (type == ArtifactType.ArtifactTypeAnsibleSdk){
-                files[path+module.ModuleName+".py"] = GenerateModuleSdk(module);
+                files[path+module.ModuleName+".py"] = GenerateModuleSdk(module, skipDoc);
             }
         }
     }

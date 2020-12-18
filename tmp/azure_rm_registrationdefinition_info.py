@@ -62,14 +62,12 @@ registration_definitions:
         properties:
             description:
                 - Properties of a registration definition.
-            returned: always
             type: dict
             sample: null
             contains:
                 description:
                     description:
                         - Description of the registration definition.
-                    returned: always
                     type: str
                     sample: null
                 authorizations:
@@ -92,7 +90,6 @@ registration_definitions:
                         principal_id_display_name:
                             description:
                                 - Display name of the principal Id.
-                            returned: always
                             type: str
                             sample: null
                         role_definition_id:
@@ -113,7 +110,6 @@ registration_definitions:
                                     It is the list of role definition ids which define all the
                                     permissions that the user in the authorization can assign to
                                     other security groups/service principals/users.
-                            returned: always
                             type: list
                             sample: null
                 eligible_authorizations:
@@ -122,7 +118,6 @@ registration_definitions:
                             Eligible PIM authorization tuple containing principal id of the
                             user/security group or service principal, id of the built-in role,
                             and just-in-time access policy setting
-                    returned: always
                     type: list
                     sample: null
                     contains:
@@ -137,7 +132,6 @@ registration_definitions:
                         principal_id_display_name:
                             description:
                                 - Display name of the principal Id.
-                            returned: always
                             type: str
                             sample: null
                         role_definition_id:
@@ -153,7 +147,6 @@ registration_definitions:
                         just_in_time_access_policy:
                             description:
                                 - Just-in-time access policy setting.
-                            returned: always
                             type: dict
                             sample: null
                             contains:
@@ -168,13 +161,11 @@ registration_definitions:
                                         - >-
                                             Maximum access duration in ISO 8601 format.  The default
                                             value is "PT8H".
-                                    returned: always
                                     type: str
                                     sample: null
                 registration_definition_name:
                     description:
                         - Name of the registration definition.
-                    returned: always
                     type: str
                     sample: null
                 managed_by_tenant_id:
@@ -186,7 +177,6 @@ registration_definitions:
         plan:
             description:
                 - Plan details for the managed services.
-            returned: always
             type: dict
             sample: null
             contains:
@@ -217,39 +207,33 @@ registration_definitions:
         id:
             description:
                 - Fully qualified path of the registration definition.
-            returned: always
             type: str
             sample: null
         type:
             description:
                 - Type of the resource.
-            returned: always
             type: str
             sample: null
         name:
             description:
                 - Name of the registration definition.
-            returned: always
             type: str
             sample: null
         value:
             description:
                 - List of registration definitions.
-            returned: always
             type: list
             sample: null
             contains:
                 properties:
                     description:
                         - Properties of a registration definition.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
                         description:
                             description:
                                 - Description of the registration definition.
-                            returned: always
                             type: str
                             sample: null
                         authorizations:
@@ -274,7 +258,6 @@ registration_definitions:
                                 principal_id_display_name:
                                     description:
                                         - Display name of the principal Id.
-                                    returned: always
                                     type: str
                                     sample: null
                                 role_definition_id:
@@ -295,7 +278,6 @@ registration_definitions:
                                             Role. It is the list of role definition ids which define
                                             all the permissions that the user in the authorization can
                                             assign to other security groups/service principals/users.
-                                    returned: always
                                     type: list
                                     sample: null
                         eligible_authorizations:
@@ -304,7 +286,6 @@ registration_definitions:
                                     Eligible PIM authorization tuple containing principal id of
                                     the user/security group or service principal, id of the
                                     built-in role, and just-in-time access policy setting
-                            returned: always
                             type: list
                             sample: null
                             contains:
@@ -320,7 +301,6 @@ registration_definitions:
                                 principal_id_display_name:
                                     description:
                                         - Display name of the principal Id.
-                                    returned: always
                                     type: str
                                     sample: null
                                 role_definition_id:
@@ -336,7 +316,6 @@ registration_definitions:
                                 just_in_time_access_policy:
                                     description:
                                         - Just-in-time access policy setting.
-                                    returned: always
                                     type: dict
                                     sample: null
                                     contains:
@@ -351,13 +330,11 @@ registration_definitions:
                                                 - >-
                                                     Maximum access duration in ISO 8601 format.  The
                                                     default value is "PT8H".
-                                            returned: always
                                             type: str
                                             sample: null
                         registration_definition_name:
                             description:
                                 - Name of the registration definition.
-                            returned: always
                             type: str
                             sample: null
                         managed_by_tenant_id:
@@ -369,7 +346,6 @@ registration_definitions:
                 plan:
                     description:
                         - Plan details for the managed services.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
@@ -400,7 +376,6 @@ registration_definitions:
         next_link:
             description:
                 - Link to next page of registration definitions.
-            returned: always
             type: str
             sample: null
 

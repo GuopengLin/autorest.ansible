@@ -17,12 +17,15 @@ import {
 } from "./AnsibleModuleCommon"
 import {Module} from "../Common/Module";
 
-export function GenerateModuleSdkInfo(module: Module) : string[] {
+export function GenerateModuleSdkInfo(module: Module, skipDoc: boolean) : string[] {
+
     var output: string[] = [];
-    AppendModuleHeader(output);
-    AppendModuleDocumentation(output, module, true, false);
-    AppendModuleExamples(output, module, false);
-    AppendModuleReturnDoc(output, module, true);
+    if (!skipDoc){
+        AppendModuleHeader(output);
+        AppendModuleDocumentation(output, module, true, false);
+        AppendModuleExamples(output, module, false);
+        AppendModuleReturnDoc(output, module, true);
+    }
 
     output.push("");
     // output.push("import time");

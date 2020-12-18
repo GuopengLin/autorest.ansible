@@ -676,7 +676,9 @@ function GetHelpFromResponseFields(module: Module, fields: ModuleOption[], paddi
             //help.concat(this.WrapString(padding + "        - ", doc));
 
             field_doc['description'] = [ field.Documentation ];
-            field_doc['returned'] = "always"; //field.Returned;
+            if (field.Required){
+                field_doc['returned'] = "always"; //field.Returned;
+            }
             field_doc['type'] = field.Type;
 
             //help.push(padding + "    returned: " + field.Returned);

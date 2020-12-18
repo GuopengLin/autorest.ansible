@@ -36,7 +36,7 @@ export async function main() {
 
     let codeModel = new AnsibleCodeModel(model, "Galleries", false, console.log);
     let files = {};
-    files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk);
+    files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk, false);
     for (let f in files) {
         console.log(f);
         WriteFile(f, files[f]);

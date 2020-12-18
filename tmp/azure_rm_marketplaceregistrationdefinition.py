@@ -62,7 +62,6 @@ RETURN = '''
 properties:
     description:
         - Properties of a marketplace registration definition.
-    returned: always
     type: dict
     sample: null
     contains:
@@ -92,7 +91,6 @@ properties:
                 principal_id_display_name:
                     description:
                         - Display name of the principal Id.
-                    returned: always
                     type: str
                     sample: null
                 role_definition_id:
@@ -113,7 +111,6 @@ properties:
                             is the list of role definition ids which define all the
                             permissions that the user in the authorization can assign to other
                             security groups/service principals/users.
-                    returned: always
                     type: list
                     sample: null
         eligible_authorizations:
@@ -122,7 +119,6 @@ properties:
                     Eligible PIM authorization tuple containing principal id of the
                     user/security group or service principal, id of the built-in role, and
                     just-in-time access policy setting
-            returned: always
             type: list
             sample: null
             contains:
@@ -137,7 +133,6 @@ properties:
                 principal_id_display_name:
                     description:
                         - Display name of the principal Id.
-                    returned: always
                     type: str
                     sample: null
                 role_definition_id:
@@ -153,7 +148,6 @@ properties:
                 just_in_time_access_policy:
                     description:
                         - Just-in-time access policy setting.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
@@ -168,31 +162,26 @@ properties:
                                 - >-
                                     Maximum access duration in ISO 8601 format.  The default value
                                     is "PT8H".
-                            returned: always
                             type: str
                             sample: null
         offer_display_name:
             description:
                 - The marketplace offer display name.
-            returned: always
             type: str
             sample: null
         publisher_display_name:
             description:
                 - The marketplace publisher display name.
-            returned: always
             type: str
             sample: null
         plan_display_name:
             description:
                 - The marketplace plan display name.
-            returned: always
             type: str
             sample: null
 plan:
     description:
         - Plan details for the managed services.
-    returned: always
     type: dict
     sample: null
     contains:
@@ -223,19 +212,16 @@ plan:
 id:
     description:
         - Fully qualified path of the marketplace registration definition.
-    returned: always
     type: str
     sample: null
 type:
     description:
         - Type of the resource.
-    returned: always
     type: str
     sample: null
 name:
     description:
         - Name of the marketplace registration definition.
-    returned: always
     type: str
     sample: null
 

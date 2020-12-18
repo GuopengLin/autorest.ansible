@@ -36,32 +36,16 @@ export async function processRequest(host: Host) {
         });
     }
     try {
-        // const inputFileUris = await host.ListInputs();
-        // Info("12345");
-        // Info("input file"+inputFileUris);
-        // const inputFiles: string[] = await Promise.all(inputFileUris.filter(uri =>uri.endsWith("no-tags.yaml")).map(uri => host.ReadFile(uri)));
-        // for (let iff of inputFiles){
-        //     const jsyaml = require('js-yaml');
-        //     let climodel = jsyaml.safeLoad(iff);
-        //     host.WriteFile("model4.yaml",yaml.dump(climodel));
-        //     Info("1234");
-        //     let codeModel = new  AnsibleCodeModel(climodel);
-        //     // let files = {};
-        //     // files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk);
-        //     // for (let f in files) {
-        //     //     Info(f);
-        //     //     WriteFile(f, files[f]);
-        //     // }
-        // }
+
         const session = await startSession<CodeModel>(host, {}, codeModelSchema);
 
         host.WriteFile("model4.yaml",serialize(session.model));
         let chooseModule = await host.GetValue("module");
         let onlyList = await host.GetValue("list");
         let codeModel = new AnsibleCodeModel(session.model, chooseModule, onlyList, Info);
-
+        let skipDoc = await host.GetValue("skipDoc");
         let files = {};
-        files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk);
+        files = GenerateAll(codeModel, ArtifactType.ArtifactTypeAnsibleSdk, skipDoc);
         for (let f in files) {
             Info(f);
             WriteFile(f, files[f]);

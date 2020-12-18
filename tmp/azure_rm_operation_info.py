@@ -46,21 +46,18 @@ operations:
         value:
             description:
                 - List of Microsoft.ManagedServices operations.
-            returned: always
             type: list
             sample: null
             contains:
                 display:
                     description:
                         - The object that represents the operation.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
                         provider:
                             description:
                                 - 'Service provider: Microsoft.ManagedServices'
-                            returned: always
                             type: str
                             sample: null
                         resource:
@@ -68,19 +65,16 @@ operations:
                                 - >-
                                     Resource on which the operation is performed: Registration
                                     definition, registration assignment etc.
-                            returned: always
                             type: str
                             sample: null
                         operation:
                             description:
                                 - 'Operation type: Read, write, delete, etc.'
-                            returned: always
                             type: str
                             sample: null
                         description:
                             description:
                                 - Description of the operation.
-                            returned: always
                             type: str
                             sample: null
 

@@ -69,7 +69,6 @@ registration_assignments:
         properties:
             description:
                 - Properties of a registration assignment.
-            returned: always
             type: dict
             sample: null
             contains:
@@ -82,7 +81,6 @@ registration_assignments:
                 registration_definition:
                     description:
                         - Registration definition inside registration assignment.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
@@ -91,13 +89,11 @@ registration_assignments:
                                 - >-
                                     Properties of registration definition inside registration
                                     assignment.
-                            returned: always
                             type: dict
                             sample: null
                         plan:
                             description:
                                 - Plan details for the managed services.
-                            returned: always
                             type: dict
                             sample: null
                             contains:
@@ -128,32 +124,27 @@ registration_assignments:
         id:
             description:
                 - The fully qualified path of the registration assignment.
-            returned: always
             type: str
             sample: null
         type:
             description:
                 - Type of the resource.
-            returned: always
             type: str
             sample: null
         name:
             description:
                 - Name of the registration assignment.
-            returned: always
             type: str
             sample: null
         value:
             description:
                 - List of registration assignments.
-            returned: always
             type: list
             sample: null
             contains:
                 properties:
                     description:
                         - Properties of a registration assignment.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
@@ -166,7 +157,6 @@ registration_assignments:
                         registration_definition:
                             description:
                                 - Registration definition inside registration assignment.
-                            returned: always
                             type: dict
                             sample: null
                             contains:
@@ -175,13 +165,11 @@ registration_assignments:
                                         - >-
                                             Properties of registration definition inside registration
                                             assignment.
-                                    returned: always
                                     type: dict
                                     sample: null
                                 plan:
                                     description:
                                         - Plan details for the managed services.
-                                    returned: always
                                     type: dict
                                     sample: null
                                     contains:
@@ -212,7 +200,6 @@ registration_assignments:
         next_link:
             description:
                 - Link to next page of registration assignments.
-            returned: always
             type: str
             sample: null
 

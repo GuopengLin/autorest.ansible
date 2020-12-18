@@ -118,7 +118,6 @@ RETURN = '''
 properties:
     description:
         - Properties of a registration assignment.
-    returned: always
     type: dict
     sample: null
     contains:
@@ -131,7 +130,6 @@ properties:
         registration_definition:
             description:
                 - Registration definition inside registration assignment.
-            returned: always
             type: dict
             sample: null
             contains:
@@ -140,13 +138,11 @@ properties:
                         - >-
                             Properties of registration definition inside registration
                             assignment.
-                    returned: always
                     type: dict
                     sample: null
                 plan:
                     description:
                         - Plan details for the managed services.
-                    returned: always
                     type: dict
                     sample: null
                     contains:
@@ -177,19 +173,16 @@ properties:
 id:
     description:
         - The fully qualified path of the registration assignment.
-    returned: always
     type: str
     sample: null
 type:
     description:
         - Type of the resource.
-    returned: always
     type: str
     sample: null
 name:
     description:
         - Name of the registration assignment.
-    returned: always
     type: str
     sample: null
 
