@@ -1,8 +1,0 @@
- - name: get the VirtualMachineImage
-   azure_rm_virtualmachineimage_info:
-     location: my_location
-     publisher_name: my_publisher_name
-     offer: my_offer
-     skus: my_skus
-     version: my_version
-   
