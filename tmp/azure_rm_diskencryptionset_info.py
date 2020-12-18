@@ -1,3 +1,273 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_diskencryptionset_info
+version_added: '2.9'
+short_description: Get DiskEncryptionSet info.
+description:
+    - Get info of DiskEncryptionSet.
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        type: str
+    disk_encryption_set_name:
+        description:
+            - >-
+                The name of the disk encryption set that is being created. The name
+                can't be changed after the disk encryption set is created. Supported
+                characters for the name are a-z, A-Z, 0-9 and _. The maximum name length
+                is 80 characters.
+        type: str
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Get information about a disk encryption set.
+      azure_rm_diskencryptionset_info: 
+        disk_encryption_set_name: myDiskEncryptionSet
+        resource_group_name: myResourceGroup
+
+    - name: List all disk encryption sets in a resource group.
+      azure_rm_diskencryptionset_info: 
+        resource_group_name: myResourceGroup
+
+    - name: List all disk encryption sets in a subscription.
+      azure_rm_diskencryptionset_info: 
+
+    - name: List all resources that are encrypted with this disk encryption set.
+      azure_rm_diskencryptionset_info: 
+        disk_encryption_set_name: myDiskEncryptionSet
+        resource_group_name: myResourceGroup
+
+'''
+
+RETURN = '''
+disk_encryption_sets:
+    description: >-
+        A list of dict results where the key is the name of the DiskEncryptionSet
+        and the values are the facts for that DiskEncryptionSet.
+    returned: always
+    type: complex
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            type: dict
+            sample: null
+        identity:
+            description:
+                - >-
+                    The managed identity for the disk encryption set. It should be given
+                    permission on the key vault before it can be used to encrypt disks.
+            type: dict
+            sample: null
+            contains:
+                type:
+                    description:
+                        - >-
+                            The type of Managed Identity used by the DiskEncryptionSet. Only
+                            SystemAssigned is supported.
+                    type: str
+                    sample: null
+        encryption_type:
+            description:
+                - The type of key used to encrypt the data of the disk.
+            type: str
+            sample: null
+        active_key:
+            description:
+                - The key vault key which is currently used by this disk encryption set.
+            type: dict
+            sample: null
+            contains:
+                source_vault:
+                    description:
+                        - Resource id of the KeyVault containing the key or secret
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        id:
+                            description:
+                                - Resource Id
+                            type: str
+                            sample: null
+                key_url:
+                    description:
+                        - Url pointing to a key or secret in KeyVault
+                    returned: always
+                    type: str
+                    sample: null
+        previous_keys:
+            description:
+                - >-
+                    A readonly collection of key vault keys previously used by this disk
+                    encryption set while a key rotation is in progress. It will be empty
+                    if there is no ongoing key rotation.
+            type: list
+            sample: null
+            contains:
+                source_vault:
+                    description:
+                        - Resource id of the KeyVault containing the key or secret
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        id:
+                            description:
+                                - Resource Id
+                            type: str
+                            sample: null
+                key_url:
+                    description:
+                        - Url pointing to a key or secret in KeyVault
+                    returned: always
+                    type: str
+                    sample: null
+        provisioning_state:
+            description:
+                - The disk encryption set provisioning state.
+            type: str
+            sample: null
+        value:
+            description:
+                - >-
+                    A list of disk encryption sets.
+
+                    A list of IDs or Owner IDs of resources which are encrypted with the
+                    disk encryption set.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                identity:
+                    description:
+                        - >-
+                            The managed identity for the disk encryption set. It should be
+                            given permission on the key vault before it can be used to encrypt
+                            disks.
+                    type: dict
+                    sample: null
+                    contains:
+                        type:
+                            description:
+                                - >-
+                                    The type of Managed Identity used by the DiskEncryptionSet.
+                                    Only SystemAssigned is supported.
+                            type: str
+                            sample: null
+                encryption_type:
+                    description:
+                        - The type of key used to encrypt the data of the disk.
+                    type: str
+                    sample: null
+                active_key:
+                    description:
+                        - >-
+                            The key vault key which is currently used by this disk encryption
+                            set.
+                    type: dict
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    type: str
+                                    sample: null
+                        key_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
+                previous_keys:
+                    description:
+                        - >-
+                            A readonly collection of key vault keys previously used by this
+                            disk encryption set while a key rotation is in progress. It will
+                            be empty if there is no ongoing key rotation.
+                    type: list
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    type: str
+                                    sample: null
+                        key_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
+        next_link:
+            description:
+                - >-
+                    The uri to fetch the next page of disk encryption sets. Call
+                    ListNext() with this to fetch the next page of disk encryption sets.
+
+                    The uri to fetch the next page of encrypted resources. Call ListNext()
+                    with this to fetch the next page of encrypted resources.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

@@ -1,3 +1,650 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_snapshot
+version_added: '2.9'
+short_description: Manage Azure Snapshot instance.
+description:
+    - 'Create, update and delete instance of Azure Snapshot.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    name:
+        description:
+            - >-
+                The name of the snapshot that is being created. The name can't be
+                changed after the snapshot is created. Supported characters for the name
+                are a-z, A-Z, 0-9 and _. The max name length is 80 characters.
+        required: true
+        type: str
+    sku:
+        description:
+            - >-
+                The snapshots sku name. Can be Standard_LRS, Premium_LRS, or
+                Standard_ZRS.
+        type: dict
+        suboptions:
+            name:
+                description:
+                    - The sku name.
+                type: str
+                choices:
+                    - Standard_LRS
+                    - Premium_LRS
+                    - Standard_ZRS
+    os_type:
+        description:
+            - The Operating System type.
+            - the Operating System type.
+        type: sealed-choice
+    hyper_v_generation:
+        description:
+            - >-
+                The hypervisor generation of the Virtual Machine. Applicable to OS disks
+                only.
+        type: str
+        choices:
+            - V1
+            - V2
+    creation_data:
+        description:
+            - >-
+                Disk source information. CreationData information cannot be changed
+                after the disk has been created.
+        type: dict
+        suboptions:
+            create_option:
+                description:
+                    - This enumerates the possible sources of a disk's creation.
+                required: true
+                type: str
+                choices:
+                    - Empty
+                    - Attach
+                    - FromImage
+                    - Import
+                    - Copy
+                    - Restore
+                    - Upload
+            storage_account_id:
+                description:
+                    - >-
+                        Required if createOption is Import. The Azure Resource Manager
+                        identifier of the storage account containing the blob to import as a
+                        disk.
+                type: str
+            image_reference:
+                description:
+                    - Disk source information.
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - >-
+                                A relative uri containing either a Platform Image Repository or
+                                user image reference.
+                        required: true
+                        type: str
+                    lun:
+                        description:
+                            - >-
+                                If the disk is created from an image's data disk, this is an
+                                index that indicates which of the data disks in the image to
+                                use. For OS disks, this field is null.
+                        type: int
+            gallery_image_reference:
+                description:
+                    - >-
+                        Required if creating from a Gallery Image. The id of the
+                        ImageDiskReference will be the ARM id of the shared galley image
+                        version from which to create a disk.
+                type: dict
+                suboptions:
+                    id:
+                        description:
+                            - >-
+                                A relative uri containing either a Platform Image Repository or
+                                user image reference.
+                        required: true
+                        type: str
+                    lun:
+                        description:
+                            - >-
+                                If the disk is created from an image's data disk, this is an
+                                index that indicates which of the data disks in the image to
+                                use. For OS disks, this field is null.
+                        type: int
+            source_uri:
+                description:
+                    - >-
+                        If createOption is Import, this is the URI of a blob to be imported
+                        into a managed disk.
+                type: str
+            source_resource_id:
+                description:
+                    - >-
+                        If createOption is Copy, this is the ARM id of the source snapshot
+                        or disk.
+                type: str
+            upload_size_bytes:
+                description:
+                    - >-
+                        If createOption is Upload, this is the size of the contents of the
+                        upload including the VHD footer. This value should be between
+                        20972032 (20 MiB + 512 bytes for the VHD footer) and 35183298347520
+                        bytes (32 TiB + 512 bytes for the VHD footer).
+                type: int
+            logical_sector_size:
+                description:
+                    - >-
+                        Logical sector size in bytes for Ultra disks. Supported values are
+                        512 ad 4096. 4096 is the default.
+                type: int
+    disk_size_gb:
+        description:
+            - >-
+                If creationData.createOption is Empty, this field is mandatory and it
+                indicates the size of the disk to create. If this field is present for
+                updates or creation with other options, it indicates a resize. Resizes
+                are only allowed if the disk is not attached to a running VM, and can
+                only increase the disk's size.
+        type: int
+    encryption_settings_collection:
+        description:
+            - >-
+                Encryption settings collection used be Azure Disk Encryption, can
+                contain multiple encryption settings per disk or snapshot.
+        type: dict
+        suboptions:
+            enabled:
+                description:
+                    - >-
+                        Set this flag to true and provide DiskEncryptionKey and optional
+                        KeyEncryptionKey to enable encryption. Set this flag to false and
+                        remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
+                        If EncryptionSettings is null in the request object, the existing
+                        settings remain unchanged.
+                required: true
+                type: bool
+            encryption_settings:
+                description:
+                    - 'A collection of encryption settings, one for each disk volume.'
+                type: list
+                suboptions:
+                    disk_encryption_key:
+                        description:
+                            - Key Vault Secret Url and vault id of the disk encryption key
+                        type: dict
+                        suboptions:
+                            source_vault:
+                                description:
+                                    - Resource id of the KeyVault containing the key or secret
+                                required: true
+                                type: dict
+                                suboptions:
+                                    id:
+                                        description:
+                                            - Resource Id
+                                        type: str
+                            secret_url:
+                                description:
+                                    - Url pointing to a key or secret in KeyVault
+                                required: true
+                                type: str
+                    key_encryption_key:
+                        description:
+                            - >-
+                                Key Vault Key Url and vault id of the key encryption key.
+                                KeyEncryptionKey is optional and when provided is used to unwrap
+                                the disk encryption key.
+                        type: dict
+                        suboptions:
+                            source_vault:
+                                description:
+                                    - Resource id of the KeyVault containing the key or secret
+                                required: true
+                                type: dict
+                                suboptions:
+                                    id:
+                                        description:
+                                            - Resource Id
+                                        type: str
+                            key_url:
+                                description:
+                                    - Url pointing to a key or secret in KeyVault
+                                required: true
+                                type: str
+            encryption_settings_version:
+                description:
+                    - >-
+                        Describes what type of encryption is used for the disks. Once this
+                        field is set, it cannot be overwritten. '1.0' corresponds to Azure
+                        Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
+                        Encryption.
+                type: str
+    incremental:
+        description:
+            - >-
+                Whether a snapshot is incremental. Incremental snapshots on the same
+                disk occupy less space than full snapshots and can be diffed.
+        type: bool
+    encryption:
+        description:
+            - >-
+                Encryption property can be used to encrypt data at rest with customer
+                managed keys or platform managed keys.
+        type: dict
+        suboptions:
+            disk_encryption_set_id:
+                description:
+                    - >-
+                        ResourceId of the disk encryption set to use for enabling encryption
+                        at rest.
+                type: str
+            type:
+                description:
+                    - The type of key used to encrypt the data of the disk.
+                type: str
+                choices:
+                    - EncryptionAtRestWithPlatformKey
+                    - EncryptionAtRestWithCustomerKey
+                    - EncryptionAtRestWithPlatformAndCustomerKeys
+    network_access_policy:
+        description:
+            - Policy for accessing the disk via network.
+        type: str
+        choices:
+            - AllowAll
+            - AllowPrivate
+            - DenyAll
+    disk_access_id:
+        description:
+            - ARM id of the DiskAccess resource for using private endpoints on disks.
+        type: str
+    state:
+        description:
+            - Assert the state of the Snapshot.
+            - >-
+                Use C(present) to create or update an Snapshot and C(absent) to delete
+                it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create a snapshot by importing an unmanaged blob from a different subscription.
+      azure_rm_snapshot: 
+        resource_group_name: myResourceGroup
+        snapshot_name: mySnapshot1
+        location: West US
+        properties:
+          creation_data:
+            create_option: Import
+            source_uri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+            storage_account_id: >-
+              subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myStorageAccount
+
+    - name: Create a snapshot by importing an unmanaged blob from the same subscription.
+      azure_rm_snapshot: 
+        resource_group_name: myResourceGroup
+        snapshot_name: mySnapshot1
+        location: West US
+        properties:
+          creation_data:
+            create_option: Import
+            source_uri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+
+    - name: Create a snapshot from an existing snapshot in the same or a different subscription.
+      azure_rm_snapshot: 
+        resource_group_name: myResourceGroup
+        snapshot_name: mySnapshot2
+        location: West US
+        properties:
+          creation_data:
+            create_option: Copy
+            source_resource_id: >-
+              subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1
+
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+managed_by:
+    description:
+        - Unused. Always Null.
+    type: str
+    sample: null
+sku:
+    description:
+        - 'The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS.'
+    type: dict
+    sample: null
+    contains:
+        name:
+            description:
+                - The sku name.
+            type: str
+            sample: null
+time_created:
+    description:
+        - The time when the snapshot was created.
+    type: str
+    sample: null
+os_type:
+    description:
+        - The Operating System type.
+    type: sealed-choice
+    sample: null
+hyper_v_generation:
+    description:
+        - >-
+            The hypervisor generation of the Virtual Machine. Applicable to OS disks
+            only.
+    type: str
+    sample: null
+creation_data:
+    description:
+        - >-
+            Disk source information. CreationData information cannot be changed after
+            the disk has been created.
+    type: dict
+    sample: null
+    contains:
+        create_option:
+            description:
+                - This enumerates the possible sources of a disk's creation.
+            returned: always
+            type: str
+            sample: null
+        storage_account_id:
+            description:
+                - >-
+                    Required if createOption is Import. The Azure Resource Manager
+                    identifier of the storage account containing the blob to import as a
+                    disk.
+            type: str
+            sample: null
+        image_reference:
+            description:
+                - Disk source information.
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - >-
+                            A relative uri containing either a Platform Image Repository or
+                            user image reference.
+                    returned: always
+                    type: str
+                    sample: null
+                lun:
+                    description:
+                        - >-
+                            If the disk is created from an image's data disk, this is an index
+                            that indicates which of the data disks in the image to use. For OS
+                            disks, this field is null.
+                    type: int
+                    sample: null
+        gallery_image_reference:
+            description:
+                - >-
+                    Required if creating from a Gallery Image. The id of the
+                    ImageDiskReference will be the ARM id of the shared galley image
+                    version from which to create a disk.
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - >-
+                            A relative uri containing either a Platform Image Repository or
+                            user image reference.
+                    returned: always
+                    type: str
+                    sample: null
+                lun:
+                    description:
+                        - >-
+                            If the disk is created from an image's data disk, this is an index
+                            that indicates which of the data disks in the image to use. For OS
+                            disks, this field is null.
+                    type: int
+                    sample: null
+        source_uri:
+            description:
+                - >-
+                    If createOption is Import, this is the URI of a blob to be imported
+                    into a managed disk.
+            type: str
+            sample: null
+        source_resource_id:
+            description:
+                - >-
+                    If createOption is Copy, this is the ARM id of the source snapshot or
+                    disk.
+            type: str
+            sample: null
+        upload_size_bytes:
+            description:
+                - >-
+                    If createOption is Upload, this is the size of the contents of the
+                    upload including the VHD footer. This value should be between 20972032
+                    (20 MiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32
+                    TiB + 512 bytes for the VHD footer).
+            type: int
+            sample: null
+        logical_sector_size:
+            description:
+                - >-
+                    Logical sector size in bytes for Ultra disks. Supported values are 512
+                    ad 4096. 4096 is the default.
+            type: int
+            sample: null
+disk_size_gb:
+    description:
+        - >-
+            If creationData.createOption is Empty, this field is mandatory and it
+            indicates the size of the disk to create. If this field is present for
+            updates or creation with other options, it indicates a resize. Resizes are
+            only allowed if the disk is not attached to a running VM, and can only
+            increase the disk's size.
+    type: int
+    sample: null
+disk_size_bytes:
+    description:
+        - The size of the disk in bytes. This field is read only.
+    type: int
+    sample: null
+disk_state:
+    description:
+        - The state of the snapshot.
+    type: str
+    sample: null
+unique_id:
+    description:
+        - Unique Guid identifying the resource.
+    type: str
+    sample: null
+encryption_settings_collection:
+    description:
+        - >-
+            Encryption settings collection used be Azure Disk Encryption, can contain
+            multiple encryption settings per disk or snapshot.
+    type: dict
+    sample: null
+    contains:
+        enabled:
+            description:
+                - >-
+                    Set this flag to true and provide DiskEncryptionKey and optional
+                    KeyEncryptionKey to enable encryption. Set this flag to false and
+                    remove DiskEncryptionKey and KeyEncryptionKey to disable encryption.
+                    If EncryptionSettings is null in the request object, the existing
+                    settings remain unchanged.
+            returned: always
+            type: bool
+            sample: null
+        encryption_settings:
+            description:
+                - 'A collection of encryption settings, one for each disk volume.'
+            type: list
+            sample: null
+            contains:
+                disk_encryption_key:
+                    description:
+                        - Key Vault Secret Url and vault id of the disk encryption key
+                    type: dict
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    type: str
+                                    sample: null
+                        secret_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
+                key_encryption_key:
+                    description:
+                        - >-
+                            Key Vault Key Url and vault id of the key encryption key.
+                            KeyEncryptionKey is optional and when provided is used to unwrap
+                            the disk encryption key.
+                    type: dict
+                    sample: null
+                    contains:
+                        source_vault:
+                            description:
+                                - Resource id of the KeyVault containing the key or secret
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                id:
+                                    description:
+                                        - Resource Id
+                                    type: str
+                                    sample: null
+                        key_url:
+                            description:
+                                - Url pointing to a key or secret in KeyVault
+                            returned: always
+                            type: str
+                            sample: null
+        encryption_settings_version:
+            description:
+                - >-
+                    Describes what type of encryption is used for the disks. Once this
+                    field is set, it cannot be overwritten. '1.0' corresponds to Azure
+                    Disk Encryption with AAD app.'1.1' corresponds to Azure Disk
+                    Encryption.
+            type: str
+            sample: null
+provisioning_state:
+    description:
+        - The disk provisioning state.
+    type: str
+    sample: null
+incremental:
+    description:
+        - >-
+            Whether a snapshot is incremental. Incremental snapshots on the same disk
+            occupy less space than full snapshots and can be diffed.
+    type: bool
+    sample: null
+encryption:
+    description:
+        - >-
+            Encryption property can be used to encrypt data at rest with customer
+            managed keys or platform managed keys.
+    type: dict
+    sample: null
+    contains:
+        disk_encryption_set_id:
+            description:
+                - >-
+                    ResourceId of the disk encryption set to use for enabling encryption
+                    at rest.
+            type: str
+            sample: null
+        type:
+            description:
+                - The type of key used to encrypt the data of the disk.
+            type: str
+            sample: null
+network_access_policy:
+    description:
+        - Policy for accessing the disk via network.
+    type: str
+    sample: null
+disk_access_id:
+    description:
+        - ARM id of the DiskAccess resource for using private endpoints on disks.
+    type: str
+    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

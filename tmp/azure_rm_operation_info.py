@@ -30,9 +30,6 @@ author:
 '''
 
 EXAMPLES = '''
-    - name: Get Registration Operations
-      azure_rm_operation_info: 
-
 '''
 
 RETURN = '''
@@ -45,45 +42,16 @@ operations:
     contains:
         value:
             description:
-                - List of Microsoft.ManagedServices operations.
+                - The list of compute operations
             type: list
             sample: null
-            contains:
-                display:
-                    description:
-                        - The object that represents the operation.
-                    type: dict
-                    sample: null
-                    contains:
-                        provider:
-                            description:
-                                - 'Service provider: Microsoft.ManagedServices'
-                            type: str
-                            sample: null
-                        resource:
-                            description:
-                                - >-
-                                    Resource on which the operation is performed: Registration
-                                    definition, registration assignment etc.
-                            type: str
-                            sample: null
-                        operation:
-                            description:
-                                - 'Operation type: Read, write, delete, etc.'
-                            type: str
-                            sample: null
-                        description:
-                            description:
-                                - Description of the operation.
-                            type: str
-                            sample: null
 
 '''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:
     from msrestazure.azure_exceptions import CloudError
-    from azure.mgmt.managed import ManagedServicesClient
+    from azure.mgmt.compute import ComputeManagementClient
     from msrestazure.azure_operation import AzureOperationPoller
     from msrest.polling import LROPoller
 except ImportError:
@@ -104,7 +72,7 @@ class AzureRMOperationInfo(AzureRMModuleBase):
         self.status_code = [200]
 
         self.query_parameters = {}
-        self.query_parameters['api-version'] = '2020-02-01-preview'
+        self.query_parameters['api-version'] = '2020-06-01'
         self.header_parameters = {}
         self.header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -116,9 +84,9 @@ class AzureRMOperationInfo(AzureRMModuleBase):
         for key in self.module_arg_spec:
             setattr(self, key, kwargs[key])
 
-        self.mgmt_client = self.get_mgmt_svc_client(ManagedServicesClient,
+        self.mgmt_client = self.get_mgmt_svc_client(ComputeManagementClient,
                                                     base_url=self._cloud_environment.endpoints.resource_manager,
-                                                    api_version='2020-02-01-preview')
+                                                    api_version='2020-06-01')
 
         else:
             self.results['operations'] = self.format_item(self.list())

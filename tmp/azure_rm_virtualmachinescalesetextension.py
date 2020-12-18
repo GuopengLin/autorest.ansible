@@ -1,3 +1,209 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_virtualmachinescalesetextension
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineScaleSetExtension instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineScaleSetExtension.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    vm_scale_set_name:
+        description:
+            - >-
+                The name of the VM scale set where the extension should be create or
+                updated.
+            - The name of the VM scale set where the extension should be updated.
+            - The name of the VM scale set where the extension should be deleted.
+            - The name of the VM scale set containing the extension.
+        required: true
+        type: str
+    vmss_extension_name:
+        description:
+            - The name of the VM scale set extension.
+        required: true
+        type: str
+    name:
+        description:
+            - The name of the extension.
+        type: str
+    force_update_tag:
+        description:
+            - >-
+                If a value is provided and is different from the previous value, the
+                extension handler will be forced to update even if the extension
+                configuration has not changed.
+        type: str
+    publisher:
+        description:
+            - The name of the extension handler publisher.
+        type: str
+    type_properties_type:
+        description:
+            - >-
+                Specifies the type of the extension; an example is
+                "CustomScriptExtension".
+        type: str
+    type_handler_version:
+        description:
+            - Specifies the version of the script handler.
+        type: str
+    auto_upgrade_minor_version:
+        description:
+            - >-
+                Indicates whether the extension should use a newer minor version if one
+                is available at deployment time. Once deployed, however, the extension
+                will not upgrade minor versions unless redeployed, even with this
+                property set to true.
+        type: bool
+    enable_automatic_upgrade:
+        description:
+            - >-
+                Indicates whether the extension should be automatically upgraded by the
+                platform if there is a newer version of the extension available.
+        type: bool
+    settings:
+        description:
+            - Json formatted public settings for the extension.
+        type: any
+    protected_settings:
+        description:
+            - >-
+                The extension can contain either protectedSettings or
+                protectedSettingsFromKeyVault or no protected settings at all.
+        type: any
+    provision_after_extensions:
+        description:
+            - >-
+                Collection of extension names after which this extension needs to be
+                provisioned.
+        type: list
+    expand:
+        description:
+            - The expand expression to apply on the operation.
+        type: str
+    state:
+        description:
+            - Assert the state of the VirtualMachineScaleSetExtension.
+            - >-
+                Use C(present) to create or update an VirtualMachineScaleSetExtension
+                and C(absent) to delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - The name of the extension.
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+force_update_tag:
+    description:
+        - >-
+            If a value is provided and is different from the previous value, the
+            extension handler will be forced to update even if the extension
+            configuration has not changed.
+    type: str
+    sample: null
+publisher:
+    description:
+        - The name of the extension handler publisher.
+    type: str
+    sample: null
+type_properties_type:
+    description:
+        - >-
+            Specifies the type of the extension; an example is
+            "CustomScriptExtension".
+    type: str
+    sample: null
+type_handler_version:
+    description:
+        - Specifies the version of the script handler.
+    type: str
+    sample: null
+auto_upgrade_minor_version:
+    description:
+        - >-
+            Indicates whether the extension should use a newer minor version if one is
+            available at deployment time. Once deployed, however, the extension will
+            not upgrade minor versions unless redeployed, even with this property set
+            to true.
+    type: bool
+    sample: null
+enable_automatic_upgrade:
+    description:
+        - >-
+            Indicates whether the extension should be automatically upgraded by the
+            platform if there is a newer version of the extension available.
+    type: bool
+    sample: null
+settings:
+    description:
+        - Json formatted public settings for the extension.
+    type: any
+    sample: null
+protected_settings:
+    description:
+        - >-
+            The extension can contain either protectedSettings or
+            protectedSettingsFromKeyVault or no protected settings at all.
+    type: any
+    sample: null
+provisioning_state:
+    description:
+        - 'The provisioning state, which only appears in the response.'
+    type: str
+    sample: null
+provision_after_extensions:
+    description:
+        - >-
+            Collection of extension names after which this extension needs to be
+            provisioned.
+    type: list
+    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

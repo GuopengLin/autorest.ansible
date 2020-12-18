@@ -1,3 +1,412 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_galleryimage
+version_added: '2.9'
+short_description: Manage Azure GalleryImage instance.
+description:
+    - 'Create, update and delete instance of Azure GalleryImage.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    gallery_name:
+        description:
+            - >-
+                The name of the Shared Image Gallery in which the Image Definition is to
+                be created.
+            - >-
+                The name of the Shared Image Gallery in which the Image Definition is to
+                be updated.
+            - >-
+                The name of the Shared Image Gallery from which the Image Definitions
+                are to be retrieved.
+            - >-
+                The name of the Shared Image Gallery in which the Image Definition is to
+                be deleted.
+        required: true
+        type: str
+    gallery_image_name:
+        description:
+            - >-
+                The name of the gallery Image Definition to be created or updated. The
+                allowed characters are alphabets and numbers with dots, dashes, and
+                periods allowed in the middle. The maximum length is 80 characters.
+            - >-
+                The name of the gallery Image Definition to be updated. The allowed
+                characters are alphabets and numbers with dots, dashes, and periods
+                allowed in the middle. The maximum length is 80 characters.
+            - The name of the gallery Image Definition to be retrieved.
+            - The name of the gallery Image Definition to be deleted.
+        required: true
+        type: str
+    description:
+        description:
+            - >-
+                The description of this gallery Image Definition resource. This property
+                is updatable.
+        type: str
+    eula:
+        description:
+            - The Eula agreement for the gallery Image Definition.
+        type: str
+    privacy_statement_uri:
+        description:
+            - The privacy statement uri.
+        type: str
+    release_note_uri:
+        description:
+            - The release note uri.
+        type: str
+    os_type:
+        description:
+            - >-
+                This property allows you to specify the type of the OS that is included
+                in the disk when creating a VM from a managed image.
+                :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>`
+                **Windows** :code:`<br>`:code:`<br>` **Linux**
+        type: sealed-choice
+    os_state:
+        description:
+            - >-
+                This property allows the user to specify whether the virtual machines
+                created under this image are 'Generalized' or 'Specialized'.
+        type: sealed-choice
+    hyper_v_generation:
+        description:
+            - >-
+                The hypervisor generation of the Virtual Machine. Applicable to OS disks
+                only.
+        type: str
+        choices:
+            - V1
+            - V2
+    end_of_life_date:
+        description:
+            - >-
+                The end of life date of the gallery Image Definition. This property can
+                be used for decommissioning purposes. This property is updatable.
+        type: str
+    identifier:
+        description:
+            - This is the gallery Image Definition identifier.
+        type: dict
+        suboptions:
+            publisher:
+                description:
+                    - The name of the gallery Image Definition publisher.
+                required: true
+                type: str
+            offer:
+                description:
+                    - The name of the gallery Image Definition offer.
+                required: true
+                type: str
+            sku:
+                description:
+                    - The name of the gallery Image Definition SKU.
+                required: true
+                type: str
+    recommended:
+        description:
+            - >-
+                The properties describe the recommended machine configuration for this
+                Image Definition. These properties are updatable.
+        type: dict
+        suboptions:
+            v_cp_us:
+                description:
+                    - Describes the resource range.
+                type: dict
+                suboptions:
+                    min:
+                        description:
+                            - The minimum number of the resource.
+                        type: int
+                    max:
+                        description:
+                            - The maximum number of the resource.
+                        type: int
+            memory:
+                description:
+                    - Describes the resource range.
+                type: dict
+                suboptions:
+                    min:
+                        description:
+                            - The minimum number of the resource.
+                        type: int
+                    max:
+                        description:
+                            - The maximum number of the resource.
+                        type: int
+    disallowed:
+        description:
+            - Describes the disallowed disk types.
+        type: dict
+        suboptions:
+            disk_types:
+                description:
+                    - A list of disk types.
+                type: list
+    purchase_plan:
+        description:
+            - >-
+                Describes the gallery Image Definition purchase plan. This is used by
+                marketplace images.
+        type: dict
+        suboptions:
+            name:
+                description:
+                    - The plan ID.
+                type: str
+            publisher:
+                description:
+                    - The publisher ID.
+                type: str
+            product:
+                description:
+                    - The product ID.
+                type: str
+    state:
+        description:
+            - Assert the state of the GalleryImage.
+            - >-
+                Use C(present) to create or update an GalleryImage and C(absent) to
+                delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create or update a simple gallery image.
+      azure_rm_galleryimage: 
+        gallery_image_name: myGalleryImageName
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+    - name: Update a simple gallery image.
+      azure_rm_galleryimage: 
+        gallery_image_name: myGalleryImageName
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+    - name: Delete a gallery image.
+      azure_rm_galleryimage: 
+        gallery_image_name: myGalleryImageName
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+description:
+    description:
+        - >-
+            The description of this gallery Image Definition resource. This property
+            is updatable.
+    type: str
+    sample: null
+eula:
+    description:
+        - The Eula agreement for the gallery Image Definition.
+    type: str
+    sample: null
+privacy_statement_uri:
+    description:
+        - The privacy statement uri.
+    type: str
+    sample: null
+release_note_uri:
+    description:
+        - The release note uri.
+    type: str
+    sample: null
+os_type:
+    description:
+        - >-
+            This property allows you to specify the type of the OS that is included in
+            the disk when creating a VM from a managed image. :code:`<br>`:code:`<br>`
+            Possible values are: :code:`<br>`:code:`<br>` **Windows**
+            :code:`<br>`:code:`<br>` **Linux**
+    type: sealed-choice
+    sample: null
+os_state:
+    description:
+        - >-
+            This property allows the user to specify whether the virtual machines
+            created under this image are 'Generalized' or 'Specialized'.
+    type: sealed-choice
+    sample: null
+hyper_v_generation:
+    description:
+        - >-
+            The hypervisor generation of the Virtual Machine. Applicable to OS disks
+            only.
+    type: str
+    sample: null
+end_of_life_date:
+    description:
+        - >-
+            The end of life date of the gallery Image Definition. This property can be
+            used for decommissioning purposes. This property is updatable.
+    type: str
+    sample: null
+identifier:
+    description:
+        - This is the gallery Image Definition identifier.
+    type: dict
+    sample: null
+    contains:
+        publisher:
+            description:
+                - The name of the gallery Image Definition publisher.
+            returned: always
+            type: str
+            sample: null
+        offer:
+            description:
+                - The name of the gallery Image Definition offer.
+            returned: always
+            type: str
+            sample: null
+        sku:
+            description:
+                - The name of the gallery Image Definition SKU.
+            returned: always
+            type: str
+            sample: null
+recommended:
+    description:
+        - >-
+            The properties describe the recommended machine configuration for this
+            Image Definition. These properties are updatable.
+    type: dict
+    sample: null
+    contains:
+        v_cp_us:
+            description:
+                - Describes the resource range.
+            type: dict
+            sample: null
+            contains:
+                min:
+                    description:
+                        - The minimum number of the resource.
+                    type: int
+                    sample: null
+                max:
+                    description:
+                        - The maximum number of the resource.
+                    type: int
+                    sample: null
+        memory:
+            description:
+                - Describes the resource range.
+            type: dict
+            sample: null
+            contains:
+                min:
+                    description:
+                        - The minimum number of the resource.
+                    type: int
+                    sample: null
+                max:
+                    description:
+                        - The maximum number of the resource.
+                    type: int
+                    sample: null
+disallowed:
+    description:
+        - Describes the disallowed disk types.
+    type: dict
+    sample: null
+    contains:
+        disk_types:
+            description:
+                - A list of disk types.
+            type: list
+            sample: null
+purchase_plan:
+    description:
+        - >-
+            Describes the gallery Image Definition purchase plan. This is used by
+            marketplace images.
+    type: dict
+    sample: null
+    contains:
+        name:
+            description:
+                - The plan ID.
+            type: str
+            sample: null
+        publisher:
+            description:
+                - The publisher ID.
+            type: str
+            sample: null
+        product:
+            description:
+                - The product ID.
+            type: str
+            sample: null
+provisioning_state:
+    description:
+        - 'The provisioning state, which only appears in the response.'
+    type: str
+    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

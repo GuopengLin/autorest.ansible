@@ -1,3 +1,173 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_dedicatedhostgroup_info
+version_added: '2.9'
+short_description: Get DedicatedHostGroup info.
+description:
+    - Get info of DedicatedHostGroup.
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        type: str
+    host_group_name:
+        description:
+            - The name of the dedicated host group.
+        type: str
+    expand:
+        description:
+            - >-
+                The expand expression to apply on the operation. The response shows the
+                list of instance view of the dedicated hosts under the dedicated host
+                group.
+        type: constant
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create a dedicated host group.
+      azure_rm_dedicatedhostgroup_info: 
+        expand: instanceView
+        host_group_name: myDedicatedHostGroup
+        resource_group_name: myResourceGroup
+
+'''
+
+RETURN = '''
+dedicated_host_groups:
+    description: >-
+        A list of dict results where the key is the name of the DedicatedHostGroup
+        and the values are the facts for that DedicatedHostGroup.
+    returned: always
+    type: complex
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            type: dict
+            sample: null
+        zones:
+            description:
+                - >-
+                    Availability Zone to use for this host group. Only single zone is
+                    supported. The zone can be assigned only during creation. If not
+                    provided, the group supports all zones in the region. If provided,
+                    enforces each host in the group to be in the same zone.
+            type: list
+            sample: null
+        platform_fault_domain_count:
+            description:
+                - Number of fault domains that the host group can span.
+            type: int
+            sample: null
+        hosts:
+            description:
+                - >-
+                    A list of references to all dedicated hosts in the dedicated host
+                    group.
+            type: list
+            sample: null
+        instance_view:
+            description:
+                - >-
+                    The dedicated host group instance view, which has the list of instance
+                    view of the dedicated hosts under the dedicated host group.
+            type: dict
+            sample: null
+        support_automatic_placement:
+            description:
+                - >-
+                    Specifies whether virtual machines or virtual machine scale sets can
+                    be placed automatically on the dedicated host group. Automatic
+                    placement means resources are allocated on dedicated hosts, that are
+                    chosen by Azure, under the dedicated host group. The value is
+                    defaulted to 'true' when not provided. :code:`<br>`:code:`<br>`Minimum
+                    api-version: 2020-06-01.
+            type: bool
+            sample: null
+        value:
+            description:
+                - The list of dedicated host groups
+            returned: always
+            type: list
+            sample: null
+            contains:
+                zones:
+                    description:
+                        - >-
+                            Availability Zone to use for this host group. Only single zone is
+                            supported. The zone can be assigned only during creation. If not
+                            provided, the group supports all zones in the region. If provided,
+                            enforces each host in the group to be in the same zone.
+                    type: list
+                    sample: null
+                platform_fault_domain_count:
+                    description:
+                        - Number of fault domains that the host group can span.
+                    type: int
+                    sample: null
+                support_automatic_placement:
+                    description:
+                        - >-
+                            Specifies whether virtual machines or virtual machine scale sets
+                            can be placed automatically on the dedicated host group. Automatic
+                            placement means resources are allocated on dedicated hosts, that
+                            are chosen by Azure, under the dedicated host group. The value is
+                            defaulted to 'true' when not provided.
+                            :code:`<br>`:code:`<br>`Minimum api-version: 2020-06-01.
+                    type: bool
+                    sample: null
+        next_link:
+            description:
+                - >-
+                    The URI to fetch the next page of Dedicated Host Groups. Call
+                    ListNext() with this URI to fetch the next page of Dedicated Host
+                    Groups.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

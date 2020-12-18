@@ -1,3 +1,301 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_availabilityset_info
+version_added: '2.9'
+short_description: Get AvailabilitySet info.
+description:
+    - Get info of AvailabilitySet.
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        type: str
+    availability_set_name:
+        description:
+            - The name of the availability set.
+        type: str
+    expand:
+        description:
+            - >-
+                The expand expression to apply to the operation. Allowed values are
+                'instanceView'.
+        type: str
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: List availability sets in a subscription.
+      azure_rm_availabilityset_info: 
+
+'''
+
+RETURN = '''
+availability_sets:
+    description: >-
+        A list of dict results where the key is the name of the AvailabilitySet and
+        the values are the facts for that AvailabilitySet.
+    returned: always
+    type: complex
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            type: dict
+            sample: null
+        sku:
+            description:
+                - >-
+                    Sku of the availability set, only name is required to be set. See
+                    AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
+                    virtual machines with managed disks and 'Classic' for virtual machines
+                    with unmanaged disks. Default value is 'Classic'.
+            type: dict
+            sample: null
+            contains:
+                name:
+                    description:
+                        - The sku name.
+                    type: str
+                    sample: null
+                tier:
+                    description:
+                        - >-
+                            Specifies the tier of virtual machines in a scale set.:code:`<br
+                            />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                            **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+                    type: str
+                    sample: null
+                capacity:
+                    description:
+                        - Specifies the number of virtual machines in the scale set.
+                    type: int
+                    sample: null
+        platform_update_domain_count:
+            description:
+                - Update Domain count.
+            type: int
+            sample: null
+        platform_fault_domain_count:
+            description:
+                - Fault Domain count.
+            type: int
+            sample: null
+        virtual_machines:
+            description:
+                - A list of references to all virtual machines in the availability set.
+            type: list
+            sample: null
+            contains:
+                id:
+                    description:
+                        - Resource Id
+                    type: str
+                    sample: null
+        proximity_placement_group:
+            description:
+                - >-
+                    Specifies information about the proximity placement group that the
+                    availability set should be assigned to.
+                    :code:`<br>`:code:`<br>`Minimum api-version: 2018-04-01.
+            type: dict
+            sample: null
+            contains:
+                id:
+                    description:
+                        - Resource Id
+                    type: str
+                    sample: null
+        statuses:
+            description:
+                - The resource status information.
+            type: list
+            sample: null
+            contains:
+                code:
+                    description:
+                        - The status code.
+                    type: str
+                    sample: null
+                level:
+                    description:
+                        - The level code.
+                    type: sealed-choice
+                    sample: null
+                display_status:
+                    description:
+                        - The short localizable label for the status.
+                    type: str
+                    sample: null
+                message:
+                    description:
+                        - >-
+                            The detailed status message, including for alerts and error
+                            messages.
+                    type: str
+                    sample: null
+                time:
+                    description:
+                        - The time of the status.
+                    type: str
+                    sample: null
+        value:
+            description:
+                - |-
+                    The list of availability sets
+                    The list of virtual machine sizes.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                sku:
+                    description:
+                        - >-
+                            Sku of the availability set, only name is required to be set. See
+                            AvailabilitySetSkuTypes for possible set of values. Use 'Aligned'
+                            for virtual machines with managed disks and 'Classic' for virtual
+                            machines with unmanaged disks. Default value is 'Classic'.
+                    type: dict
+                    sample: null
+                    contains:
+                        name:
+                            description:
+                                - The sku name.
+                            type: str
+                            sample: null
+                        tier:
+                            description:
+                                - >-
+                                    Specifies the tier of virtual machines in a scale
+                                    set.:code:`<br />`:code:`<br />` Possible Values::code:`<br
+                                    />`:code:`<br />` **Standard**\ :code:`<br />`:code:`<br />`
+                                    **Basic**
+                            type: str
+                            sample: null
+                        capacity:
+                            description:
+                                - Specifies the number of virtual machines in the scale set.
+                            type: int
+                            sample: null
+                platform_update_domain_count:
+                    description:
+                        - Update Domain count.
+                    type: int
+                    sample: null
+                platform_fault_domain_count:
+                    description:
+                        - Fault Domain count.
+                    type: int
+                    sample: null
+                virtual_machines:
+                    description:
+                        - >-
+                            A list of references to all virtual machines in the availability
+                            set.
+                    type: list
+                    sample: null
+                    contains:
+                        id:
+                            description:
+                                - Resource Id
+                            type: str
+                            sample: null
+                proximity_placement_group:
+                    description:
+                        - >-
+                            Specifies information about the proximity placement group that the
+                            availability set should be assigned to.
+                            :code:`<br>`:code:`<br>`Minimum api-version: 2018-04-01.
+                    type: dict
+                    sample: null
+                    contains:
+                        id:
+                            description:
+                                - Resource Id
+                            type: str
+                            sample: null
+                statuses:
+                    description:
+                        - The resource status information.
+                    type: list
+                    sample: null
+                    contains:
+                        code:
+                            description:
+                                - The status code.
+                            type: str
+                            sample: null
+                        level:
+                            description:
+                                - The level code.
+                            type: sealed-choice
+                            sample: null
+                        display_status:
+                            description:
+                                - The short localizable label for the status.
+                            type: str
+                            sample: null
+                        message:
+                            description:
+                                - >-
+                                    The detailed status message, including for alerts and error
+                                    messages.
+                            type: str
+                            sample: null
+                        time:
+                            description:
+                                - The time of the status.
+                            type: str
+                            sample: null
+        next_link:
+            description:
+                - >-
+                    The URI to fetch the next page of AvailabilitySets. Call ListNext()
+                    with this URI to fetch the next page of AvailabilitySets.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

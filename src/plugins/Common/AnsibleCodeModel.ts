@@ -36,11 +36,12 @@ export class AnsibleCodeModel {
             mainModule.MgmtClientName ="GenericRestClient";
             mainModule.PythonMgmtClient = this.model.info.pascal_case_title;
 
-            // mainModule.PythonNamespace = "azure.mgmt."+ this.model.info.title.substring(0, this.model.info.title.length-6).toLowerCase();
-            mainModule.PythonNamespace = "azure.mgmt."+ ToSnakeCase(this.model.info.title).split("_")[0];
+            let idx = this.model.info.title.indexOf("ManagementClient") != -1? this.model.info.title.indexOf("ManagementClient") :this.model.info.title.indexOf("Client");
+
+            mainModule.PythonNamespace = "azure.mgmt."+ this.model.info.title.substring(0,idx).toLowerCase();
             infoModule.MgmtClientName = "GenericRestClient";
             infoModule.PythonMgmtClient =  this.model.info.pascal_case_title;
-            infoModule.PythonNamespace = "azure.mgmt."+ ToSnakeCase(this.model.info.title).split("_")[0];
+            infoModule.PythonNamespace = "azure.mgmt."+ this.model.info.title.substring(0,idx).toLowerCase();
             this.Modules.push(mainModule);
             this.Modules.push(infoModule);
 

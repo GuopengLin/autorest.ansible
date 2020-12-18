@@ -1,3 +1,269 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_availabilityset
+version_added: '2.9'
+short_description: Manage Azure AvailabilitySet instance.
+description:
+    - 'Create, update and delete instance of Azure AvailabilitySet.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    availability_set_name:
+        description:
+            - The name of the availability set.
+        required: true
+        type: str
+    sku:
+        description:
+            - >-
+                Sku of the availability set, only name is required to be set. See
+                AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
+                virtual machines with managed disks and 'Classic' for virtual machines
+                with unmanaged disks. Default value is 'Classic'.
+        type: dict
+        suboptions:
+            name:
+                description:
+                    - The sku name.
+                type: str
+            tier:
+                description:
+                    - >-
+                        Specifies the tier of virtual machines in a scale set.:code:`<br
+                        />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                        **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+                type: str
+            capacity:
+                description:
+                    - Specifies the number of virtual machines in the scale set.
+                type: int
+    platform_update_domain_count:
+        description:
+            - Update Domain count.
+        type: int
+    platform_fault_domain_count:
+        description:
+            - Fault Domain count.
+        type: int
+    virtual_machines:
+        description:
+            - A list of references to all virtual machines in the availability set.
+        type: list
+        suboptions:
+            id:
+                description:
+                    - Resource Id
+                type: str
+    proximity_placement_group:
+        description:
+            - >-
+                Specifies information about the proximity placement group that the
+                availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
+                api-version: 2018-04-01.
+        type: dict
+        suboptions:
+            id:
+                description:
+                    - Resource Id
+                type: str
+    statuses:
+        description:
+            - The resource status information.
+        type: list
+        suboptions:
+            code:
+                description:
+                    - The status code.
+                type: str
+            level:
+                description:
+                    - The level code.
+                type: sealed-choice
+            display_status:
+                description:
+                    - The short localizable label for the status.
+                type: str
+            message:
+                description:
+                    - >-
+                        The detailed status message, including for alerts and error
+                        messages.
+                type: str
+            time:
+                description:
+                    - The time of the status.
+                type: str
+    state:
+        description:
+            - Assert the state of the AvailabilitySet.
+            - >-
+                Use C(present) to create or update an AvailabilitySet and C(absent) to
+                delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create an availability set.
+      azure_rm_availabilityset: 
+        availability_set_name: myAvailabilitySet
+        resource_group_name: myResourceGroup
+        location: westus
+        properties:
+          platform_fault_domain_count: 2
+          platform_update_domain_count: 20
+
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+sku:
+    description:
+        - >-
+            Sku of the availability set, only name is required to be set. See
+            AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for
+            virtual machines with managed disks and 'Classic' for virtual machines
+            with unmanaged disks. Default value is 'Classic'.
+    type: dict
+    sample: null
+    contains:
+        name:
+            description:
+                - The sku name.
+            type: str
+            sample: null
+        tier:
+            description:
+                - >-
+                    Specifies the tier of virtual machines in a scale set.:code:`<br
+                    />`:code:`<br />` Possible Values::code:`<br />`:code:`<br />`
+                    **Standard**\ :code:`<br />`:code:`<br />` **Basic**
+            type: str
+            sample: null
+        capacity:
+            description:
+                - Specifies the number of virtual machines in the scale set.
+            type: int
+            sample: null
+platform_update_domain_count:
+    description:
+        - Update Domain count.
+    type: int
+    sample: null
+platform_fault_domain_count:
+    description:
+        - Fault Domain count.
+    type: int
+    sample: null
+virtual_machines:
+    description:
+        - A list of references to all virtual machines in the availability set.
+    type: list
+    sample: null
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+proximity_placement_group:
+    description:
+        - >-
+            Specifies information about the proximity placement group that the
+            availability set should be assigned to. :code:`<br>`:code:`<br>`Minimum
+            api-version: 2018-04-01.
+    type: dict
+    sample: null
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+statuses:
+    description:
+        - The resource status information.
+    type: list
+    sample: null
+    contains:
+        code:
+            description:
+                - The status code.
+            type: str
+            sample: null
+        level:
+            description:
+                - The level code.
+            type: sealed-choice
+            sample: null
+        display_status:
+            description:
+                - The short localizable label for the status.
+            type: str
+            sample: null
+        message:
+            description:
+                - 'The detailed status message, including for alerts and error messages.'
+            type: str
+            sample: null
+        time:
+            description:
+                - The time of the status.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

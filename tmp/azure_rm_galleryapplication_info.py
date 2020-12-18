@@ -1,3 +1,196 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_galleryapplication_info
+version_added: '2.9'
+short_description: Get GalleryApplication info.
+description:
+    - Get info of GalleryApplication.
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    gallery_name:
+        description:
+            - >-
+                The name of the Shared Application Gallery from which the Application
+                Definitions are to be retrieved.
+            - >-
+                The name of the Shared Application Gallery from which Application
+                Definitions are to be listed.
+        required: true
+        type: str
+    gallery_application_name:
+        description:
+            - The name of the gallery Application Definition to be retrieved.
+        type: str
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Get a gallery Application.
+      azure_rm_galleryapplication_info: 
+        gallery_application_name: myGalleryApplicationName
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+    - name: List gallery Applications in a gallery.
+      azure_rm_galleryapplication_info: 
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+'''
+
+RETURN = '''
+gallery_applications:
+    description: >-
+        A list of dict results where the key is the name of the GalleryApplication
+        and the values are the facts for that GalleryApplication.
+    returned: always
+    type: complex
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            type: dict
+            sample: null
+        description:
+            description:
+                - >-
+                    The description of this gallery Application Definition resource. This
+                    property is updatable.
+            type: str
+            sample: null
+        eula:
+            description:
+                - The Eula agreement for the gallery Application Definition.
+            type: str
+            sample: null
+        privacy_statement_uri:
+            description:
+                - The privacy statement uri.
+            type: str
+            sample: null
+        release_note_uri:
+            description:
+                - The release note uri.
+            type: str
+            sample: null
+        end_of_life_date:
+            description:
+                - >-
+                    The end of life date of the gallery Application Definition. This
+                    property can be used for decommissioning purposes. This property is
+                    updatable.
+            type: str
+            sample: null
+        supported_os_type:
+            description:
+                - >-
+                    This property allows you to specify the supported type of the OS that
+                    application is built for. :code:`<br>`:code:`<br>` Possible values
+                    are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
+                    **Linux**
+            type: sealed-choice
+            sample: null
+        value:
+            description:
+                - A list of Gallery Applications.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                description:
+                    description:
+                        - >-
+                            The description of this gallery Application Definition resource.
+                            This property is updatable.
+                    type: str
+                    sample: null
+                eula:
+                    description:
+                        - The Eula agreement for the gallery Application Definition.
+                    type: str
+                    sample: null
+                privacy_statement_uri:
+                    description:
+                        - The privacy statement uri.
+                    type: str
+                    sample: null
+                release_note_uri:
+                    description:
+                        - The release note uri.
+                    type: str
+                    sample: null
+                end_of_life_date:
+                    description:
+                        - >-
+                            The end of life date of the gallery Application Definition. This
+                            property can be used for decommissioning purposes. This property
+                            is updatable.
+                    type: str
+                    sample: null
+                supported_os_type:
+                    description:
+                        - >-
+                            This property allows you to specify the supported type of the OS
+                            that application is built for. :code:`<br>`:code:`<br>` Possible
+                            values are: :code:`<br>`:code:`<br>` **Windows**
+                            :code:`<br>`:code:`<br>` **Linux**
+                    type: sealed-choice
+                    sample: null
+        next_link:
+            description:
+                - >-
+                    The uri to fetch the next page of Application Definitions in the
+                    Application Gallery. Call ListNext() with this to fetch the next page
+                    of gallery Application Definitions.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

@@ -50,7 +50,7 @@ RETURN = '''
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:
     from msrestazure.azure_exceptions import CloudError
-    from azure.mgmt.managed import ManagedServicesClient
+    from azure.mgmt.compute import ComputeManagementClient
     from msrestazure.azure_operation import AzureOperationPoller
     from msrest.polling import LROPoller
 except ImportError:
@@ -96,9 +96,9 @@ class AzureRMOperation(AzureRMModuleBaseExt):
         old_response = None
         response = None
 
-        self.mgmt_client = self.get_mgmt_svc_client(ManagedServicesClient,
+        self.mgmt_client = self.get_mgmt_svc_client(ComputeManagementClient,
                                                     base_url=self._cloud_environment.endpoints.resource_manager,
-                                                    api_version='2020-02-01-preview')
+                                                    api_version='2020-06-01')
 
         old_response = self.get_resource()
 

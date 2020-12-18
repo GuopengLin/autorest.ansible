@@ -1,3 +1,94 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_virtualmachinesize_info
+version_added: '2.9'
+short_description: Get VirtualMachineSize info.
+description:
+    - Get info of VirtualMachineSize.
+options:
+    location:
+        description:
+            - The location upon which virtual-machine-sizes is queried.
+        required: true
+        type: str
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+'''
+
+RETURN = '''
+virtual_machine_sizes:
+    description: >-
+        A list of dict results where the key is the name of the VirtualMachineSize
+        and the values are the facts for that VirtualMachineSize.
+    returned: always
+    type: complex
+    contains:
+        value:
+            description:
+                - The list of virtual machine sizes.
+            type: list
+            sample: null
+            contains:
+                name:
+                    description:
+                        - The name of the virtual machine size.
+                    type: str
+                    sample: null
+                number_of_cores:
+                    description:
+                        - The number of cores supported by the virtual machine size.
+                    type: int
+                    sample: null
+                os_disk_size_in_mb:
+                    description:
+                        - 'The OS disk size, in MB, allowed by the virtual machine size.'
+                    type: int
+                    sample: null
+                resource_disk_size_in_mb:
+                    description:
+                        - >-
+                            The resource disk size, in MB, allowed by the virtual machine
+                            size.
+                    type: int
+                    sample: null
+                memory_in_mb:
+                    description:
+                        - >-
+                            The amount of memory, in MB, supported by the virtual machine
+                            size.
+                    type: int
+                    sample: null
+                max_data_disk_count:
+                    description:
+                        - >-
+                            The maximum number of data disks that can be attached to the
+                            virtual machine size.
+                    type: int
+                    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

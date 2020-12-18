@@ -1,3 +1,176 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_virtualmachineimage_info
+version_added: '2.9'
+short_description: Get VirtualMachineImage info.
+description:
+    - Get info of VirtualMachineImage.
+options:
+    location:
+        description:
+            - The name of a supported Azure region.
+        required: true
+        type: str
+    publisher_name:
+        description:
+            - A valid image publisher.
+        type: str
+    offer:
+        description:
+            - A valid image publisher offer.
+        type: str
+    skus:
+        description:
+            - A valid image SKU.
+        type: str
+    version:
+        description:
+            - A valid image SKU version.
+        type: str
+    expand:
+        description:
+            - The expand expression to apply on the operation.
+        type: str
+    top:
+        description:
+            - undefined
+        type: int
+    orderby:
+        description:
+            - undefined
+        type: str
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+'''
+
+RETURN = '''
+virtual_machine_images:
+    description: >-
+        A list of dict results where the key is the name of the VirtualMachineImage
+        and the values are the facts for that VirtualMachineImage.
+    returned: always
+    type: complex
+    contains:
+        name:
+            description:
+                - The name of the resource.
+            returned: always
+            type: str
+            sample: null
+        location:
+            description:
+                - The supported Azure location of the resource.
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - >-
+                    Specifies the tags that are assigned to the virtual machine. For more
+                    information about using tags, see `Using tags to organize your Azure
+                    resources
+                    <https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md>`_.
+            type: dict
+            sample: null
+        plan:
+            description:
+                - >-
+                    Used for establishing the purchase context of any 3rd Party artifact
+                    through MarketPlace.
+            type: dict
+            sample: null
+            contains:
+                publisher:
+                    description:
+                        - The publisher ID.
+                    returned: always
+                    type: str
+                    sample: null
+                name:
+                    description:
+                        - The plan ID.
+                    returned: always
+                    type: str
+                    sample: null
+                product:
+                    description:
+                        - >-
+                            Specifies the product of the image from the marketplace. This is
+                            the same value as Offer under the imageReference element.
+                    returned: always
+                    type: str
+                    sample: null
+        os_disk_image:
+            description:
+                - Contains the os disk image information.
+            type: dict
+            sample: null
+            contains:
+                operating_system:
+                    description:
+                        - The operating system of the osDiskImage.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+        data_disk_images:
+            description:
+                - ''
+            type: list
+            sample: null
+        automatic_os_upgrade_properties:
+            description:
+                - Describes automatic OS upgrade properties on the image.
+            type: dict
+            sample: null
+            contains:
+                automatic_os_upgrade_supported:
+                    description:
+                        - Specifies whether automatic OS upgrade is supported on the image.
+                    returned: always
+                    type: bool
+                    sample: null
+        hyper_v_generation:
+            description:
+                - Specifies the HyperVGeneration Type
+            type: str
+            sample: null
+        disallowed:
+            description:
+                - >-
+                    Specifies disallowed configuration for the VirtualMachine created from
+                    the image
+            type: dict
+            sample: null
+            contains:
+                vm_disk_type:
+                    description:
+                        - VM disk types which are disallowed.
+                    type: str
+                    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

@@ -1,3 +1,475 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_containerservice
+version_added: '2.9'
+short_description: Manage Azure ContainerService instance.
+description:
+    - 'Create, update and delete instance of Azure ContainerService.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    container_service_name:
+        description:
+            - >-
+                The name of the container service in the specified subscription and
+                resource group.
+        required: true
+        type: str
+    orchestrator_profile:
+        description:
+            - Properties of the orchestrator.
+        type: dict
+        suboptions:
+            orchestrator_type:
+                description:
+                    - >-
+                        The orchestrator to use to manage container service cluster
+                        resources. Valid values are Swarm, DCOS, and Custom.
+                required: true
+                type: sealed-choice
+    custom_profile:
+        description:
+            - Properties for custom clusters.
+        type: dict
+        suboptions:
+            orchestrator:
+                description:
+                    - The name of the custom orchestrator to use.
+                required: true
+                type: str
+    service_principal_profile:
+        description:
+            - Properties for cluster service principals.
+        type: dict
+        suboptions:
+            client_id:
+                description:
+                    - The ID for the service principal.
+                required: true
+                type: str
+            secret:
+                description:
+                    - The secret password associated with the service principal.
+                required: true
+                type: str
+    master_profile:
+        description:
+            - Properties of master agents.
+        type: dict
+        suboptions:
+            count:
+                description:
+                    - >-
+                        Number of masters (VMs) in the container service cluster. Allowed
+                        values are 1, 3, and 5. The default value is 1.
+                type: str
+                choices:
+                    - 1
+                    - 3
+                    - 5
+            dns_prefix:
+                description:
+                    - DNS prefix to be used to create the FQDN for master.
+                required: true
+                type: str
+    agent_pool_profiles:
+        description:
+            - Properties of the agent pool.
+        type: list
+        suboptions:
+            name:
+                description:
+                    - >-
+                        Unique name of the agent pool profile in the context of the
+                        subscription and resource group.
+                required: true
+                type: str
+            count:
+                description:
+                    - >-
+                        Number of agents (VMs) to host docker containers. Allowed values
+                        must be in the range of 1 to 100 (inclusive). The default value is
+                        1.
+                required: true
+                type: int
+            vm_size:
+                description:
+                    - Size of agent VMs.
+                required: true
+                type: str
+                choices:
+                    - Standard_A0
+                    - Standard_A1
+                    - Standard_A2
+                    - Standard_A3
+                    - Standard_A4
+                    - Standard_A5
+                    - Standard_A6
+                    - Standard_A7
+                    - Standard_A8
+                    - Standard_A9
+                    - Standard_A10
+                    - Standard_A11
+                    - Standard_D1
+                    - Standard_D2
+                    - Standard_D3
+                    - Standard_D4
+                    - Standard_D11
+                    - Standard_D12
+                    - Standard_D13
+                    - Standard_D14
+                    - Standard_D1_v2
+                    - Standard_D2_v2
+                    - Standard_D3_v2
+                    - Standard_D4_v2
+                    - Standard_D5_v2
+                    - Standard_D11_v2
+                    - Standard_D12_v2
+                    - Standard_D13_v2
+                    - Standard_D14_v2
+                    - Standard_G1
+                    - Standard_G2
+                    - Standard_G3
+                    - Standard_G4
+                    - Standard_G5
+                    - Standard_DS1
+                    - Standard_DS2
+                    - Standard_DS3
+                    - Standard_DS4
+                    - Standard_DS11
+                    - Standard_DS12
+                    - Standard_DS13
+                    - Standard_DS14
+                    - Standard_GS1
+                    - Standard_GS2
+                    - Standard_GS3
+                    - Standard_GS4
+                    - Standard_GS5
+            dns_prefix:
+                description:
+                    - DNS prefix to be used to create the FQDN for the agent pool.
+                required: true
+                type: str
+    windows_profile:
+        description:
+            - Properties of Windows VMs.
+        type: dict
+        suboptions:
+            admin_username:
+                description:
+                    - The administrator username to use for Windows VMs.
+                required: true
+                type: str
+            admin_password:
+                description:
+                    - The administrator password to use for Windows VMs.
+                required: true
+                type: str
+    linux_profile:
+        description:
+            - Properties of Linux VMs.
+        type: dict
+        suboptions:
+            admin_username:
+                description:
+                    - The administrator username to use for Linux VMs.
+                required: true
+                type: str
+            ssh:
+                description:
+                    - The ssh key configuration for Linux VMs.
+                required: true
+                type: dict
+                suboptions:
+                    public_keys:
+                        description:
+                            - >-
+                                the list of SSH public keys used to authenticate with
+                                Linux-based VMs.
+                        required: true
+                        type: list
+                        suboptions:
+                            key_data:
+                                description:
+                                    - >-
+                                        Certificate public key used to authenticate with VMs through
+                                        SSH. The certificate must be in PEM format with or without
+                                        headers.
+                                required: true
+                                type: str
+    diagnostics_profile:
+        description:
+            - Properties of the diagnostic agent.
+        type: dict
+        suboptions:
+            vm_diagnostics:
+                description:
+                    - Profile for the container service VM diagnostic agent.
+                required: true
+                type: dict
+                suboptions:
+                    enabled:
+                        description:
+                            - Whether the VM diagnostic agent is provisioned on the VM.
+                        required: true
+                        type: bool
+    state:
+        description:
+            - Assert the state of the ContainerService.
+            - >-
+                Use C(present) to create or update an ContainerService and C(absent) to
+                delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create/Update Container Service
+      azure_rm_containerservice: 
+        container_service_name: acs1
+        resource_group_name: rg1
+        location: location1
+
+    - name: Delete Container Service
+      azure_rm_containerservice: 
+        container_service_name: acs1
+        resource_group_name: rg1
+
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+provisioning_state:
+    description:
+        - >-
+            the current deployment or provisioning state, which only appears in the
+            response.
+    type: str
+    sample: null
+orchestrator_profile:
+    description:
+        - Properties of the orchestrator.
+    type: dict
+    sample: null
+    contains:
+        orchestrator_type:
+            description:
+                - >-
+                    The orchestrator to use to manage container service cluster resources.
+                    Valid values are Swarm, DCOS, and Custom.
+            returned: always
+            type: sealed-choice
+            sample: null
+custom_profile:
+    description:
+        - Properties for custom clusters.
+    type: dict
+    sample: null
+    contains:
+        orchestrator:
+            description:
+                - The name of the custom orchestrator to use.
+            returned: always
+            type: str
+            sample: null
+service_principal_profile:
+    description:
+        - Properties for cluster service principals.
+    type: dict
+    sample: null
+    contains:
+        client_id:
+            description:
+                - The ID for the service principal.
+            returned: always
+            type: str
+            sample: null
+        secret:
+            description:
+                - The secret password associated with the service principal.
+            returned: always
+            type: str
+            sample: null
+master_profile:
+    description:
+        - Properties of master agents.
+    type: dict
+    sample: null
+    contains:
+        count:
+            description:
+                - >-
+                    Number of masters (VMs) in the container service cluster. Allowed
+                    values are 1, 3, and 5. The default value is 1.
+            type: str
+            sample: null
+        dns_prefix:
+            description:
+                - DNS prefix to be used to create the FQDN for master.
+            returned: always
+            type: str
+            sample: null
+agent_pool_profiles:
+    description:
+        - Properties of the agent pool.
+    type: list
+    sample: null
+    contains:
+        name:
+            description:
+                - >-
+                    Unique name of the agent pool profile in the context of the
+                    subscription and resource group.
+            returned: always
+            type: str
+            sample: null
+        count:
+            description:
+                - >-
+                    Number of agents (VMs) to host docker containers. Allowed values must
+                    be in the range of 1 to 100 (inclusive). The default value is 1.
+            returned: always
+            type: int
+            sample: null
+        vm_size:
+            description:
+                - Size of agent VMs.
+            returned: always
+            type: str
+            sample: null
+        dns_prefix:
+            description:
+                - DNS prefix to be used to create the FQDN for the agent pool.
+            returned: always
+            type: str
+            sample: null
+windows_profile:
+    description:
+        - Properties of Windows VMs.
+    type: dict
+    sample: null
+    contains:
+        admin_username:
+            description:
+                - The administrator username to use for Windows VMs.
+            returned: always
+            type: str
+            sample: null
+        admin_password:
+            description:
+                - The administrator password to use for Windows VMs.
+            returned: always
+            type: str
+            sample: null
+linux_profile:
+    description:
+        - Properties of Linux VMs.
+    type: dict
+    sample: null
+    contains:
+        admin_username:
+            description:
+                - The administrator username to use for Linux VMs.
+            returned: always
+            type: str
+            sample: null
+        ssh:
+            description:
+                - The ssh key configuration for Linux VMs.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                public_keys:
+                    description:
+                        - >-
+                            the list of SSH public keys used to authenticate with Linux-based
+                            VMs.
+                    returned: always
+                    type: list
+                    sample: null
+                    contains:
+                        key_data:
+                            description:
+                                - >-
+                                    Certificate public key used to authenticate with VMs through
+                                    SSH. The certificate must be in PEM format with or without
+                                    headers.
+                            returned: always
+                            type: str
+                            sample: null
+diagnostics_profile:
+    description:
+        - Properties of the diagnostic agent.
+    type: dict
+    sample: null
+    contains:
+        vm_diagnostics:
+            description:
+                - Profile for the container service VM diagnostic agent.
+            returned: always
+            type: dict
+            sample: null
+            contains:
+                enabled:
+                    description:
+                        - Whether the VM diagnostic agent is provisioned on the VM.
+                    returned: always
+                    type: bool
+                    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

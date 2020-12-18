@@ -384,7 +384,7 @@ registration_definitions:
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:
     from msrestazure.azure_exceptions import CloudError
-    from azure.mgmt.managed import ManagedServicesClient
+    from azure.mgmt.managedservices import ManagedServicesClient
     from msrestazure.azure_operation import AzureOperationPoller
     from msrest.polling import LROPoller
 except ImportError:

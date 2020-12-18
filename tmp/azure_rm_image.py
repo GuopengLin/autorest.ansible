@@ -1,3 +1,411 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_image
+version_added: '2.9'
+short_description: Manage Azure Image instance.
+description:
+    - 'Create, update and delete instance of Azure Image.'
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    name:
+        description:
+            - The name of the image.
+        required: true
+        type: str
+    source_virtual_machine:
+        description:
+            - The source virtual machine from which Image is created.
+        type: dict
+        suboptions:
+            id:
+                description:
+                    - Resource Id
+                type: str
+    storage_profile:
+        description:
+            - Specifies the storage settings for the virtual machine disks.
+        type: dict
+        suboptions:
+            os_disk:
+                description:
+                    - >-
+                        Specifies information about the operating system disk used by the
+                        virtual machine. :code:`<br>`:code:`<br>` For more information about
+                        disks, see `About disks and VHDs for Azure virtual machines
+                        <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                type: dict
+                suboptions:
+                    os_type:
+                        description:
+                            - >-
+                                This property allows you to specify the type of the OS that is
+                                included in the disk if creating a VM from a custom image.
+                                :code:`<br>`:code:`<br>` Possible values are:
+                                :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
+                                **Linux**
+                        required: true
+                        type: sealed-choice
+                    os_state:
+                        description:
+                            - The OS State.
+                        required: true
+                        type: sealed-choice
+            data_disks:
+                description:
+                    - >-
+                        Specifies the parameters that are used to add a data disk to a
+                        virtual machine. :code:`<br>`:code:`<br>` For more information about
+                        disks, see `About disks and VHDs for Azure virtual machines
+                        <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+                type: list
+                suboptions:
+                    lun:
+                        description:
+                            - >-
+                                Specifies the logical unit number of the data disk. This value
+                                is used to identify data disks within the VM and therefore must
+                                be unique for each data disk attached to a VM.
+                        required: true
+                        type: int
+            zone_resilient:
+                description:
+                    - >-
+                        Specifies whether an image is zone resilient or not. Default is
+                        false. Zone resilient images can be created only in regions that
+                        provide Zone Redundant Storage (ZRS).
+                type: bool
+    hyper_v_generation:
+        description:
+            - >-
+                Gets the HyperVGenerationType of the VirtualMachine created from the
+                image
+        type: str
+        choices:
+            - V1
+            - V2
+    expand:
+        description:
+            - The expand expression to apply on the operation.
+        type: str
+    state:
+        description:
+            - Assert the state of the Image.
+            - Use C(present) to create or update an Image and C(absent) to delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Create a virtual machine image from a blob with DiskEncryptionSet resource.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              blob_uri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+              disk_encryption_set:
+                id: >-
+                  /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}
+              os_state: Generalized
+              os_type: Linux
+
+    - name: Create a virtual machine image from a blob.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              blob_uri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+              os_state: Generalized
+              os_type: Linux
+            zone_resilient: true
+
+    - name: Create a virtual machine image from a managed disk with DiskEncryptionSet resource.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              disk_encryption_set:
+                id: >-
+                  /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}
+              managed_disk:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk
+              os_state: Generalized
+              os_type: Linux
+
+    - name: Create a virtual machine image from a managed disk.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              managed_disk:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk
+              os_state: Generalized
+              os_type: Linux
+            zone_resilient: true
+
+    - name: Create a virtual machine image from a snapshot with DiskEncryptionSet resource.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              disk_encryption_set:
+                id: >-
+                  /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}
+              os_state: Generalized
+              os_type: Linux
+              snapshot:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot
+
+    - name: Create a virtual machine image from a snapshot.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            os_disk:
+              os_state: Generalized
+              os_type: Linux
+              snapshot:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot
+            zone_resilient: false
+
+    - name: Create a virtual machine image from an existing virtual machine.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          source_virtual_machine:
+            id: >-
+              /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM
+
+    - name: Create a virtual machine image that includes a data disk from a blob.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            data_disks:
+              - blob_uri: >-
+                  https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd
+                lun: 1
+            os_disk:
+              blob_uri: 'https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd'
+              os_state: Generalized
+              os_type: Linux
+            zone_resilient: false
+
+    - name: Create a virtual machine image that includes a data disk from a managed disk.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            data_disks:
+              - lun: 1
+                managed_disk:
+                  id: >-
+                    subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2
+            os_disk:
+              managed_disk:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk
+              os_state: Generalized
+              os_type: Linux
+            zone_resilient: false
+
+    - name: Create a virtual machine image that includes a data disk from a snapshot.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        location: West US
+        properties:
+          storage_profile:
+            data_disks:
+              - lun: 1
+                snapshot:
+                  id: >-
+                    subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2
+            os_disk:
+              os_state: Generalized
+              os_type: Linux
+              snapshot:
+                id: >-
+                  subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot
+            zone_resilient: true
+
+    - name: Updates tags of an Image.
+      azure_rm_image: 
+        image_name: myImage
+        resource_group_name: myResourceGroup
+        properties:
+          hyper_vgeneration: V1
+          source_virtual_machine:
+            id: >-
+              /subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM
+        tags:
+          department: HR
+
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+source_virtual_machine:
+    description:
+        - The source virtual machine from which Image is created.
+    type: dict
+    sample: null
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+storage_profile:
+    description:
+        - Specifies the storage settings for the virtual machine disks.
+    type: dict
+    sample: null
+    contains:
+        os_disk:
+            description:
+                - >-
+                    Specifies information about the operating system disk used by the
+                    virtual machine. :code:`<br>`:code:`<br>` For more information about
+                    disks, see `About disks and VHDs for Azure virtual machines
+                    <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+            type: dict
+            sample: null
+            contains:
+                os_type:
+                    description:
+                        - >-
+                            This property allows you to specify the type of the OS that is
+                            included in the disk if creating a VM from a custom image.
+                            :code:`<br>`:code:`<br>` Possible values are:
+                            :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>`
+                            **Linux**
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+                os_state:
+                    description:
+                        - The OS State.
+                    returned: always
+                    type: sealed-choice
+                    sample: null
+        data_disks:
+            description:
+                - >-
+                    Specifies the parameters that are used to add a data disk to a virtual
+                    machine. :code:`<br>`:code:`<br>` For more information about disks,
+                    see `About disks and VHDs for Azure virtual machines
+                    <https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json>`_.
+            type: list
+            sample: null
+            contains:
+                lun:
+                    description:
+                        - >-
+                            Specifies the logical unit number of the data disk. This value is
+                            used to identify data disks within the VM and therefore must be
+                            unique for each data disk attached to a VM.
+                    returned: always
+                    type: int
+                    sample: null
+        zone_resilient:
+            description:
+                - >-
+                    Specifies whether an image is zone resilient or not. Default is false.
+                    Zone resilient images can be created only in regions that provide Zone
+                    Redundant Storage (ZRS).
+            type: bool
+            sample: null
+provisioning_state:
+    description:
+        - The provisioning state.
+    type: str
+    sample: null
+hyper_v_generation:
+    description:
+        - Gets the HyperVGenerationType of the VirtualMachine created from the image
+    type: str
+    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

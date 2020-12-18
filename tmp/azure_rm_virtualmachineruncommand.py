@@ -1,3 +1,124 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_virtualmachineruncommand
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineRunCommand instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineRunCommand.'
+options:
+    location:
+        description:
+            - The location upon which run commands is queried.
+        required: true
+        type: str
+    command_id:
+        description:
+            - The command id.
+        required: true
+        type: str
+    state:
+        description:
+            - Assert the state of the VirtualMachineRunCommand.
+            - >-
+                Use C(present) to create or update an VirtualMachineRunCommand and
+                C(absent) to delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+'''
+
+RETURN = '''
+schema:
+    description:
+        - The VM run command schema.
+    returned: always
+    type: str
+    sample: null
+id:
+    description:
+        - The VM run command id.
+    returned: always
+    type: str
+    sample: null
+os_type:
+    description:
+        - The Operating System type.
+    returned: always
+    type: sealed-choice
+    sample: null
+label:
+    description:
+        - The VM run command label.
+    returned: always
+    type: str
+    sample: null
+description:
+    description:
+        - The VM run command description.
+    returned: always
+    type: str
+    sample: null
+script:
+    description:
+        - The script to be executed.
+    returned: always
+    type: list
+    sample: null
+parameters:
+    description:
+        - The parameters used by the script.
+    type: list
+    sample: null
+    contains:
+        name:
+            description:
+                - The run command parameter name.
+            returned: always
+            type: str
+            sample: null
+        type:
+            description:
+                - The run command parameter type.
+            returned: always
+            type: str
+            sample: null
+        default_value:
+            description:
+                - The run command parameter default value.
+            type: str
+            sample: null
+        required:
+            description:
+                - The run command parameter required.
+            type: bool
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:

@@ -1,3 +1,233 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_galleryapplicationversion_info
+version_added: '2.9'
+short_description: Get GalleryApplicationVersion info.
+description:
+    - Get info of GalleryApplicationVersion.
+options:
+    resource_group:
+        description:
+            - The name of the resource group.
+        required: true
+        type: str
+    gallery_name:
+        description:
+            - >-
+                The name of the Shared Application Gallery in which the Application
+                Definition resides.
+        required: true
+        type: str
+    gallery_application_name:
+        description:
+            - >-
+                The name of the gallery Application Definition in which the Application
+                Version resides.
+            - >-
+                The name of the Shared Application Gallery Application Definition from
+                which the Application Versions are to be listed.
+        required: true
+        type: str
+    gallery_application_version_name:
+        description:
+            - The name of the gallery Application Version to be retrieved.
+        type: str
+    expand:
+        description:
+            - The expand expression to apply on the operation.
+        type: str
+        choices:
+            - ReplicationStatus
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+    - name: Get a gallery Application Version with replication status.
+      azure_rm_galleryapplicationversion_info: 
+        gallery_application_name: myGalleryApplicationName
+        gallery_application_version_name: 1.0.0
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+    - name: Get a gallery Application Version.
+      azure_rm_galleryapplicationversion_info: 
+        gallery_application_name: myGalleryApplicationName
+        gallery_application_version_name: 1.0.0
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+    - name: List gallery Application Versions in a gallery Application Definition.
+      azure_rm_galleryapplicationversion_info: 
+        gallery_application_name: myGalleryApplicationName
+        gallery_name: myGalleryName
+        resource_group_name: myResourceGroup
+
+'''
+
+RETURN = '''
+gallery_application_versions:
+    description: >-
+        A list of dict results where the key is the name of the
+        GalleryApplicationVersion and the values are the facts for that
+        GalleryApplicationVersion.
+    returned: always
+    type: complex
+    contains:
+        id:
+            description:
+                - Resource Id
+            type: str
+            sample: null
+        name:
+            description:
+                - Resource name
+            type: str
+            sample: null
+        type:
+            description:
+                - Resource type
+            type: str
+            sample: null
+        location:
+            description:
+                - Resource location
+            returned: always
+            type: str
+            sample: null
+        tags:
+            description:
+                - Resource tags
+            type: dict
+            sample: null
+        publishing_profile:
+            description:
+                - The publishing profile of a gallery Image Version.
+            type: dict
+            sample: null
+            contains:
+                source:
+                    description:
+                        - >-
+                            The source image from which the Image Version is going to be
+                            created.
+                    returned: always
+                    type: dict
+                    sample: null
+                    contains:
+                        file_name:
+                            description:
+                                - Required. The fileName of the artifact.
+                            returned: always
+                            type: str
+                            sample: null
+                        media_link:
+                            description:
+                                - >-
+                                    Required. The mediaLink of the artifact, must be a readable
+                                    storage blob.
+                            returned: always
+                            type: str
+                            sample: null
+                content_type:
+                    description:
+                        - >-
+                            Optional. May be used to help process this file. The type of file
+                            contained in the source, e.g. zip, json, etc.
+                    type: str
+                    sample: null
+                enable_health_check:
+                    description:
+                        - Optional. Whether or not this application reports health.
+                    type: bool
+                    sample: null
+        provisioning_state:
+            description:
+                - 'The provisioning state, which only appears in the response.'
+            type: str
+            sample: null
+        replication_status:
+            description:
+                - This is the replication status of the gallery Image Version.
+            type: dict
+            sample: null
+        value:
+            description:
+                - A list of gallery Application Versions.
+            returned: always
+            type: list
+            sample: null
+            contains:
+                publishing_profile:
+                    description:
+                        - The publishing profile of a gallery Image Version.
+                    type: dict
+                    sample: null
+                    contains:
+                        source:
+                            description:
+                                - >-
+                                    The source image from which the Image Version is going to be
+                                    created.
+                            returned: always
+                            type: dict
+                            sample: null
+                            contains:
+                                file_name:
+                                    description:
+                                        - Required. The fileName of the artifact.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                                media_link:
+                                    description:
+                                        - >-
+                                            Required. The mediaLink of the artifact, must be a
+                                            readable storage blob.
+                                    returned: always
+                                    type: str
+                                    sample: null
+                        content_type:
+                            description:
+                                - >-
+                                    Optional. May be used to help process this file. The type of
+                                    file contained in the source, e.g. zip, json, etc.
+                            type: str
+                            sample: null
+                        enable_health_check:
+                            description:
+                                - Optional. Whether or not this application reports health.
+                            type: bool
+                            sample: null
+        next_link:
+            description:
+                - >-
+                    The uri to fetch the next page of gallery Application Versions. Call
+                    ListNext() with this to fetch the next page of gallery Application
+                    Versions.
+            type: str
+            sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase
 try:

@@ -1,3 +1,127 @@
+#!/usr/bin/python
+#
+# Copyright (c) 2020 GuopengLin, (@t-glin)
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+
+
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+
+DOCUMENTATION = '''
+---
+module: azure_rm_virtualmachineextensionimage
+version_added: '2.9'
+short_description: Manage Azure VirtualMachineExtensionImage instance.
+description:
+    - 'Create, update and delete instance of Azure VirtualMachineExtensionImage.'
+options:
+    location:
+        description:
+            - The name of a supported Azure region.
+        required: true
+        type: str
+    publisher_name:
+        description:
+            - undefined
+        required: true
+        type: str
+    type:
+        description:
+            - undefined
+        required: true
+        type: str
+    version:
+        description:
+            - undefined
+        required: true
+        type: str
+    state:
+        description:
+            - Assert the state of the VirtualMachineExtensionImage.
+            - >-
+                Use C(present) to create or update an VirtualMachineExtensionImage and
+                C(absent) to delete it.
+        default: present
+        choices:
+            - absent
+            - present
+extends_documentation_fragment:
+    - azure.azcollection.azure
+    - azure.azcollection.azure_tags
+author:
+    - GuopengLin (@t-glin)
+
+'''
+
+EXAMPLES = '''
+'''
+
+RETURN = '''
+id:
+    description:
+        - Resource Id
+    type: str
+    sample: null
+name:
+    description:
+        - Resource name
+    type: str
+    sample: null
+type:
+    description:
+        - Resource type
+    type: str
+    sample: null
+location:
+    description:
+        - Resource location
+    returned: always
+    type: str
+    sample: null
+tags:
+    description:
+        - Resource tags
+    type: dict
+    sample: null
+operating_system:
+    description:
+        - The operating system this extension supports.
+    type: str
+    sample: null
+compute_role:
+    description:
+        - The type of role (IaaS or PaaS) this extension supports.
+    type: str
+    sample: null
+handler_schema:
+    description:
+        - >-
+            The schema defined by publisher, where extension consumers should provide
+            settings in a matching schema.
+    type: str
+    sample: null
+vm_scale_set_enabled:
+    description:
+        - >-
+            Whether the extension can be used on xRP VMScaleSets. By default existing
+            extensions are usable on scalesets, but there might be cases where a
+            publisher wants to explicitly indicate the extension is only enabled for
+            CRP VMs but not VMSS.
+    type: bool
+    sample: null
+supports_multiple_extensions:
+    description:
+        - Whether the handler can support multiple extensions.
+    type: bool
+    sample: null
+
+'''
 
 from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt
 try:
