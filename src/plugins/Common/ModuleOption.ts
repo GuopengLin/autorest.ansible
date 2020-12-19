@@ -39,11 +39,11 @@ export class ModuleOption {
     }
     private Init(swaggerOption:any){
         this.Name = swaggerOption.language.default.name;
-        // console.log(this.padding+this.Name);
+        console.log(this.padding+this.Name);
         this.NameAnsible = ToSnakeCase(this.Name);
         if (this.NameAnsible == "resource_group_name")
             this.NameAnsible = "resource_group";
-        if (this.NameAnsible == this.ModuleObjectName.toLowerCase()+"_name")
+        if (this.NameAnsible == ToSnakeCase(this.ModuleObjectName)+"_name")
             this.NameAnsible = "name";
         this.NameSwagger = this.Name;
         this.Required = swaggerOption.required != undefined ? swaggerOption.required : false;
