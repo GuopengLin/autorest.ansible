@@ -39,7 +39,6 @@ export class ModuleOption {
     }
     private Init(swaggerOption:any){
         this.Name = swaggerOption.language.default.name;
-        console.log(this.padding+this.Name);
         this.NameAnsible = ToSnakeCase(this.Name);
         if (this.NameAnsible == "resource_group_name")
             this.NameAnsible = "resource_group";
