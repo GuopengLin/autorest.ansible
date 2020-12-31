@@ -24,8 +24,6 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
 
     AppendModuleHeader(output);
     AppendModuleDocumentation(output, module, false, collection);
-    // AppendModuleExamples(output, module, collection);
-    // AppendModuleReturnDoc(output, module, false);
 
     output.push("");
     output.push("import time");
@@ -115,14 +113,6 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
         }
     }
 
-    // var broken = module.ModuleUrl.split('/');
-    // output.push("        self.url = ('/" + broken[1] + "'");
-    // for (var i = 2; i < broken.length; i++)
-    // {
-    //     output[output.length - 1] += " +";
-    //     output.push("                    '/" + broken[i] + "'");
-    // }
-    // output[output.length - 1] += ")";
     output.push("        self.url= '" +module.BasicURL + "'")
 
     let fixurl = GetFixUrlStatements(module.BasicURL);
@@ -215,23 +205,9 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
     output.push("            self.results['changed'] = False");
     output.push("            response = old_response");
     output.push("");
-    // {
-    //     var stmtsx = module.ResponseFieldStatements;
-    //
-    //     if (stmtsx.length > 0)
-    //     {
-    //         output.push("        if response:");
-    //         stmtsx.forEach(element => {
-    //             output.push("           " + element);
-    //         });
-    //         output.push("");
-    //     }
-    // }
     output.push("        return self.results");
-    //}
     output.push("");
     output.push("    def create_update_resource(self):");
-    // output.push("        # self.log('Creating / Updating the " + module.ObjectName + " instance {0}'.format(self." + module.ModuleResourceName + "))");
     output.push("");
     output.push("        try:");
     if (module.HasCreateOrUpdate())
@@ -280,7 +256,6 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
     output.push("        return response");
     output.push("");
     output.push("    def delete_resource(self):");
-    //output.push("        # self.log('Deleting the " + module.ObjectName + " instance {0}'.format(self." + module.ModuleResourceName + "))");
     output.push("        try:");
 
     output.push("            response = self.mgmt_client.query(self.url,");
@@ -299,7 +274,6 @@ export function GenerateModuleRest(module: Module, collection: boolean) : string
     output.push("        return True");
     output.push("");
     output.push("    def get_resource(self):");
-    //output.push("        # self.log('Checking if the " + module.ObjectName + " instance {0} is present'.format(self." + module.ModuleResourceName + "))");
     output.push("        found = False");
     output.push("        try:");
 

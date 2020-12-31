@@ -39,7 +39,6 @@ export class ModuleExample {
             return content;
     }
     public Name: string;
-    public SwaggerExample: string;
     public Value: object = {};
     public methodName: string;
 

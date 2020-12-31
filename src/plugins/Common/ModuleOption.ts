@@ -12,20 +12,8 @@ export enum ModuleOptionKind{
 
 
 export class ModuleOption {
-    // constructor(name: string, type:string="", required:boolean=false) {
-    //     this.NameSwagger = name;
-    //     this.Name = this.NameSwagger;
-    //     this.Type = type;
-    //     this.Required = required;
-    //     this.SubOptions = [];
-    //     this.IsList = false;
-    //     this.DefaultValue = null;
-    //     this.NoLog = false;
-    //     this.IncludeInDocumentation = true;
-    //     this.IncludeInArgSpec = true;
-    // }
+
     constructor(objectName: string, swaggerOption:any, parent: ModuleOption, isResponse : boolean, optionSet: Set<string>) {
-        // this.SwaggerOption = swaggerOption;
         this.padding = "    ";
         if (parent != null)
             this.padding = this.padding + parent.padding;

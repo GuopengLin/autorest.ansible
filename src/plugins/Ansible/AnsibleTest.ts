@@ -1,3 +1,9 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+
 import {Test} from "../Common/Test";
 import * as yaml from "node-yaml";
 import {ModuleOption, ModuleOptionKind} from "../Common/ModuleOption";
@@ -26,13 +32,8 @@ export function GenerateTest(test: Test){
                 output.push("   "+element);
             });
         }
-
         output.push("");
     }
-    // test.GenerateCreate(output, test);
-    // test.GenerateUpdate(output, test);
-    // test.GenerateUpdateWithoutChange(output, test);
-    // test.GenerateDelete(output, test);
     return output;
 }
 
@@ -95,31 +96,5 @@ export function GetExample(test: Test, methodName: Set<string>, exampleName: str
 }
 
 
-// function GenerateCreate(output: string[], test: Test){
-//
-// }
-//
-// function GenerateUpdate(output: string[], test: Test){
-//
-// }
-//
-// function GenerateUpdateWithoutChange(output: string[], test: Test){
-//
-// }
-//
-// function GenerateDelete(output: string[], test: Test){
-//
-// }
-//
-// function GenerateExample(output: string[], test: Test, name: string){
-//     let example = test.Examples['create'];
-//     output.push("    - name: create "+example.Name);
-//     output.push("      " + test.ModuleName + ": ");
-//     if (!(JSON.stringify(example.Value) === '{}')){
-//         yaml.dump(example.Value).split('\n').forEach(element => {
-//             output.push("        "+element);
-//         });
-//     }
-//     output.push("");
-// }
+
 

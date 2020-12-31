@@ -2,21 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as yaml from "node-yaml";
-
-// import { Example } from "../Common/Example";
 
 
 import { AnsibleCodeModel} from "../Common/AnsibleCodeModel";
 
-import { GenerateModuleRest } from "./AnsibleModuleRest";
-import { GenerateModuleRestInfo } from "./AnsibleModuleRestInfo";
-import { GenerateModuleSdk } from "./AnsibleModuleSdk";
-import { GenerateModuleSdkInfo } from "./AnsibleModuleSdkInfo";
 
 import {Channel, Host, startSession} from "@azure-tools/autorest-extension-base";
 import {CodeModel, codeModelSchema} from "@azure-tools/codemodel";
-import {EOL} from "os";
 import {ArtifactType, GenerateAll} from "./AnsibleGenerator";
 import {serialize} from "@azure-tools/codegen";
 

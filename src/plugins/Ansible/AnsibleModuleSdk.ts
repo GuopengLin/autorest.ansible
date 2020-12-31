@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnsibleCodeModel } from "../Common/AnsibleCodeModel";
 
 import {
     ModuleTopLevelOptionsVariables,
@@ -27,14 +26,8 @@ export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
         AppendModuleExamples(output, module, false);
         AppendModuleReturnDoc(output, module, false);
     }
-
-
     output.push("");
-    // output.push("import time");
-    // output.push("import json");
-    // output.push("import re");
     output.push("from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBaseExt");
-    // output.push("from copy import deepcopy");
     output.push("try:");
     output.push("    from msrestazure.azure_exceptions import CloudError");
     output.push("    from " + module.PythonNamespace + " import " + module.PythonMgmtClient + "");
@@ -59,7 +52,6 @@ export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
         output.push("        " + vars[i]);
     }
     output.push("        self.body = {}");
-    
     output.push("");
     output.push("        self.results = dict(changed=False)");
     output.push("        self.mgmt_client = None");
@@ -159,18 +151,6 @@ export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
     output.push("            response = old_response");
     output.push("            self.result['state'] = response");
     output.push("");
-    // {
-    //     var stmtsx = module.ResponseFieldStatements;
-    //
-    //     if (stmtsx.length > 0)
-    //     {
-    //         output.push("        if response:");
-    //         stmtsx.forEach(element => {
-    //             output.push("           " + element);
-    //         });
-    //         output.push("");
-    //     }
-    // }
     output.push("        return self.results");
     output.push("");
     if (module.GetMethod('create_or_update') != null || module.GetMethod('create') != null){
@@ -197,7 +177,6 @@ export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
     }
     if (module.GetMethod('delete') != null){
         output.push("    def delete_resource(self):");
-        //output.push("        # self.log('Deleting the " + module.ObjectName + " instance {0}'.format(self." + module.ModuleResourceName + "))");
         output.push("        try:");
 
         ModuleGenerateApiCall(output, "            ", module, "delete");
@@ -210,19 +189,13 @@ export function GenerateModuleSdk(module: Module, skipDoc: boolean) : string[] {
         output.push("");
     }
     output.push("    def get_resource(self):");
-    //output.push("        # self.log('Checking if the " + module.ObjectName + " instance {0} is present'.format(self." + module.ModuleResourceName + "))");
     output.push("        try:");
-
     ModuleGenerateApiCall(output, "            ", module, "get");
-
     output.push("        except CloudError as e:");
     output.push("            return False");
-    
     output.push("        return response.as_dict()");
     output.push("");
     output.push("");
-
     AppendMain(output, module);
-
     return output;
 }

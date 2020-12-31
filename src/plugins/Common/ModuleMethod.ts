@@ -3,7 +3,6 @@ import {ToSnakeCase} from "../../utils/helper";
 
 export class ModuleMethod {
     constructor(objectName: string,swaggerMethod: any) {
-        // this.SwaggerMethod = swaggerMethod;
         this.ModuleObjectName = objectName;
         this.Init(swaggerMethod);
     }

@@ -3,16 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnsibleCodeModel } from "../Common/AnsibleCodeModel"
+
 import {
     ModuleTopLevelOptionsVariables,
     GetFixUrlStatements,
     AppendModuleHeader,
     AppendModuleDocumentation,
-    // AppendModuleExamples,
     AppendMain,
     AppendModuleArgSpec,
-    // AppendModuleReturnDoc,
     AppendInfoModuleLogic
 } from "./AnsibleModuleCommon"
 import {Module} from "../Common/Module";
@@ -22,9 +20,6 @@ export function GenerateModuleRestInfo(module: Module, collection: boolean) : st
 
     AppendModuleHeader(output);
     AppendModuleDocumentation(output, module, true, collection);
-    // AppendModuleExamples(output, module, collection);
-    // AppendModuleReturnDoc(output, module, true);
-
     output.push("");
     output.push("import time");
     output.push("import json");

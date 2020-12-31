@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnsibleCodeModel } from "../Common/AnsibleCodeModel"
 import {
     ModuleTopLevelOptionsVariables,
     AppendModuleHeader,
@@ -28,10 +27,7 @@ export function GenerateModuleSdkInfo(module: Module, skipDoc: boolean) : string
     }
 
     output.push("");
-    // output.push("import time");
-    // output.push("import json");
     output.push("from ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common_ext import AzureRMModuleBase");
-    // output.push("from copy import deepcopy");
     output.push("try:");
     output.push("    from msrestazure.azure_exceptions import CloudError");
     output.push("    from " + module.PythonNamespace + " import " + module.PythonMgmtClient + "");

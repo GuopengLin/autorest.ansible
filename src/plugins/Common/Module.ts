@@ -4,14 +4,7 @@ import {ToSnakeCase} from "../../utils/helper";
 import {ModuleExample} from "./ModuleExample";
 
 export class Module {
-    // constructor(swaggerName:string, isInfoModule:boolean) {
-    //     this.SwaggerName = swaggerName;
-    //     this.IsInfoModule = isInfoModule;
-    //     this.ObjectName = this.GetObjectName();
-    //     this.ModuleClassName = this.GetModuleClassName();
-    //     this.ModuleName = this.GetModuleName();
-    //     this.ModuleOperationName = ToSnakeCase(swaggerName);
-    // }
+
     constructor(swaggerModule: any, isInfoModule:boolean) {
         this.IsInfoModule = isInfoModule;
         this.Init(swaggerModule);
@@ -45,21 +38,7 @@ export class Module {
         }
 
     }
-    // private LoadExamples(){
-    //     for (let method of this.ModuleMethods){
-    //         if (method.Name == "Get" && !this.IsInfoModule)
-    //             continue;
-    //         if (method.SwaggerMethod.extensions != null && method.SwaggerMethod.extensions['x-ms-examples'] != null){
-    //             let examples = method.SwaggerMethod.extensions['x-ms-examples'];
-    //             for (let name in examples){
-    //                 if (!this.HasExample(name)){
-    //                     let moduleExample = new ModuleExample(name, examples[name] ,method);
-    //                     this.ModuleExamples.push(moduleExample);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+
     private HasExample(name: string){
         for (let example of this.ModuleExamples)
             if (example.Name == name)

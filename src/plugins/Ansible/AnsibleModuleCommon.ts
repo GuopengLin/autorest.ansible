@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// import { ExamplePostProcessor, ExampleType } from "../Common/ExamplePostProcessor";
 import {Indent, ToSnakeCase} from "../../utils/helper";
 import {Module} from "../Common/Module";
 import {ModuleOption, ModuleOptionKind} from "../Common/ModuleOption";
@@ -88,34 +87,11 @@ export function AppendModuleDocumentation(output: string[], module: Module, isIn
         }
         output.push(temp+s[i]);
     }
-    // yaml.dump(doc).split("\n").forEach(element => {
-    //     output.push("    "+element);
-    // });
     output.push("'''");
     output.push("");
 }
 
-// export function AppendModuleExamples(output: string[], module: Module, isCollection: boolean)
-// {
-//     output.push("EXAMPLES = '''");
-//
-//     let pp = new ExamplePostProcessor(module.Module);
-//     let examples = module.ModuleExamples;
-//     let processedExamples: any[] = []
-//
-//     for (let exampleIdx in examples)
-//     {
-//         let example = examples[exampleIdx];
-//         processedExamples.push(pp.ProcessExample(example, isCollection ? ExampleType.AnsibleCollection : ExampleType.Ansible, false));
-//     }
-//
-//     yaml.dump(processedExamples).split(/\r?\n/).forEach(element => {
-//         output.push(element);
-//     });
-//
-//     output.push("'''");
-//     output.push("");
-// }
+
 
 export function AppendModuleExamples(output: string[], module: Module, isInfoModule: boolean){
     output.push("EXAMPLES = '''");
@@ -138,20 +114,7 @@ export function AppendModuleExamples(output: string[], module: Module, isInfoMod
     output.push("");
 }
 
-// export function AppendParameter(output: string[], indent: string, name: string, content: any){
-//     if (typeof content == 'object'){
-//         if (content instanceof Array){
-//
-//         }else {
-//             for (let subName in content)
-//                 AppendParameter(output,indent+"    ", subName, content[subName]);
-//         }
-//     }
-//     else {
-//         output.push(indent+name+": "+content);
-//     }
-//
-// }
+
 
 export function AppendModuleReturnDoc(output: string[], module: Module, isInfoModule: boolean)
 {
@@ -170,9 +133,6 @@ export function AppendModuleReturnDoc(output: string[], module: Module, isInfoMo
         }
         output.push(temp+s[i]);
     }
-    // yaml.dump(doc).split(/\r?\n/).forEach(element => {
-    //     output.push("    "+element);
-    // });
     output.push("'''");
 
 }
@@ -216,13 +176,7 @@ export function AppendInfoModuleLogic(output: string[], module: Module)
                 ifPadding = ' '.repeat(ifPadding.length);
             }
         }
-
-
-
         output.push("            self.results['" + module.ModuleOperationName +"'] = self.format_item(self." + method.Name.toLowerCase() + "())");
-
-        // output.push("            self.results['" + module.ModuleOperationName +"'] = self.format_item(self." + method.Name.toLowerCase() + "())");
-
         ifStatement = "elif"
     }
     output.push("        return self.results");
@@ -279,32 +233,15 @@ function GetHelpFromOptions(module: Module, options: ModuleOption[], padding: st
             option_doc['required'] = true;
         }
 
-        // right now just add type if option is a list or bool
-        //if (option.IsList || option.Type == "bool")
-        //{
-            option_doc['type'] = (option.IsList ? "list" : option.Type);
-        //}
+
+        option_doc['type'] = (option.IsList ? "list" : option.Type);
 
         if (option.DefaultValue != null)
         {
             option_doc['default'] = option.DefaultValue;
         }
 
-        /* XXXX
-        if (option.EnumValues != null && option.EnumValues.Length > 0)
-        {
-            //string line = padding + "    choices: [";
-            string line = padding + "    choices:";
-            help.push(line);
-            for (int i = 0; i < option.EnumValues.Length; i++)
-            {
-                line = padding + "        - '" + option.EnumValues[i].Key + "'";
-                help.push(line);
-                //line += "'" + option.EnumValues[i].Key + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
-            }
-            //help.push(line);
-        }
-        */
+
         if (option.EnumValues != null && option.EnumValues.length > 0){
             option_doc['choices'] = option.EnumValues;
         }
@@ -327,13 +264,6 @@ export function GetModuleArgSpec(module: Module, options: ModuleOption[], append
     if (appendMainModuleOptions)
     {
         argSpec.push(argSpec.pop() + ",");
-        //if (this.NeedsForceUpdate)
-        //{
-        //    argSpec.push("force_update=dict(");
-        //    argSpec.push("    type='bool'");
-        //    argSpec.push("),");
-        //}
-
         argSpec.push("state=dict(");
         argSpec.push("    type='str',");
         argSpec.push("    default='present',");
@@ -351,19 +281,12 @@ function GetArgSpecFromOptions(module: Module, options: ModuleOption[], prefix: 
     for (var i = 0; i < options.length; i++)
     {
         var option: ModuleOption = options[i];
-        // if (option.Hidden)
-        //     continue;
-
         if (!option.IncludeInArgSpec)
             continue;
 
         // tags shouldn't be added directly
         if (option.NameAnsible == "tags")
             continue;
-
-        // for info Modules, only options included in path should be included
-        // if (!mainModule && option.DispositionSdk != "*")
-        //     continue;
 
         let required: boolean =  option.Required;
         let choices: boolean = (option.EnumValues != null) && option.EnumValues.length > 0;
@@ -392,12 +315,6 @@ function GetArgSpecFromOptions(module: Module, options: ModuleOption[], prefix: 
 
         if (mainModule && option.Kind == ModuleOptionKind.MODULE_OPTION_BODY)
         {
-            // if (option.Comparison != "")
-            // {
-            //     argSpec.push(argSpec.pop() + ",");
-            //     argSpec.push(prefix + "    comparison='" + option.Comparison + "'");
-            // }
-
             if (!option.Updatable)
             {
                 argSpec.push(argSpec.pop() + ",");
@@ -450,22 +367,6 @@ function GetArgSpecFromOptions(module: Module, options: ModuleOption[], prefix: 
                 argSpec.push(prefix + choicesList);
                 choicesList = "             ";
             }
-            // I don't know why Zim chooses dictionary to store the choices, so I change it to string
-            // for (var ci = 0; ci < option.EnumValues.length; ci++)
-            // {
-            //     choicesList += "'" + option.EnumValues[ci].Key + "'";
-            //
-            //     if (ci < option.EnumValues.length - 1)
-            //     {
-            //         choicesList += ",";
-            //     }
-            //     else
-            //     {
-            //         choicesList += "]";
-            //     }
-            //     argSpec.push(prefix + choicesList);
-            //     choicesList = "             ";
-            // }
         }
 
         if (required)
@@ -524,7 +425,6 @@ function GetArgSpecFromOptions(module: Module, options: ModuleOption[], prefix: 
 
             argSpec.push(prefix + "    )");
         }
-
         argSpec.push(prefix + ")");
     }
 
@@ -545,7 +445,6 @@ function haveSuboptions(option: ModuleOption): boolean
     {
         if (so.Hidden)
             continue;
-
         cnt++;
     }
 
@@ -561,21 +460,6 @@ export function ModuleTopLevelOptionsVariables(options: ModuleOption[], useSdk: 
         if (option.Kind == ModuleOptionKind.MODULE_OPTION_BODY)
             continue;
         variables.push("self." + option.NameAnsible + " = None");
-        // if (option.DispositionSdk == "*")
-        // {
-        //     variables.push("self." + option.NameAnsible + " = None");
-        // }
-        // else if (option.Kind == ModuleOptionKind.MODULE_OPTION_PLACEHOLDER)
-        // {
-        //     variables.push("self." + option.NameAnsible + " = dict()");
-        // }
-        // else
-        // {
-        //     // XXX - right now just supporting 2 levels
-        //     //string[] path = option.Disposition.Split(":");
-        //     //string variable = "self." + path[0] + "['" + option.NameAlt + "'] = dict()";
-        //     //variables.push(variable);
-        // }
     }
 
     return variables;
@@ -649,16 +533,13 @@ function ModuleInfoReturnResponseFields(module: Module):  any
     help[module.ModuleOperationName]['type'] = 'complex';
     help[module.ModuleOperationName]['contains'] = {};
     help[module.ModuleOperationName]['contains'] = GetHelpFromResponseFields(module, module.ModuleResponseFields, "                ");
-    // help[module.ModuleOperationName]['contains'][module.ObjectNamePythonized + "_name"] = {};
-    // help[module.ModuleOperationName]['contains'][module.ObjectNamePythonized + "_name"]['description'] = "The key is the name of the server that the values relate to.";
-    // help[module.ModuleOperationName]['contains'][module.ObjectNamePythonized + "_name"]['type'] = 'complex';
-    // help[module.ModuleOperationName]['contains'][module.ObjectNamePythonized + "_name"]['contains'] = GetHelpFromResponseFields(module, module.ModuleResponseFields, "                ");
+
     return help;
 }
 
 function GetHelpFromResponseFields(module: Module, fields: ModuleOption[], padding: string): any
 {
-    //let help: string[] = [];
+
     let help: any = {}
     if (fields != null)
     {
@@ -670,28 +551,17 @@ function GetHelpFromResponseFields(module: Module, fields: ModuleOption[], paddi
             let field_doc = {};
             help[field.NameAnsible] = field_doc;
 
-            //let doc: string = this.NormalizeString(field.Description);
-            //help.push(padding + field.NameAlt + ":");
-            //help.push(padding + "    description:");
-            //help.concat(this.WrapString(padding + "        - ", doc));
-
             field_doc['description'] = [ field.Documentation ];
             if (field.Required){
                 field_doc['returned'] = "always"; //field.Returned;
             }
             field_doc['type'] = field.Type;
 
-            //help.push(padding + "    returned: " + field.Returned);
-            //help.push(padding + "    type: " + field.Type);
-
-            //help.concat(this.WrapString(padding + "    sample: ", field.SampleValue));
             field_doc['sample'] = field.ExampleValue;
 
             if (haveSuboptions(field))
             {
                 field_doc['contains'] = GetHelpFromResponseFields(module, field.SubOptions, padding + "        ");
-                //help.push(padding + "    contains:");
-                //help.concat(this.GetHelpFromResponseFields(field.SubOptions, padding + "        "));
             }
         }
     }
