@@ -13,3 +13,5 @@ tmpoutput
 *.DS_Store
 src/local.ts
 tmp/
+track1/
+track2/

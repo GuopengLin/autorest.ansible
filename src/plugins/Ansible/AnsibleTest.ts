@@ -4,13 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import {Test} from "../Common/Test";
+import {ModuleTest} from "../Common/ModuleTest";
 import * as yaml from "node-yaml";
 import {ModuleOption, ModuleOptionKind} from "../Common/ModuleOption";
 import {SwaggerModelType} from "../../utils/helper";
 import {ModuleMethod} from "../Common/ModuleMethod";
 
-export function GenerateTest(test: Test){
+export function GenerateTest(test: ModuleTest){
     var output: string[] = [];
 
     for (let method of test.ModuleMethods){
@@ -38,7 +38,7 @@ export function GenerateTest(test: Test){
 }
 
 
-export function UpdateParameters(test: Test){
+export function UpdateParameters(test: ModuleTest){
     for (let method of test.ModuleMethods){
         for (let parameter of method.Options){
             if (test.ParameterValues.has(parameter.Name)  && parameter.Kind == ModuleOptionKind.MODULE_OPTION_BODY)
@@ -46,14 +46,14 @@ export function UpdateParameters(test: Test){
         }
     }
 }
-export function GetParameter(test: Test, parameter: ModuleOption){
+export function GetParameter(test: ModuleTest, parameter: ModuleOption){
     if (test.ParameterValues.has(parameter.Name))
         return test.ParameterValues.get(parameter.Name);
     let value = GetValue(test, parameter);
     if (value != null)
         test.ParameterValues.set(parameter.Name, value);
 }
-export function GetValue(test: Test, parameter: ModuleOption){
+export function GetValue(test: ModuleTest, parameter: ModuleOption){
     // need to add more situations
     if (parameter.SwaggerType == SwaggerModelType.SWAGGER_MODEL_STRING){
         return "my_"+parameter.Name;
@@ -63,7 +63,7 @@ export function GetValue(test: Test, parameter: ModuleOption){
     }
     return null;
 }
-export function GetExample(test: Test, methodName: Set<string>, exampleName: string){
+export function GetExample(test: ModuleTest, methodName: Set<string>, exampleName: string){
     let nowMethod: ModuleMethod = null;
     for (let method of test.ModuleMethods){
         if (methodName.has(method.Name)){

@@ -44,7 +44,7 @@ function run-tests($src) {
   $script:total = $script:total + [int]$rc
 
   if( $rc -gt 0 ) {
-    write-host -fore RED "`n--------------------------------------------------------`nFAILED Test Execution [$name]`n--------------------------------------------------------`n"
+    write-host -fore RED "`n--------------------------------------------------------`nFAILED ModuleTest Execution [$name]`n--------------------------------------------------------`n"
     $errors[$name] = $rc
   } else {
     $success[$name] = $name

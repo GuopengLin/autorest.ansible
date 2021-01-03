@@ -1,12 +1,12 @@
 
 
 import {Module} from "./Module";
-import {Test} from "./Test";
+import {ModuleTest} from "./ModuleTest";
 
 export class AnsibleCodeModel {
     private model: any = null;
     public Modules: Module[] = [];
-    public Tests: Test[] = [];
+    public Tests: ModuleTest[] = [];
     private log: Function;
     constructor(model: any, chooseModule: string, onlyList:boolean, log: Function) {
         this.model = model;
@@ -40,7 +40,7 @@ export class AnsibleCodeModel {
             this.Modules.push(mainModule);
             this.Modules.push(infoModule);
 
-            let test = new Test(mainModule.ModuleName, mainModule.ModuleMethods, mainModule.ObjectName);
+            let test = new ModuleTest(mainModule.ModuleName, mainModule.ModuleMethods, mainModule.ObjectName);
             this.Tests.push(test);
 
         }

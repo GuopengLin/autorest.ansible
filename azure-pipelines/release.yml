@@ -52,14 +52,14 @@ stages:
           ArtifactName: '$(VAR_ARIFACT_NAME)'
           publishLocation: 'Container'
 
-- stage: Test
+- stage: ModuleTest
   dependsOn: Build
   condition: succeeded()
   jobs:
     - job: E2E
 
 - stage: PrivateRelease
-  dependsOn: Test
+  dependsOn: ModuleTest
   condition: or(succeeded(), ne(variables['USER_SKIP_TEST'], 'true'))
   jobs:
     - job: Github
@@ -114,7 +114,7 @@ stages:
           changeLogType: 'commitBased'
 
 - stage: PublicRelease
-  dependsOn: Test
+  dependsOn: ModuleTest
   condition: or(succeeded(), ne(variables['USER_SKIP_TEST'], 'true'))
   jobs:
     - deployment: npmjs
